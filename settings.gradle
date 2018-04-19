@@ -1,0 +1,4 @@
+include ':ble-common'
+
+include ':ble'
+project(':ble').projectDir = file('../Android-BLE-Library/ble')
