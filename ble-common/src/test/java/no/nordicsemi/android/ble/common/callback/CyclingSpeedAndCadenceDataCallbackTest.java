@@ -38,7 +38,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[7]);
 		// Flags
-		assertTrue(data.setByte((byte) 0x01, 0));
+		assertTrue(data.setByte(0x01, 0));
 		// Wheel revolutions
 		assertTrue(data.setValue(12345, Data.FORMAT_UINT32, 1));
 		assertTrue(data.setValue(1000, Data.FORMAT_UINT16, 5));
@@ -72,7 +72,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[5]);
 		// Flags
-		assertTrue(data.setByte((byte) 0x02, 0));
+		assertTrue(data.setByte(0x02, 0));
 		// Crank revolutions
 		assertTrue(data.setValue(345, Data.FORMAT_UINT16, 1));
 		assertTrue(data.setValue(2000, Data.FORMAT_UINT16, 3));
@@ -112,7 +112,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[1 + 6 + 4]);
 		// Flags
-		assertTrue(data.setByte((byte) 0x03, 0));
+		assertTrue(data.setByte(0x03, 0));
 		// Wheel revolutions
 		assertTrue(data.setValue(12345, Data.FORMAT_UINT32, 1));
 		assertTrue(data.setValue(1000, Data.FORMAT_UINT16, 5));
@@ -145,7 +145,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[7]);
 		// Flags
-		assertTrue(data.setByte((byte) 0x01, 0));
+		assertTrue(data.setByte(0x01, 0));
 		// Wheel revolutions
 		assertTrue(data.setValue(10, Data.FORMAT_UINT32, 1));
 		assertTrue(data.setValue(0, Data.FORMAT_UINT16, 5));
@@ -179,7 +179,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[5]);
 		// Flags
-		assertTrue(data.setByte((byte) 0x02, 0));
+		assertTrue(data.setByte(0x02, 0));
 		// Crank revolutions
 		assertTrue(data.setValue(10, Data.FORMAT_UINT16, 1));
 		assertTrue(data.setValue(0, Data.FORMAT_UINT16, 3));
@@ -215,7 +215,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[11]);
 		// Flags
-		assertTrue(data.setByte((byte) 0x03, 0));
+		assertTrue(data.setByte(0x03, 0));
 		// Wheel revolutions
 		assertTrue(data.setValue(20, Data.FORMAT_UINT32, 1));
 		assertTrue(data.setValue(0, Data.FORMAT_UINT16, 5));
@@ -254,7 +254,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 		};
 		final Data data = new Data(new byte[9]); // 11 bytes are required
 		// Flags
-		assertTrue(data.setByte((byte) 0x03, 0));
+		assertTrue(data.setByte(0x03, 0));
 		// Wheel revolutions
 		assertTrue(data.setValue(20, Data.FORMAT_UINT32, 1));
 		assertTrue(data.setValue(0, Data.FORMAT_UINT16, 5));

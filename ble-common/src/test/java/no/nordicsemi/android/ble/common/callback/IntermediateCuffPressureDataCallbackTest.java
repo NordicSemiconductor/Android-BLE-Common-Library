@@ -63,7 +63,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 		};
 		final Data data = new Data(new byte[19]);
 		// Flags
-		data.setByte((byte) 0b11110, 0);
+		data.setByte(0b11110, 0);
 		// Cuff pressure in mmHg
 		data.setValue(4, 0, Data.FORMAT_SFLOAT, 1);
 		// Date and Time
@@ -119,7 +119,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 		};
 		final Data data = new Data(new byte[11]);
 		// Flags
-		data.setByte((byte) 0b10101, 0);
+		data.setByte(0b10101, 0);
 		// Systolic, diastolic and mean AP in mmHg
 		data.setValue(111, -1, Data.FORMAT_SFLOAT, 1);
 		// Pulse rate
@@ -157,7 +157,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 		};
 		final Data data = new Data(new byte[7]);
 		// Flags
-		data.setByte((byte) 0b00000, 0);
+		data.setByte(0b00000, 0);
 		// Systolic, diastolic and mean AP in mmHg
 		data.setValue(215, -1, Data.FORMAT_SFLOAT, 1);
 
