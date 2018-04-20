@@ -4,7 +4,10 @@ import android.support.annotation.NonNull;
 
 /**
  * CRC-16 class is a helper that calculates different types of CRC.
- * Testing is based on https://www.lammertbies.nl/comm/info/crc-calculation.html
+ * Catalogue of CRC-16 algorithms:
+ * <a href="http://reveng.sourceforge.net/crc-catalogue/16.htm">http://reveng.sourceforge.net/crc-catalogue/16.htm</a>
+ * <p>Testing is based on 'check' from the link above and
+ * <a href="https://www.lammertbies.nl/comm/info/crc-calculation.html">https://www.lammertbies.nl/comm/info/crc-calculation.html</a>.
  */
 public final class CRC16 {
 
