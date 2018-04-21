@@ -10,6 +10,7 @@ import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ConstantConditions")
 public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
