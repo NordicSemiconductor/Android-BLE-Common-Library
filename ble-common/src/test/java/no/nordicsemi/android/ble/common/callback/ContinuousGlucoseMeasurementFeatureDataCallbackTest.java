@@ -56,16 +56,16 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 			}
 		};
 		final Data data = new Data(new byte[6]);
-		data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0);
-		data.setValue(0x16, Data.FORMAT_UINT8, 3);
-		data.setValue(0xC18A, Data.FORMAT_UINT16, 4);
+		assertTrue(data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0));
+		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
+		assertTrue(data.setValue(0xC18A, Data.FORMAT_UINT16, 4));
 		called = false;
 		callback.onDataReceived(null, data);
 		assertTrue(called);
 	}
 
 	@Test
-	public void onContinuousGlucoseMeasurementFeaturesReceived_noCrc() {
+	public void onContinuousGlucoseMeasurementFeaturesReceived_crcNotSupported() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
@@ -113,34 +113,7 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 	}
 
 	@Test
-	public void onContinuousGlucoseMeasurementFeaturesReceived_wrongDefaultCrc() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
-			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
-				assertEquals("Wrong CRC but data reported", 1, 2);
-			}
-
-			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
-				assertEquals("Correct packet but invalid CRC reported", 1, 2);
-			}
-
-			@Override
-			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				called = true;
-			}
-		};
-		final Data data = new Data(new byte[6]);
-		data.setValue(0b11000111001101110, Data.FORMAT_UINT24, 0);
-		data.setValue(0x16, Data.FORMAT_UINT8, 3);
-		data.setValue(0xBEAF, Data.FORMAT_UINT16, 4);
-		called = false;
-		callback.onDataReceived(null, data);
-		assertTrue(called);
-	}
-
-	@Test
-	public void onContinuousGlucoseMeasurementFeaturesReceived_wrongCrc() {
+	public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
@@ -158,9 +131,62 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 			}
 		};
 		final Data data = new Data(new byte[6]);
-		data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0);
-		data.setValue(0x16, Data.FORMAT_UINT8, 3);
-		data.setValue(0xBEAF, Data.FORMAT_UINT16, 4);
+		assertTrue(data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0));
+		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
+		assertTrue(data.setValue(0xBEAF, Data.FORMAT_UINT16, 4));
+		called = false;
+		callback.onDataReceived(null, data);
+		assertTrue(called);
+	}
+
+	@Test
+	public void onInvalidDataReceived_noCrc() {
+		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+			@Override
+			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+				assertEquals("Invalid data but data reported", 1, 2);
+			}
+
+			@Override
+			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+				assertEquals("Invalid data but wrong CRC reported", 1, 2);
+			}
+
+			@Override
+			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+				called = true;
+			}
+		};
+		final Data data = new Data(new byte[4]);
+		assertTrue(data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0));
+		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
+		called = false;
+		callback.onDataReceived(null, data);
+		assertTrue(called);
+	}
+
+	@Test
+	public void onInvalidDataReceived_wrongDefaultCrc() {
+		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+			@Override
+			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+				assertEquals("Wrong CRC but data reported", 1, 2);
+			}
+
+			@Override
+			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+				assertEquals("Correct packet but invalid CRC reported", 1, 2);
+			}
+
+			@Override
+			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+				called = true;
+			}
+		};
+		final Data data = new Data(new byte[6]);
+		assertTrue(data.setValue(0b11000111001101110, Data.FORMAT_UINT24, 0));
+		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
+		assertTrue(data.setValue(0xBEAF, Data.FORMAT_UINT16, 4));
 		called = false;
 		callback.onDataReceived(null, data);
 		assertTrue(called);
