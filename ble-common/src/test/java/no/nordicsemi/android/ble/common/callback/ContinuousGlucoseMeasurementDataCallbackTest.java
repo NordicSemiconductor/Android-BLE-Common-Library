@@ -23,24 +23,26 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 	public void onContinuousGlucoseMeasurementReceived_full() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset) {
+			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset, final boolean secured) {
 				assertEquals("Glucose", 12.34, glucoseConcentration, 0.01);
 				assertNotNull("Trend present", cgmTrend);
 				assertEquals("Trend", 0.2f, cgmTrend, 0.01);
 				assertNotNull("Quality present", cgmQuality);
 				assertEquals("Quality", 99.7f, cgmQuality, 0.01);
 				assertEquals("Time offset", 5, timeOffset);
+				assertTrue(secured);
 			}
 
 			@Override
-			public void onSensorStatusChanged(final Status status, final int timeOffset) {
+			public void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
 				assertNotNull("Status present", status);
+				assertTrue(secured);
 			}
 
 			@Override
-			public void onCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final Data data) {
 				final int expectedCrc = data.getIntValue(Data.FORMAT_UINT16, 13);
-				final int actualCrc   = CRC16.MCRF4XX(data.getValue(), 0, 13);
+				final int actualCrc = CRC16.MCRF4XX(data.getValue(), 0, 13);
 				assertEquals("CRC error on valid data", expectedCrc, actualCrc);
 			}
 
@@ -76,20 +78,21 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 	public void onContinuousGlucoseMeasurementReceived_small() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset) {
+			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset, final boolean secured) {
 				assertEquals("Glucose", 120.0, glucoseConcentration, 0.01);
 				assertNull("Trend not present", cgmTrend);
 				assertNull("Quality not present", cgmQuality);
 				assertEquals("Time offset", 6, timeOffset);
+				assertFalse(secured);
 			}
 
 			@Override
-			public void onSensorStatusChanged(final Status status, final int timeOffset) {
+			public void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
 				assertEquals("Status not present but reported", 1, 2);
 			}
 
 			@Override
-			public void onCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("CRC error on valid data", 1, 2);
 			}
 
@@ -117,20 +120,21 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 			private int time = 5;
 
 			@Override
-			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset) {
+			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset, final boolean secured) {
 				assertEquals("Glucose", 120.0, glucoseConcentration, 0.01);
 				assertNull("Trend not present", cgmTrend);
 				assertNull("Quality not present", cgmQuality);
 				assertEquals("Time offset", time++, timeOffset);
+				assertFalse(secured);
 			}
 
 			@Override
-			public void onSensorStatusChanged(final Status status, final int timeOffset) {
+			public void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
 				assertEquals("Status not present but reported", 1, 2);
 			}
 
 			@Override
-			public void onCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("CRC error on valid data", 1, 2);
 			}
 
@@ -165,17 +169,17 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 	public void onContinuousGlucoseMeasurementReceived_crcError() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset) {
+			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset, final boolean secured) {
 				assertEquals("Measurement reported despite wrong CRC", 1, 2);
 			}
 
 			@Override
-			public void onSensorStatusChanged(final Status status, final int timeOffset) {
+			public void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
 				assertEquals("Status reported despite wrong CRC", 1, 2);
 			}
 
 			@Override
-			public void onCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final Data data) {
 				final int actualCrc = CRC16.MCRF4XX(data.getValue(), 0, 6);
 				assertEquals("CRC error", 0x6F59, actualCrc);
 			}
@@ -204,17 +208,17 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 	public void onInvalidDataReceived_tooShort() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset) {
+			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset, final boolean secured) {
 				assertEquals("Measurement reported despite invalid data", 1, 2);
 			}
 
 			@Override
-			public void onSensorStatusChanged(final Status status, final int timeOffset) {
+			public void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
 				assertEquals("Status reported despite invalid data", 1, 2);
 			}
 
 			@Override
-			public void onCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("Invalid data reported as CRC error", 1, 2);
 			}
 
@@ -240,17 +244,17 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset) {
+			public void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, @Nullable final Float cgmTrend, @Nullable final Float cgmQuality, final int timeOffset, final boolean secured) {
 				assertEquals("Measurement reported despite invalid data", 1, 2);
 			}
 
 			@Override
-			public void onSensorStatusChanged(final Status status, final int timeOffset) {
+			public void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
 				assertEquals("Status reported despite invalid data", 1, 2);
 			}
 
 			@Override
-			public void onCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("Invalid data reported as CRC error", 1, 2);
 			}
 

@@ -8,7 +8,7 @@ import no.nordicsemi.android.ble.data.Data;
 public interface ContinuousGlucoseMeasurementCallback {
 
 	@SuppressWarnings("WeakerAccess")
-	class Status {
+	class CGMStatus {
 		public boolean sessionStopped;
 		public boolean deviceBatteryLow;
 		public boolean sensorTypeIncorrectForDevice;
@@ -30,7 +30,7 @@ public interface ContinuousGlucoseMeasurementCallback {
 		public boolean sensorResultLowerThenDeviceCanProcess;
 		public boolean sensorResultHigherThenDeviceCanProcess;
 
-		public Status(final int warningStatus, final int calibrationTempStatus, final int sensorStatus) {
+		public CGMStatus(final int warningStatus, final int calibrationTempStatus, final int sensorStatus) {
 			sessionStopped = (warningStatus & 0x01) != 0;
 			deviceBatteryLow = (warningStatus & 0x02) != 0;
 			sensorTypeIncorrectForDevice = (warningStatus & 0x04) != 0;
@@ -59,11 +59,13 @@ public interface ContinuousGlucoseMeasurementCallback {
 	/**
 	 * Callback called when a Continuous Glucose Measurement packet has been received.
 	 * If Sensor Status Annunciation was present in the packet,
-	 * the {@link #onSensorStatusChanged(Status, int)} will be called immediately afterwards
-	 * with the same time offset, even if the status hasn't changed since the last packet.
+	 * the {@link #onContinuousGlucoseSensorStatusChanged(CGMStatus, int, boolean)} will be called
+	 * immediately afterwards with the same time offset, even if the status hasn't changed since
+	 * the last packet.
 	 * <p>
 	 *     If the E2E CRC field was present in the CGM packet, the data has been verified against it.
-	 *     If CRC check has failed, the {@link #onCrcError(Data)} will be called instead.
+	 *     If CRC check has failed, the {@link #onContinuousGlucoseMeasurementReceivedWithCrcError(Data)}
+	 *     will be called instead.
 	 * </p>
 	 * <p>
 	 *     The Glucose concentration is reported in mg/dL. To convert it to mmol/L use:
@@ -75,27 +77,37 @@ public interface ContinuousGlucoseMeasurementCallback {
 	 * @param cgmTrend optional CGM Trend information, in (mg/dL)/min.
 	 * @param cgmQuality optional CGM Quality information in percent.
 	 * @param timeOffset time offset in minutes since Session Start Time.
+	 * @param secured true if the packet was sent with E2E-CRC value that was verified to match the packet,
+	 *                false if the packet didn't contain CRC field. For a callback in case of
+	 *                invalid CRC value check {@link #onContinuousGlucoseMeasurementReceivedWithCrcError(Data)}.
 	 */
-	void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration, final @Nullable Float cgmTrend, final @Nullable Float cgmQuality, final int timeOffset);
+	void onContinuousGlucoseMeasurementReceived(final float glucoseConcentration,
+												final @Nullable Float cgmTrend, final @Nullable Float cgmQuality,
+												final int timeOffset, final boolean secured);
 
 	/**
 	 * Callback called whenever the Sensor Status Annunciation field was
 	 * present int the CGM packet.
 	 * <p>
 	 *     If the E2E CRC field was present in the CGM packet, the data has been verified against it.
-	 *     If CRC check has failed, the {@link #onCrcError(Data)} will be called instead.
+	 *     If CRC check has failed, the {@link #onContinuousGlucoseMeasurementReceivedWithCrcError(Data)}
+	 *     will be called instead.
 	 * </p>
 	 *
 	 * @param status the status received.
 	 * @param timeOffset time offset in minutes since Session Start Time.
+	 * @param secured true if the packet was sent with E2E-CRC value that was verified to match the packet,
+	 *                false if the packet didn't contain CRC field. For a callback in case of
+	 *                invalid CRC value check {@link #onContinuousGlucoseMeasurementReceivedWithCrcError(Data)}.
 	 */
-	void onSensorStatusChanged(final Status status, final int timeOffset);
+	void onContinuousGlucoseSensorStatusChanged(final CGMStatus status, final int timeOffset,
+												final boolean secured);
 
 	/**
-	 * Callback called when a CGM packet with E2E field was received but the CRC check hsa failed.
+	 * Callback called when a CGM packet with E2E field was received but the CRC check has failed.
 	 * @param data CGM packet data that was received, including the CRC field.
 	 */
-	default void onCrcError(final @NonNull Data data) {
+	default void onContinuousGlucoseMeasurementReceivedWithCrcError(final @NonNull Data data) {
 		// ignore
 	}
 }

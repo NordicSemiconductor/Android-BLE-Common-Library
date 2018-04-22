@@ -12,7 +12,7 @@ public interface IntermediateCuffPressureCallback {
 	int UNIT_kPa = 1;
 
 	@SuppressWarnings("WeakerAccess")
-	class Status {
+	class ICPStatus {
 		public boolean bodyMovementDetected;
 		public boolean cuffTooLose;
 		public boolean irregularPulseDetected;
@@ -21,7 +21,7 @@ public interface IntermediateCuffPressureCallback {
 		public boolean pulseRateIsLessThenLowerLimit;
 		public boolean improperMeasurementPosition;
 
-		public Status(final int status) {
+		public ICPStatus(final int status) {
 			bodyMovementDetected = (status & 0x01) != 0;
 			cuffTooLose = (status & 0x02) != 0;
 			irregularPulseDetected = (status & 0x04) != 0;
@@ -34,6 +34,7 @@ public interface IntermediateCuffPressureCallback {
 
 	/**
 	 * Callback called when Intermediate Cuff Pressure packet has been received.
+	 *
 	 * @param device target device.
 	 * @param cuffPressure cuff pressure.
 	 * @param unit measurement unit, one of {@link #UNIT_mmHG} or {@link #UNIT_kPa}.
@@ -44,5 +45,5 @@ public interface IntermediateCuffPressureCallback {
 	 */
 	void onIntermediateCuffPressureReceived(final @NonNull BluetoothDevice device, final float cuffPressure, final int unit,
 											final @Nullable Float pulseRate, final @Nullable Integer userID,
-											final @Nullable Status status, final @Nullable Calendar calendar);
+											final @Nullable ICPStatus status, final @Nullable Calendar calendar);
 }

@@ -6,15 +6,13 @@ import android.support.annotation.Nullable;
 
 import java.util.Calendar;
 
+@SuppressWarnings("unused")
 public interface BloodPressureMeasurementCallback {
 	int UNIT_mmHG = 0;
 	int UNIT_kPa = 1;
 
-	/**
-	 * Blood pressure measurement status.
-	 */
 	@SuppressWarnings("WeakerAccess")
-	class Status {
+	class BPMStatus {
 		public boolean bodyMovementDetected;
 		public boolean cuffTooLose;
 		public boolean irregularPulseDetected;
@@ -23,7 +21,7 @@ public interface BloodPressureMeasurementCallback {
 		public boolean pulseRateIsLessThenLowerLimit;
 		public boolean improperMeasurementPosition;
 
-		public Status(final int status) {
+		public BPMStatus(final int status) {
 			bodyMovementDetected = (status & 0x01) != 0;
 			cuffTooLose = (status & 0x02) != 0;
 			irregularPulseDetected = (status & 0x04) != 0;
@@ -36,6 +34,7 @@ public interface BloodPressureMeasurementCallback {
 
 	/**
 	 * Callback called when Blood Pressure Measurement packet has been received.
+	 *
 	 * @param device target device.
 	 * @param systolic systolic compound of blood pressure measurement.
 	 * @param diastolic diastolic compound of blood pressure measurement.
@@ -49,5 +48,5 @@ public interface BloodPressureMeasurementCallback {
 	void onBloodPressureMeasurementReceived(final @NonNull BluetoothDevice device, final float systolic, final float diastolic,
 											final float meanArterialPressure, final int unit,
 											final @Nullable Float pulseRate, final @Nullable Integer userID,
-											final @Nullable Status status, final @Nullable Calendar calendar);
+											final @Nullable BPMStatus status, final @Nullable Calendar calendar);
 }

@@ -21,9 +21,9 @@ public class BloodPressureMeasurementDataCallbackTest {
 		final DataCallback callback = new BloodPressureMeasurementDataCallback() {
 			@Override
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
-						final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
-						@Nullable final Float pulseRate, @Nullable final Integer userID,
-						@Nullable final Status status, @Nullable final Calendar calendar) {
+														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
+														   @Nullable final Float pulseRate, @Nullable final Integer userID,
+														   @Nullable final BPMStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Systolic", 138.0, systolic, 0);
 				assertEquals("Diastolic", 88.0, diastolic, 0);
 				assertEquals("Mean AP", 120.0, meanArterialPressure, 0);
@@ -93,7 +93,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final BPMStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Systolic", 18.9, systolic, 0.01);
 				assertEquals("Diastolic", 11.0, diastolic, 0);
 				assertEquals("Mean AP", 15.9, meanArterialPressure, 0.01);
@@ -143,7 +143,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final BPMStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Systolic", 18.9, systolic, 0.01);
 				assertEquals("Diastolic", 11.0, diastolic, 0);
 				assertEquals("Mean AP", 15.9, meanArterialPressure, 0.01);
@@ -181,7 +181,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final BPMStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Invalid data reported as correct", 1, 2);
 			}
 
@@ -206,7 +206,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final BPMStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Invalid data reported as correct", 1, 2);
 			}
 

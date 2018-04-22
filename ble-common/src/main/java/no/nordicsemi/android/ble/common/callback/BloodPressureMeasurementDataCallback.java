@@ -64,11 +64,11 @@ public abstract class BloodPressureMeasurementDataCallback implements ProfileDat
 		}
 
 		// Read measurement status if present
-		Status status = null;
+		BPMStatus status = null;
 		if (measurementStatusPresent) {
 			final int measurementStatus = data.getIntValue(Data.FORMAT_UINT16, offset);
 			// offset += 2;
-			status = new Status(measurementStatus);
+			status = new BPMStatus(measurementStatus);
 		}
 
 		onBloodPressureMeasurementReceived(device, systolic, diastolic, meanArterialPressure, unit, pulseRate, userId, status, calendar);

@@ -47,7 +47,7 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 				final int expectedCrc = data.getIntValue(Data.FORMAT_UINT16, offset + dataSize);
 				final int actualCrc = CRC16.MCRF4XX(data.getValue(), offset, dataSize);
 				if (expectedCrc != actualCrc) {
-					onCrcError(data);
+					onContinuousGlucoseMeasurementReceivedWithCrcError(data);
 					return;
 				}
 			}
@@ -65,7 +65,7 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 			int warningStatus = 0;
 			int calibrationTempStatus = 0;
 			int sensorStatus = 0;
-			Status status = null;
+			CGMStatus status = null;
 
 			if (sensorWarningOctetPresent) {
 				warningStatus = data.getIntValue(Data.FORMAT_UINT8, offset++);
@@ -77,7 +77,7 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 				sensorStatus = data.getIntValue(Data.FORMAT_UINT8, offset++);
 			}
 			if (sensorWarningOctetPresent || sensorCalTempOctetPresent || sensorStatusOctetPresent) {
-				status = new Status(warningStatus, calibrationTempStatus, sensorStatus);
+				status = new CGMStatus(warningStatus, calibrationTempStatus, sensorStatus);
 			}
 
 			// CGM Trend Information
@@ -99,9 +99,9 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 				offset += 2;
 			}
 
-			onContinuousGlucoseMeasurementReceived(glucoseConcentration, trend, quality, timeOffset);
+			onContinuousGlucoseMeasurementReceived(glucoseConcentration, trend, quality, timeOffset, crcPresent);
 			if (status != null) {
-				onSensorStatusChanged(status, timeOffset);
+				onContinuousGlucoseSensorStatusChanged(status, timeOffset, crcPresent);
 			}
 		}
 	}

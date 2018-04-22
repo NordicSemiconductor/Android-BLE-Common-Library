@@ -9,7 +9,6 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import no.nordicsemi.android.ble.callback.DataCallback;
-import no.nordicsemi.android.ble.common.profile.IntermediateCuffPressureCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -27,9 +26,9 @@ public class IntermediateCuffPressureDataCallbackTest {
 		final DataCallback callback = new IntermediateCuffPressureDataCallback() {
 			@Override
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
-						final float cuffPressure, final int unit,
-						@Nullable final Float pulseRate, @Nullable final Integer userID,
-						@Nullable final Status status, @Nullable final Calendar calendar) {
+														   final float cuffPressure, final int unit,
+														   @Nullable final Float pulseRate, @Nullable final Integer userID,
+														   @Nullable final ICPStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Cuff pressure", 4.0, cuffPressure, 0);
 				assertEquals("Unit: mmHg", 0, unit);
 				assertNotNull("Pulse rate set", pulseRate);
@@ -95,7 +94,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final ICPStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Cuff pressure", 11.1, cuffPressure, 0.01);
 				assertEquals("Unit: kPa", 1, unit);
 				assertNotNull("Pulse rate set", pulseRate);
@@ -141,7 +140,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final ICPStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Cuff pressure", 21.5, cuffPressure, 0.01);
 				assertEquals("Unit: mmHg", 0, unit);
 				assertNull("Pulse rate not set", pulseRate);
@@ -175,7 +174,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final ICPStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Invalid data reported as correct", 1, 2);
 			}
 
@@ -200,7 +199,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
 														   @Nullable final Float pulseRate, @Nullable final Integer userID,
-														   @Nullable final Status status, @Nullable final Calendar calendar) {
+														   @Nullable final ICPStatus status, @Nullable final Calendar calendar) {
 				assertEquals("Invalid data reported as correct", 1, 2);
 			}
 
