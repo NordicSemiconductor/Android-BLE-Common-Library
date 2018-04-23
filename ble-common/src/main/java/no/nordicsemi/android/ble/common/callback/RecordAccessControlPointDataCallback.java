@@ -7,13 +7,13 @@ import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.common.profile.RecordAccessControlPointCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("ConstantConditions")
 public abstract class RecordAccessControlPointDataCallback implements ProfileDataCallback, RecordAccessControlPointCallback {
 	private final static int OP_CODE_NUMBER_OF_STORED_RECORDS_RESPONSE = 5;
 	private final static int OP_CODE_RESPONSE_CODE = 6;
 	private final static int OPERATOR_NULL = 0;
-	private final static int SUCCESS = 1;
-	private final static int SUCCESS_WITH_NO_RECORDS = 6;
+	private final static int RACP_RESPONSE_SUCCESS = 1;
+	private final static int RACP_ERROR_NO_RECORDS_FOUND = 6;
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
@@ -59,9 +59,9 @@ public abstract class RecordAccessControlPointDataCallback implements ProfileDat
 			}
 			case OP_CODE_RESPONSE_CODE: {
 				final int responseCode = data.getIntValue(Data.FORMAT_UINT8, 2);
-				if (responseCode == SUCCESS) {
+				if (responseCode == RACP_RESPONSE_SUCCESS) {
 					onRecordAccessOperationCompleted();
-				} else if (responseCode == SUCCESS_WITH_NO_RECORDS) {
+				} else if (responseCode == RACP_ERROR_NO_RECORDS_FOUND) {
 					onRecordAccessOperationCompletedWithNoRecordsFound();
 				} else {
 					onRecordAccessOperationError(responseCode);

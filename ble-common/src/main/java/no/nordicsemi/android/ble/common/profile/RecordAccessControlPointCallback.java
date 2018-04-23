@@ -1,5 +1,6 @@
 package no.nordicsemi.android.ble.common.profile;
 
+@SuppressWarnings("unused")
 public interface RecordAccessControlPointCallback {
 	// int RACP_RESPONSE_SUCCESS = 1;
 	int RACP_ERROR_OP_CODE_NOT_SUPPORTED = 2;
