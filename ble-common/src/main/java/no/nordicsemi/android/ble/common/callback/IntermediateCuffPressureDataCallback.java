@@ -5,9 +5,9 @@ import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
+import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.common.profile.IntermediateCuffPressureCallback;
 import no.nordicsemi.android.ble.data.Data;
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 
 @SuppressWarnings("ConstantConditions")
 public abstract class IntermediateCuffPressureDataCallback implements ProfileDataCallback, IntermediateCuffPressureCallback {
@@ -64,11 +64,11 @@ public abstract class IntermediateCuffPressureDataCallback implements ProfileDat
 		}
 
 		// Read measurement status if present
-		ICPStatus status = null;
+		BPMStatus status = null;
 		if (measurementStatusPresent) {
 			final int measurementStatus = data.getIntValue(Data.FORMAT_UINT16, offset);
 			// offset += 2;
-			status = new ICPStatus(measurementStatus);
+			status = new BPMStatus(measurementStatus);
 		}
 
 		onIntermediateCuffPressureReceived(device, cuffPressure, unit, pulseRate, userId, status, calendar);
