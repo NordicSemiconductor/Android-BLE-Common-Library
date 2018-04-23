@@ -13,8 +13,11 @@ public interface BloodPressureMeasurementTypes {
 		public boolean pulseRateExceedsUpperLimit;
 		public boolean pulseRateIsLessThenLowerLimit;
 		public boolean improperMeasurementPosition;
+		public int value;
 
 		public BPMStatus(final int status) {
+			this.value = status;
+
 			bodyMovementDetected = (status & 0x01) != 0;
 			cuffTooLose = (status & 0x02) != 0;
 			irregularPulseDetected = (status & 0x04) != 0;

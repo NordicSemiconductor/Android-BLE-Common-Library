@@ -20,6 +20,12 @@ public interface ContinuousGlucoseMeasurementTypes {
 	int SAMPLE_LOCATION_SUBCUTANEOUS_TISSUE = 5;
 	int SAMPLE_LOCATION_VALUE_NOT_AVAILABLE = 15;
 
+	// int CGM_RESPONSE_SUCCESS = 1;
+	int CGM_ERROR_OP_CODE_NOT_SUPPORTED = 2;
+	int CGM_ERROR_INVALID_OPERAND = 3;
+	int CGM_ERROR_PROCEDURE_NOT_COMPLETED = 4;
+	int CGM_ERROR_PARAMETER_OUT_OF_RANGE = 5;
+
 	class CGMFeatures {
 		public boolean calibrationSupported;
 		public boolean patientHighLowAlertsSupported;
@@ -38,8 +44,11 @@ public interface ContinuousGlucoseMeasurementTypes {
 		public boolean multipleSessionsSupported;
 		public boolean cgmTrendInfoSupported;
 		public boolean cgmQualityInfoSupported;
+		public int value;
 
 		public CGMFeatures(final int features) {
+			this.value = features;
+
 			calibrationSupported = (features & 0x000001) != 0;
 			patientHighLowAlertsSupported = (features & 0x000002) != 0;
 			hypoAlertsSupported = (features & 0x000004) != 0;
@@ -64,8 +73,11 @@ public interface ContinuousGlucoseMeasurementTypes {
 		public boolean rejected;
 		public boolean dataOutOfRange;
 		public boolean processPending;
+		public int value;
 
 		public CGMCalibrationStatus(final int status) {
+			this.value = status;
+
 			rejected = (status & 0x01) != 0;
 			dataOutOfRange = (status & 0x02) != 0;
 			processPending = (status & 0x04) != 0;
@@ -93,8 +105,15 @@ public interface ContinuousGlucoseMeasurementTypes {
 		public boolean sensorRateOfIncreaseExceeded;
 		public boolean sensorResultLowerThenDeviceCanProcess;
 		public boolean sensorResultHigherThenDeviceCanProcess;
+		public int warningStatus;
+		public int calibrationTempStatus;
+		public int sensorStatus;
 
 		public CGMStatus(final int warningStatus, final int calibrationTempStatus, final int sensorStatus) {
+			this.warningStatus = warningStatus;
+			this.calibrationTempStatus = calibrationTempStatus;
+			this.sensorStatus = sensorStatus;
+
 			sessionStopped = (warningStatus & 0x01) != 0;
 			deviceBatteryLow = (warningStatus & 0x02) != 0;
 			sensorTypeIncorrectForDevice = (warningStatus & 0x04) != 0;
