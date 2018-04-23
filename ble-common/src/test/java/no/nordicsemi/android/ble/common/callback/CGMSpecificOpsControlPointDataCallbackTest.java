@@ -6,11 +6,14 @@ import android.support.annotation.NonNull;
 import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.DataCallback;
-import no.nordicsemi.android.ble.common.profile.ContinuousGlucoseMeasurementTypes;
 import no.nordicsemi.android.ble.data.Data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("ConstantConditions")
 public class CGMSpecificOpsControlPointDataCallbackTest {
 	private boolean success;
 	private boolean invalidCrc;
@@ -119,6 +122,11 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		public void onContinuousGlucoseRateOfIncreaseAlertReceived(final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.rateOfIncreaseAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
+		}
+
+		@Override
+		public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+			CGMSpecificOpsControlPointDataCallbackTest.this.invalidData = true;
 		}
 	};
 
@@ -236,5 +244,20 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		callback.onDataReceived(null, data);
 		assertEquals("Level", 100000f, rateOfIncreaseAlertLevel, 0.01);
 		assertFalse(secured);
+	}
+
+	@Test
+	public void onContinuousGlucoseCommunicationIntervalReceived() {
+		final Data data = new Data(new byte[] { 3, 10, (byte) 0x8A, (byte) 0x75});
+		callback.onDataReceived(null, data);
+		assertEquals("Interval", 10, interval);
+		assertTrue(secured);
+	}
+
+	@Test
+	public void onInvalidDataReceived() {
+		final Data data = new Data(new byte[] { 6, 10, 1 });
+		callback.onDataReceived(null, data);
+		assertTrue(invalidData);
 	}
 }
