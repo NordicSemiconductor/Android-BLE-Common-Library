@@ -13,14 +13,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
+public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 	private boolean called;
 
 	@Test
 	public void onContinuousGlucoseMeasurementFeaturesReceived_full() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
 				called = true;
 				assertNotNull(features);
 				assertFalse(features.calibrationSupported);
@@ -46,7 +46,7 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 			}
 
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("Correct packet but invalid CRC reported", 1, 2);
 			}
 
@@ -66,9 +66,9 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementFeaturesReceived_crcNotSupported() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
 				called = true;
 				assertNotNull(features);
 				assertFalse(features.calibrationSupported);
@@ -94,7 +94,7 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 			}
 
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("Correct packet but invalid CRC reported", 1, 2);
 			}
 
@@ -114,14 +114,14 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
 				assertEquals("Wrong CRC but data reported", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
 				called = true;
 			}
 
@@ -141,14 +141,14 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_noCrc() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
 				assertEquals("Invalid data but data reported", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("Invalid data but wrong CRC reported", 1, 2);
 			}
 
@@ -167,14 +167,14 @@ public class ContinuousGlucoseMeasurementFeatureDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_wrongDefaultCrc() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementFeatureDataCallback() {
+		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
 				assertEquals("Wrong CRC but data reported", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
 				assertEquals("Correct packet but invalid CRC reported", 1, 2);
 			}
 

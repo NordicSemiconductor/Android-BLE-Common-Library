@@ -99,10 +99,7 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 				offset += 2;
 			}
 
-			onContinuousGlucoseMeasurementReceived(glucoseConcentration, trend, quality, timeOffset, crcPresent);
-			if (status != null) {
-				onContinuousGlucoseSensorStatusChanged(status, timeOffset, crcPresent);
-			}
+			onContinuousGlucoseMeasurementReceived(glucoseConcentration, trend, quality, status, timeOffset, crcPresent);
 		}
 	}
 }

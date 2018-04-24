@@ -4,12 +4,12 @@ import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
-import no.nordicsemi.android.ble.common.profile.ContinuousGlucoseMeasurementFeatureCallback;
+import no.nordicsemi.android.ble.common.profile.ContinuousGlucoseMonitorFeatureCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("ConstantConditions")
-public abstract class ContinuousGlucoseMeasurementFeatureDataCallback implements ProfileDataCallback, ContinuousGlucoseMeasurementFeatureCallback {
+public abstract class ContinuousGlucoseMonitorFeatureDataCallback implements ProfileDataCallback, ContinuousGlucoseMonitorFeatureCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
@@ -26,7 +26,7 @@ public abstract class ContinuousGlucoseMeasurementFeatureDataCallback implements
 		if (features.e2eCrcSupported) {
 			final int actualCrc = CRC16.MCRF4XX(data.getValue(), 0, 4);
 			if (actualCrc != expectedCrc) {
-				onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError(data);
+				onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(data);
 				return;
 			}
 		} else {
@@ -40,6 +40,6 @@ public abstract class ContinuousGlucoseMeasurementFeatureDataCallback implements
 		final int type = typeAndSampleLocation & 0x0F; // least significant nibble
 		final int sampleLocation = typeAndSampleLocation >> 4; // most significant nibble
 
-		onContinuousGlucoseMeasurementFeaturesReceived(features, type, sampleLocation, features.e2eCrcSupported);
+		onContinuousGlucoseMonitorFeaturesReceived(features, type, sampleLocation, features.e2eCrcSupported);
 	}
 }
