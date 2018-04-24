@@ -16,6 +16,7 @@ public class RecordAccessControlPointDataCallbackTest {
 	private boolean success;
 	private boolean successNoRecords;
 	private boolean invalidData;
+	private int requestCode;
 	private int error;
 	private int numberOfRecords;
 
@@ -26,6 +27,7 @@ public class RecordAccessControlPointDataCallbackTest {
 			RecordAccessControlPointDataCallbackTest.this.success = false;
 			RecordAccessControlPointDataCallbackTest.this.successNoRecords = false;
 			RecordAccessControlPointDataCallbackTest.this.invalidData = false;
+			RecordAccessControlPointDataCallbackTest.this.requestCode = 0;
 			RecordAccessControlPointDataCallbackTest.this.error = 0;
 			RecordAccessControlPointDataCallbackTest.this.numberOfRecords = 0;
 
@@ -33,13 +35,15 @@ public class RecordAccessControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onRecordAccessOperationCompleted(@NonNull final BluetoothDevice device) {
+		public void onRecordAccessOperationCompleted(@NonNull final BluetoothDevice device, final int requestCode) {
 			RecordAccessControlPointDataCallbackTest.this.success = true;
+			RecordAccessControlPointDataCallbackTest.this.requestCode = requestCode;
 		}
 
 		@Override
-		public void onRecordAccessOperationCompletedWithNoRecordsFound(@NonNull final BluetoothDevice device) {
+		public void onRecordAccessOperationCompletedWithNoRecordsFound(@NonNull final BluetoothDevice device, final int requestCode) {
 			RecordAccessControlPointDataCallbackTest.this.successNoRecords = true;
+			RecordAccessControlPointDataCallbackTest.this.requestCode = requestCode;
 		}
 
 		@Override
@@ -48,8 +52,9 @@ public class RecordAccessControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onRecordAccessOperationError(@NonNull final BluetoothDevice device, final int errorCode) {
+		public void onRecordAccessOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int errorCode) {
 			RecordAccessControlPointDataCallbackTest.this.error = errorCode;
+			RecordAccessControlPointDataCallbackTest.this.requestCode = requestCode;
 		}
 
 		@Override
@@ -60,72 +65,76 @@ public class RecordAccessControlPointDataCallbackTest {
 
 	@Test
 	public void onRecordAccessOperationCompleted() {
-		final Data data = new Data(new byte[] { 6, 0, 1 });
+		final Data data = new Data(new byte[] { 6, 0, 1, 1 });
 		callback.onDataReceived(null, data);
 		assertTrue(success);
+		assertEquals(1, requestCode);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_opCodeNotSupported() {
-		final Data data = new Data(new byte[] { 6, 0, 2 });
+		final Data data = new Data(new byte[] { 6, 0, 12, 2 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 2);
+		assertEquals(2, error);
+		assertEquals(12, requestCode);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_invalidOperator() {
-		final Data data = new Data(new byte[] { 6, 0, 3 });
+		final Data data = new Data(new byte[] { 6, 0, 1, 3 });
 		callback.onDataReceived(null, data);
 		assertEquals(error, 3);
+		assertEquals(1, requestCode);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_operatorNotSupported() {
-		final Data data = new Data(new byte[] { 6, 0, 4 });
+		final Data data = new Data(new byte[] { 6, 0, 2, 4 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 4);
+		assertEquals(4, error);
+		assertEquals(2, requestCode);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_invalidOperand() {
-		final Data data = new Data(new byte[] { 6, 0, 5 });
+		final Data data = new Data(new byte[] { 6, 0, 1, 5 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 5);
+		assertEquals(5, error);
 	}
 
 	@Test
 	public void onRecordAccessOperationCompletedWithNoRecords() {
-		final Data data = new Data(new byte[] { 6, 0, 6 });
+		final Data data = new Data(new byte[] { 6, 0, 1, 6 });
 		callback.onDataReceived(null, data);
 		assertTrue(successNoRecords);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_abortUnsuccessful() {
-		final Data data = new Data(new byte[] { 6, 0, 7 });
+		final Data data = new Data(new byte[] { 6, 0, 3, 7 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 7);
+		assertEquals(7, error);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_procedureNotCompleted() {
-		final Data data = new Data(new byte[] { 6, 0, 8 });
+		final Data data = new Data(new byte[] { 6, 0, 2, 8 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 8);
+		assertEquals(8, error);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_operandNotSupported() {
-		final Data data = new Data(new byte[] { 6, 0, 9 });
+		final Data data = new Data(new byte[] { 6, 0, 2, 9 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 9);
+		assertEquals(9, error);
 	}
 
 	@Test
 	public void onRecordAccessOperationError_unknownErrorCode() {
-		final Data data = new Data(new byte[] { 6, 0, 10 });
+		final Data data = new Data(new byte[] { 6, 0, 1, 10 });
 		callback.onDataReceived(null, data);
-		assertEquals(error, 10);
+		assertEquals(10, error);
 	}
 
 	@Test
