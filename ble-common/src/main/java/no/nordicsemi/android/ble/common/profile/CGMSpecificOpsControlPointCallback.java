@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
 
-public interface CGMSpecificOpsControlPointCallback extends ContinuousGlucoseMeasurementTypes {
+public interface CGMSpecificOpsControlPointCallback extends ContinuousGlucoseMonitorTypes {
 
 	/**
 	 * Callback called when a CGM Specific Ops request has finished successfully.

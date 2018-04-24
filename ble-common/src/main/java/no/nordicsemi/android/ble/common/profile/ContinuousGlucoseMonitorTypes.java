@@ -1,7 +1,7 @@
 package no.nordicsemi.android.ble.common.profile;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public interface ContinuousGlucoseMeasurementTypes {
+public interface ContinuousGlucoseMonitorTypes {
 	int TYPE_CAPILLARY_WHOLE_BLOOD = 1;
 	int TYPE_CAPILLARY_PLASMA = 2;
 	int TYPE_VENOUS_WHOLE_BLOOD = 3;
