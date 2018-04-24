@@ -1,4 +1,4 @@
-package no.nordicsemi.android.ble.common.callback.cgms;
+package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
@@ -14,12 +14,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
-public class ContinuousGlucoseMonitorStatusDataCallbackTest {
+public class CGMStatusDataCallbackTest {
 	private boolean called = false;
 
 	@Test
 	public void onContinuousGlucoseMonitorStatusChanged_withCrc() {
-		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
+		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
 																final int timeOffset, final boolean secured) {
@@ -67,7 +67,7 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorStatusChanged_noCrc() {
-		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
+		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
 																final int timeOffset, final boolean secured) {
@@ -114,7 +114,7 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorStatusReceivedWithCrcError() {
-		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
+		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
 																final int timeOffset, final boolean secured) {
@@ -142,7 +142,7 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived() {
-		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
+		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
 																final int timeOffset, final boolean secured) {

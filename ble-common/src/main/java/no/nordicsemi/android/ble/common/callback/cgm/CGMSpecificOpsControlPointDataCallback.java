@@ -1,4 +1,4 @@
-package no.nordicsemi.android.ble.common.callback.cgms;
+package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
@@ -96,12 +96,12 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 						calibrationDataRecordNumber, new CGMCalibrationStatus(calibrationStatus), crcPresent);
 				break;
 			case OP_CODE_RESPONSE_CODE:
-				// final int requestCode = data.getIntValue(Data.FORMAT_UINT8, 1); // ignore
+				final int requestCode = data.getIntValue(Data.FORMAT_UINT8, 1); // ignore
 				final int responseCode = data.getIntValue(Data.FORMAT_UINT8, 2);
 				if (responseCode == CGM_RESPONSE_SUCCESS) {
-					onCGMSpecificOpsOperationCompleted(device);
+					onCGMSpecificOpsOperationCompleted(device, requestCode, crcPresent);
 				} else {
-					onCGMSpecificOpsOperationError(device, responseCode);
+					onCGMSpecificOpsOperationError(device, requestCode, responseCode, crcPresent);
 				}
 				break;
 		}

@@ -5,20 +5,47 @@ import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
 
-public interface CGMSpecificOpsControlPointCallback extends ContinuousGlucoseMonitorTypes {
+@SuppressWarnings("unused")
+public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
+	int CGM_OP_CODE_SET_COMMUNICATION_INTERVAL = 1;
+	int CGM_OP_CODE_SET_CALIBRATION_VALUE = 4;
+	int CGM_OP_CODE_SET_PATIENT_HIGH_ALERT_LEVEL = 7;
+	int CGM_OP_CODE_SET_PATIENT_LOW_ALERT_LEVEL = 10;
+	int CGM_OP_CODE_SET_HYPO_ALERT_LEVEL = 13;
+	int CGM_OP_CODE_SET_HYPER_ALERT_LEVEL = 16;
+	int CGM_OP_CODE_SET_RATE_OF_DECREASE_ALERT_LEVEL = 19;
+	int CGM_OP_CODE_SET_RATE_OF_INCREASE_ALERT_LEVEL = 22;
+	int CGM_OP_CODE_RESET_DEVICE_SPECIFIC_ERROR = 25;
+	int CGM_OP_CODE_START_SESSION = 26;
+	int CGM_OP_CODE_STOP_SESSION = 27;
+
+	// int CGM_RESPONSE_SUCCESS = 1;
+	int CGM_ERROR_OP_CODE_NOT_SUPPORTED = 2;
+	int CGM_ERROR_INVALID_OPERAND = 3;
+	int CGM_ERROR_PROCEDURE_NOT_COMPLETED = 4;
+	int CGM_ERROR_PARAMETER_OUT_OF_RANGE = 5;
 
 	/**
 	 * Callback called when a CGM Specific Ops request has finished successfully.
+	 *
+	 * @param device      target device.
+	 * @param requestCode request code that has completed. One of CGM_OP_CODE_* constants.
+	 * @param secured     true, if the value received was secured with E2E-CRC value and the CRC matched
+	 *                    the packet. False, if the CRC field was not present.
 	 */
-	void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device);
+	void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device, final int requestCode, final boolean secured);
 
 	/**
 	 * Callback called when a CGM Specific Ops request has failed.
 	 *
-	 * @param device target device.
-	 * @param error  the received error code, see CGM_ERROR_* constants.
+	 * @param device      target device.
+	 * @param requestCode request code that has completed with an error. One of CGM_OP_CODE_* constants,
+	 *                    or other if such was requested.
+	 * @param error       the received error code, see CGM_ERROR_* constants.
+	 * @param secured     true, if the value received was secured with E2E-CRC value and the CRC matched
+	 *                    the packet. False, if the CRC field was not present.
 	 */
-	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int error);
+	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int error, final boolean secured);
 
 	/**
 	 * Callback called when a CGM Specific Ops response was received with and incorrect E2E CRC.

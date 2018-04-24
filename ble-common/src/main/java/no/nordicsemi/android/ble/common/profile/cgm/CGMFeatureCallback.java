@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("unused")
-public interface ContinuousGlucoseMonitorFeatureCallback extends ContinuousGlucoseMonitorTypes {
+public interface CGMFeatureCallback extends CGMTypes {
 
 	/**
 	 * Callback called when Continuous Glucose Monitor Feature value was received.

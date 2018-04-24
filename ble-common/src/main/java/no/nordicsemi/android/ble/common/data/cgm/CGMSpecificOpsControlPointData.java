@@ -1,10 +1,10 @@
-package no.nordicsemi.android.ble.common.data.cgms;
+package no.nordicsemi.android.ble.common.data.cgm;
 
-import no.nordicsemi.android.ble.common.profile.cgm.ContinuousGlucoseMonitorTypes;
+import no.nordicsemi.android.ble.common.profile.cgm.CGMTypes;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
-public final class CGMSpecificOpsControlPointData implements ContinuousGlucoseMonitorTypes {
+public final class CGMSpecificOpsControlPointData implements CGMTypes {
 	private static final byte OP_CODE_SET_COMMUNICATION_INTERVAL = 1;
 	private static final byte OP_CODE_GET_COMMUNICATION_INTERVAL = 2;
 	private static final byte OP_CODE_SET_CALIBRATION_VALUE = 4;

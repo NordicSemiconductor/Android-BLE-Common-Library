@@ -1,15 +1,15 @@
-package no.nordicsemi.android.ble.common.callback.cgms;
+package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
-import no.nordicsemi.android.ble.common.profile.cgm.ContinuousGlucoseMonitorStatusCallback;
+import no.nordicsemi.android.ble.common.profile.cgm.CGMStatusCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("ConstantConditions")
-public abstract class ContinuousGlucoseMonitorStatusDataCallback implements ProfileDataCallback, ContinuousGlucoseMonitorStatusCallback {
+public abstract class CGMStatusDataCallback implements ProfileDataCallback, CGMStatusCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

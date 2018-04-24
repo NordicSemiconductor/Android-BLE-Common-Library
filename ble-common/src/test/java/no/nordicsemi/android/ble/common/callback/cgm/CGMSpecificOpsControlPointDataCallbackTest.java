@@ -1,4 +1,4 @@
-package no.nordicsemi.android.ble.common.callback.cgms;
+package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
@@ -20,6 +20,7 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 	private boolean invalidData;
 	private boolean valueReceived;
 	private boolean secured;
+	private int requestCode;
 	private int error;
 	private int interval;
 	private float patientHighAlertLevel;
@@ -36,6 +37,7 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 			CGMSpecificOpsControlPointDataCallbackTest.this.invalidCrc = false;
 			CGMSpecificOpsControlPointDataCallbackTest.this.invalidData = false;
 			CGMSpecificOpsControlPointDataCallbackTest.this.valueReceived = false;
+			CGMSpecificOpsControlPointDataCallbackTest.this.requestCode = 0;
 			CGMSpecificOpsControlPointDataCallbackTest.this.error = 0;
 			CGMSpecificOpsControlPointDataCallbackTest.this.interval = 0;
 			CGMSpecificOpsControlPointDataCallbackTest.this.patientHighAlertLevel = 0.0f;
@@ -48,13 +50,17 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device) {
+		public void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device, final int requestCode, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.success = true;
+			CGMSpecificOpsControlPointDataCallbackTest.this.requestCode = requestCode;
+			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int error) {
+		public void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int error, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.error = error;
+			CGMSpecificOpsControlPointDataCallbackTest.this.requestCode = requestCode;
+			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
@@ -136,6 +142,8 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		final Data data = new Data(new byte[] { 28, 2, 1});
 		callback.onDataReceived(null, data);
 		assertTrue(success);
+		assertFalse(secured);
+		assertEquals(2, requestCode);
 	}
 
 	@Test
@@ -143,6 +151,8 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		final Data data = new Data(new byte[] { 28, 2, 2});
 		callback.onDataReceived(null, data);
 		assertEquals(error, 2);
+		assertFalse(secured);
+		assertEquals(2, requestCode);
 	}
 
 	@Test
@@ -150,6 +160,8 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		final Data data = new Data(new byte[] { 28, 2, 1, (byte) 0x3C, (byte) 0x3B});
 		callback.onDataReceived(null, data);
 		assertTrue(success);
+		assertTrue(secured);
+		assertEquals(2, requestCode);
 	}
 
 	@Test
@@ -157,6 +169,8 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		final Data data = new Data(new byte[] { 28, 2, 2, (byte) 0xA7, (byte) 0x09});
 		callback.onDataReceived(null, data);
 		assertEquals(error, 2);
+		assertTrue(secured);
+		assertEquals(2, requestCode);
 	}
 
 	@Test

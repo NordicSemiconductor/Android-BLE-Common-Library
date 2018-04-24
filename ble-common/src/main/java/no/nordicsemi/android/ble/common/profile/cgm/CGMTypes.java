@@ -1,7 +1,7 @@
 package no.nordicsemi.android.ble.common.profile.cgm;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
-public interface ContinuousGlucoseMonitorTypes {
+public interface CGMTypes {
 	int TYPE_CAPILLARY_WHOLE_BLOOD = 1;
 	int TYPE_CAPILLARY_PLASMA = 2;
 	int TYPE_VENOUS_WHOLE_BLOOD = 3;
@@ -19,12 +19,6 @@ public interface ContinuousGlucoseMonitorTypes {
 	int SAMPLE_LOCATION_CONTROL_SOLUTION = 4;
 	int SAMPLE_LOCATION_SUBCUTANEOUS_TISSUE = 5;
 	int SAMPLE_LOCATION_VALUE_NOT_AVAILABLE = 15;
-
-	// int CGM_RESPONSE_SUCCESS = 1;
-	int CGM_ERROR_OP_CODE_NOT_SUPPORTED = 2;
-	int CGM_ERROR_INVALID_OPERAND = 3;
-	int CGM_ERROR_PROCEDURE_NOT_COMPLETED = 4;
-	int CGM_ERROR_PARAMETER_OUT_OF_RANGE = 5;
 
 	class CGMFeatures {
 		public boolean calibrationSupported;

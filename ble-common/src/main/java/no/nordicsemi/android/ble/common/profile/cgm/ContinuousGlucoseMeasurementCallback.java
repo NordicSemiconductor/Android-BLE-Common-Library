@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import no.nordicsemi.android.ble.data.Data;
 
-public interface ContinuousGlucoseMeasurementCallback extends ContinuousGlucoseMonitorTypes {
+public interface ContinuousGlucoseMeasurementCallback extends CGMTypes {
 
 	/**
 	 * Callback called when a Continuous Glucose Measurement packet has been received.

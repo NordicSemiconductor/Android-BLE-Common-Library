@@ -1,4 +1,4 @@
-package no.nordicsemi.android.ble.common.callback.cgms;
+package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
@@ -14,12 +14,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
-public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
+public class CGMFeatureDataCallbackTest {
 	private boolean called;
 
 	@Test
 	public void onContinuousGlucoseMeasurementFeaturesReceived_full() {
-		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
+		final DataCallback callback = new CGMFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
 																   final int type, final int sampleLocation, final boolean secured) {
@@ -68,7 +68,7 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementFeaturesReceived_crcNotSupported() {
-		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
+		final DataCallback callback = new CGMFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
 																   final int type, final int sampleLocation, final boolean secured) {
@@ -117,7 +117,7 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError() {
-		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
+		final DataCallback callback = new CGMFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
 																   final int type, final int sampleLocation, final boolean secured) {
@@ -145,7 +145,7 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_noCrc() {
-		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
+		final DataCallback callback = new CGMFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
 																   final int type, final int sampleLocation, final boolean secured) {
@@ -172,7 +172,7 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_wrongDefaultCrc() {
-		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
+		final DataCallback callback = new CGMFeatureDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
 																   final int type, final int sampleLocation, final boolean secured) {

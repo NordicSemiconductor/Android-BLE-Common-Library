@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
 
-public interface ContinuousGlucoseMonitorStatusCallback extends ContinuousGlucoseMonitorTypes {
+public interface CGMStatusCallback extends CGMTypes {
 
 	/**
 	 * Callback called whenever the CGM Status characteristic was read..
