@@ -2,6 +2,7 @@ package no.nordicsemi.android.ble.common.callback;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.Calendar;
 
@@ -9,7 +10,7 @@ import no.nordicsemi.android.ble.common.profile.DateTimeCallback;
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 
-@SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
+@SuppressWarnings("ConstantConditions")
 public abstract class DateTimeDataCallback implements ProfileDataCallback, DateTimeCallback {
 
 	@Override
@@ -22,6 +23,7 @@ public abstract class DateTimeDataCallback implements ProfileDataCallback, DateT
 		onDateTimeReceived(device, calendar);
 	}
 
+	@Nullable
 	static Calendar readDateTime(@NonNull final Data data, final int offset) {
 		if (data.size() < offset + 7)
 			return null;
