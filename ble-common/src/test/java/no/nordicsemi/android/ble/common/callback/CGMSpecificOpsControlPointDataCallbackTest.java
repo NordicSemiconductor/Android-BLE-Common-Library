@@ -48,32 +48,33 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onCGMSpecificOpsOperationCompleted() {
+		public void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.success = true;
 		}
 
 		@Override
-		public void onCGMSpecificOpsOperationError(final int error) {
+		public void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int error) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.error = error;
 		}
 
 		@Override
-		public void onCGMSpecificOpsResponseReceivedWithCrcError(@NonNull final Data data) {
+		public void onCGMSpecificOpsResponseReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.invalidCrc = true;
 		}
 
 		@Override
-		public void onContinuousGlucoseCommunicationIntervalReceived(final int interval, final boolean secured) {
+		public void onContinuousGlucoseCommunicationIntervalReceived(@NonNull final BluetoothDevice device, final int interval, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.interval = interval;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onContinuousGlucoseCalibrationValueReceived(final float glucoseConcentrationOfCalibration,
+		public void onContinuousGlucoseCalibrationValueReceived(@NonNull final BluetoothDevice device,
+																final float glucoseConcentrationOfCalibration,
 																final int calibrationTime, final int nextCalibrationTime,
 																final int type, final int sampleLocation,
 																final int calibrationDataRecordNumber,
-																final CGMCalibrationStatus status, final boolean secured) {
+																@NonNull final CGMCalibrationStatus status, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.valueReceived = true;
 			assertEquals("Glucose concentration of calibration", 100.0f, glucoseConcentrationOfCalibration, 0.01);
 			assertEquals("Calibration time", 10, calibrationTime);
@@ -89,37 +90,37 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onContinuousGlucosePatientHighAlertReceived(final float alertLevel, final boolean secured) {
+		public void onContinuousGlucosePatientHighAlertReceived(@NonNull final BluetoothDevice device, final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.patientHighAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onContinuousGlucosePatientLowAlertReceived(final float alertLevel, final boolean secured) {
+		public void onContinuousGlucosePatientLowAlertReceived(@NonNull final BluetoothDevice device, final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.patientLowAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onContinuousGlucoseHypoAlertReceived(final float alertLevel, final boolean secured) {
+		public void onContinuousGlucoseHypoAlertReceived(@NonNull final BluetoothDevice device, final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.hypoAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onContinuousGlucoseHyperAlertReceived(final float alertLevel, final boolean secured) {
+		public void onContinuousGlucoseHyperAlertReceived(@NonNull final BluetoothDevice device, final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.hyperAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onContinuousGlucoseRateOfDecreaseAlertReceived(final float alertLevel, final boolean secured) {
+		public void onContinuousGlucoseRateOfDecreaseAlertReceived(@NonNull final BluetoothDevice device, final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.rateOfDecreaseAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}
 
 		@Override
-		public void onContinuousGlucoseRateOfIncreaseAlertReceived(final float alertLevel, final boolean secured) {
+		public void onContinuousGlucoseRateOfIncreaseAlertReceived(@NonNull final BluetoothDevice device, final float alertLevel, final boolean secured) {
 			CGMSpecificOpsControlPointDataCallbackTest.this.rateOfIncreaseAlertLevel = alertLevel;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}

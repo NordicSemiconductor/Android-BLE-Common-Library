@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.profile;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 @SuppressWarnings("unused")
 public interface RecordAccessControlPointCallback {
 	// int RACP_RESPONSE_SUCCESS = 1;
@@ -16,30 +19,36 @@ public interface RecordAccessControlPointCallback {
 	 * Callback called when the request has finished successfully, that is
 	 * all requested records were reported or deleted, or the operation has aborted,
 	 * depending on the request.
+	 *
+	 * @param device target device.
 	 */
-	void onRecordAccessOperationCompleted();
+	void onRecordAccessOperationCompleted(final @NonNull BluetoothDevice device);
 
 	/**
 	 * Callback called when the request to report or delete records has finished
 	 * successfully, but no records were found matching given filter criteria.
+	 *
+	 * @param device target device.
 	 */
-	void onRecordAccessOperationCompletedWithNoRecordsFound();
+	void onRecordAccessOperationCompletedWithNoRecordsFound(final @NonNull BluetoothDevice device);
 
 	/**
 	 * Callback called as a result to 'Report number of stored records' request.
 	 *
+	 * @param device          target device.
 	 * @param numberOfRecords number of records matching given filter criteria.
 	 */
-	void onNumberOfRecordsReceived(final int numberOfRecords);
+	void onNumberOfRecordsReceived(final @NonNull BluetoothDevice device, final int numberOfRecords);
 
 	/**
 	 * Callback called in case an error has been returned from the Record Access Control Point
 	 * characteristic.
 	 * <p>
 	 * The 'No records found' error is returned as
-	 * {@link #onRecordAccessOperationCompletedWithNoRecordsFound()} instead.
+	 * {@link #onRecordAccessOperationCompletedWithNoRecordsFound(BluetoothDevice)} instead.
 	 *
+	 * @param device    target device.
 	 * @param errorCode the error code, one of RACP_ERROR_* constants, or other (unknown) is such was reported.
 	 */
-	void onRecordAccessOperationError(final int errorCode);
+	void onRecordAccessOperationError(final @NonNull BluetoothDevice device, final int errorCode);
 }

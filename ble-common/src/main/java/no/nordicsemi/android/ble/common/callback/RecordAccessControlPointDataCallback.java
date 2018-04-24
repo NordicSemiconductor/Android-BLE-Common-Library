@@ -54,17 +54,17 @@ public abstract class RecordAccessControlPointDataCallback implements ProfileDat
 						onInvalidDataReceived(device, data);
 						return;
 				}
-				onNumberOfRecordsReceived(numberOfRecords);
+				onNumberOfRecordsReceived(device, numberOfRecords);
 				break;
 			}
 			case OP_CODE_RESPONSE_CODE: {
 				final int responseCode = data.getIntValue(Data.FORMAT_UINT8, 2);
 				if (responseCode == RACP_RESPONSE_SUCCESS) {
-					onRecordAccessOperationCompleted();
+					onRecordAccessOperationCompleted(device);
 				} else if (responseCode == RACP_ERROR_NO_RECORDS_FOUND) {
-					onRecordAccessOperationCompletedWithNoRecordsFound();
+					onRecordAccessOperationCompletedWithNoRecordsFound(device);
 				} else {
-					onRecordAccessOperationError(responseCode);
+					onRecordAccessOperationError(device, responseCode);
 				}
 				break;
 			}

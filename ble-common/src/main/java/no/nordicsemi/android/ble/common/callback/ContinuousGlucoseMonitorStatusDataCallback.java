@@ -28,12 +28,12 @@ public abstract class ContinuousGlucoseMonitorStatusDataCallback implements Prof
 			final int actualCrc = CRC16.MCRF4XX(data.getValue(), 0, 5);
 			final int expectedCrc = data.getIntValue(Data.FORMAT_UINT16, 5);
 			if (actualCrc != expectedCrc) {
-				onContinuousGlucoseMonitorStatusReceivedWithCrcError(data);
+				onContinuousGlucoseMonitorStatusReceivedWithCrcError(device, data);
 				return;
 			}
 		}
 
 		final CGMStatus status = new CGMStatus(warningStatus, calibrationTempStatus, sensorStatus);
-		onContinuousGlucoseMonitorStatusChanged(status, timeOffset, crcPresent);
+		onContinuousGlucoseMonitorStatusChanged(device, status, timeOffset, crcPresent);
 	}
 }

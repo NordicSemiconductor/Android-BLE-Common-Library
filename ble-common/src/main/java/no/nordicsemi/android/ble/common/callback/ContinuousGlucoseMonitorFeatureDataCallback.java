@@ -26,7 +26,7 @@ public abstract class ContinuousGlucoseMonitorFeatureDataCallback implements Pro
 		if (features.e2eCrcSupported) {
 			final int actualCrc = CRC16.MCRF4XX(data.getValue(), 0, 4);
 			if (actualCrc != expectedCrc) {
-				onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(data);
+				onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(device, data);
 				return;
 			}
 		} else {
@@ -40,6 +40,6 @@ public abstract class ContinuousGlucoseMonitorFeatureDataCallback implements Pro
 		final int type = typeAndSampleLocation & 0x0F; // least significant nibble
 		final int sampleLocation = typeAndSampleLocation >> 4; // most significant nibble
 
-		onContinuousGlucoseMonitorFeaturesReceived(features, type, sampleLocation, features.e2eCrcSupported);
+		onContinuousGlucoseMonitorFeaturesReceived(device, features, type, sampleLocation, features.e2eCrcSupported);
 	}
 }

@@ -21,7 +21,8 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 	public void onContinuousGlucoseMonitorStatusChanged_withCrc() {
 		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+																final int timeOffset, final boolean secured) {
 				assertNotNull("Status present", status);
 				assertTrue(status.sessionStopped);
 				assertTrue(status.deviceBatteryLow);
@@ -48,7 +49,7 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct data reported as CRC error", 1, 2);
 			}
 
@@ -68,7 +69,8 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 	public void onContinuousGlucoseMonitorStatusChanged_noCrc() {
 		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+																final int timeOffset, final boolean secured) {
 				assertNotNull("Status present", status);
 				assertTrue(status.sessionStopped);
 				assertFalse(status.deviceBatteryLow);
@@ -95,7 +97,7 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct data reported as CRC error", 1, 2);
 			}
 
@@ -114,12 +116,13 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 	public void onContinuousGlucoseMonitorStatusReceivedWithCrcError() {
 		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+																final int timeOffset, final boolean secured) {
 				assertEquals("Invalid CRC reported as valid packet", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				called = true;
 			}
 
@@ -141,12 +144,13 @@ public class ContinuousGlucoseMonitorStatusDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final DataCallback callback = new ContinuousGlucoseMonitorStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(final CGMStatus status, final int timeOffset, final boolean secured) {
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+																final int timeOffset, final boolean secured) {
 				assertEquals("Invalid data reported as valid packet", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Invalid data reported as wrong CRC", 1, 2);
 			}
 

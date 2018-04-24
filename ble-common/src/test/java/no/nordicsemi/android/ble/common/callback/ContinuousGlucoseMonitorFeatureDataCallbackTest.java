@@ -21,7 +21,8 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 	public void onContinuousGlucoseMeasurementFeaturesReceived_full() {
 		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
+																   final int type, final int sampleLocation, final boolean secured) {
 				called = true;
 				assertNotNull(features);
 				assertFalse(features.calibrationSupported);
@@ -47,7 +48,7 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct packet but invalid CRC reported", 1, 2);
 			}
 
@@ -69,7 +70,8 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 	public void onContinuousGlucoseMeasurementFeaturesReceived_crcNotSupported() {
 		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
+																   final int type, final int sampleLocation, final boolean secured) {
 				called = true;
 				assertNotNull(features);
 				assertFalse(features.calibrationSupported);
@@ -95,7 +97,7 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct packet but invalid CRC reported", 1, 2);
 			}
 
@@ -117,12 +119,13 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 	public void onContinuousGlucoseMeasurementFeaturesReceivedWithCrcError() {
 		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
+																   final int type, final int sampleLocation, final boolean secured) {
 				assertEquals("Wrong CRC but data reported", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				called = true;
 			}
 
@@ -144,12 +147,13 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 	public void onInvalidDataReceived_noCrc() {
 		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
+																   final int type, final int sampleLocation, final boolean secured) {
 				assertEquals("Invalid data but data reported", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Invalid data but wrong CRC reported", 1, 2);
 			}
 
@@ -170,12 +174,13 @@ public class ContinuousGlucoseMonitorFeatureDataCallbackTest {
 	public void onInvalidDataReceived_wrongDefaultCrc() {
 		final DataCallback callback = new ContinuousGlucoseMonitorFeatureDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final CGMFeatures features, final int type, final int sampleLocation, final boolean secured) {
+			public void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device, @NonNull final CGMFeatures features,
+																   final int type, final int sampleLocation, final boolean secured) {
 				assertEquals("Wrong CRC but data reported", 1, 2);
 			}
 
 			@Override
-			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final Data data) {
+			public void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct packet but invalid CRC reported", 1, 2);
 			}
 

@@ -72,7 +72,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 			final int expectedCrc = data.getIntValue(Data.FORMAT_UINT16, 1 + expectedOperandSize);
 			final int actualCrc   = CRC16.MCRF4XX(data.getValue(), 0, 1 + expectedOperandSize);
 			if (expectedCrc != actualCrc) {
-				onCGMSpecificOpsResponseReceivedWithCrcError(data);
+				onCGMSpecificOpsResponseReceivedWithCrcError(device, data);
 				return;
 			}
 		}
@@ -80,7 +80,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 		switch (opCode) {
 			case OP_CODE_COMMUNICATION_INTERVAL_RESPONSE:
 				final int interval = data.getIntValue(Data.FORMAT_UINT8, 1);
-				onContinuousGlucoseCommunicationIntervalReceived(interval, crcPresent);
+				onContinuousGlucoseCommunicationIntervalReceived(device, interval, crcPresent);
 				break;
 			case OP_CODE_CALIBRATION_VALUE_RESPONSE:
 				final float glucoseConcentrationOfCalibration = data.getFloatValue(Data.FORMAT_SFLOAT, 1);
@@ -91,7 +91,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 				final int nextCalibrationTime = data.getIntValue(Data.FORMAT_UINT16, 6);
 				final int calibrationDataRecordNumber = data.getIntValue(Data.FORMAT_UINT16, 8);
 				final int calibrationStatus = data.getIntValue(Data.FORMAT_UINT8, 10);
-				onContinuousGlucoseCalibrationValueReceived(glucoseConcentrationOfCalibration,
+				onContinuousGlucoseCalibrationValueReceived(device, glucoseConcentrationOfCalibration,
 						calibrationTime, nextCalibrationTime, calibrationType, calibrationSampleLocation,
 						calibrationDataRecordNumber, new CGMCalibrationStatus(calibrationStatus), crcPresent);
 				break;
@@ -99,9 +99,9 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 				// final int requestCode = data.getIntValue(Data.FORMAT_UINT8, 1); // ignore
 				final int responseCode = data.getIntValue(Data.FORMAT_UINT8, 2);
 				if (responseCode == CGM_RESPONSE_SUCCESS) {
-					onCGMSpecificOpsOperationCompleted();
+					onCGMSpecificOpsOperationCompleted(device);
 				} else {
-					onCGMSpecificOpsOperationError(responseCode);
+					onCGMSpecificOpsOperationError(device, responseCode);
 				}
 				break;
 		}
@@ -110,22 +110,22 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 		final float value = data.getFloatValue(Data.FORMAT_SFLOAT, 1);
 		switch (opCode) {
 			case OP_CODE_PATIENT_HIGH_ALERT_LEVEL_RESPONSE:
-				onContinuousGlucosePatientHighAlertReceived(value, crcPresent);
+				onContinuousGlucosePatientHighAlertReceived(device, value, crcPresent);
 				break;
 			case OP_CODE_PATIENT_LOW_ALERT_LEVEL_RESPONSE:
-				onContinuousGlucosePatientLowAlertReceived(value, crcPresent);
+				onContinuousGlucosePatientLowAlertReceived(device, value, crcPresent);
 				break;
 			case OP_CODE_HYPO_ALERT_LEVEL_RESPONSE:
-				onContinuousGlucoseHypoAlertReceived(value, crcPresent);
+				onContinuousGlucoseHypoAlertReceived(device, value, crcPresent);
 				break;
 			case OP_CODE_HYPER_ALERT_LEVEL_RESPONSE:
-				onContinuousGlucoseHyperAlertReceived(value, crcPresent);
+				onContinuousGlucoseHyperAlertReceived(device, value, crcPresent);
 				break;
 			case OP_CODE_RATE_OF_DECREASE_ALERT_LEVEL_RESPONSE:
-				onContinuousGlucoseRateOfDecreaseAlertReceived(value, crcPresent);
+				onContinuousGlucoseRateOfDecreaseAlertReceived(device, value, crcPresent);
 				break;
 			case OP_CODE_RATE_OF_INCREASE_ALERT_LEVEL_RESPONSE:
-				onContinuousGlucoseRateOfIncreaseAlertReceived(value, crcPresent);
+				onContinuousGlucoseRateOfIncreaseAlertReceived(device, value, crcPresent);
 				break;
 		}
 	}

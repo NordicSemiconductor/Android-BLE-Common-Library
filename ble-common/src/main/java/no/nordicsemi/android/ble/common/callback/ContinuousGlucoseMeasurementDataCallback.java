@@ -47,7 +47,7 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 				final int expectedCrc = data.getIntValue(Data.FORMAT_UINT16, offset + dataSize);
 				final int actualCrc = CRC16.MCRF4XX(data.getValue(), offset, dataSize);
 				if (expectedCrc != actualCrc) {
-					onContinuousGlucoseMeasurementReceivedWithCrcError(data);
+					onContinuousGlucoseMeasurementReceivedWithCrcError(device, data);
 					return;
 				}
 			}
@@ -99,7 +99,7 @@ public abstract class ContinuousGlucoseMeasurementDataCallback implements Profil
 				offset += 2;
 			}
 
-			onContinuousGlucoseMeasurementReceived(glucoseConcentration, trend, quality, status, timeOffset, crcPresent);
+			onContinuousGlucoseMeasurementReceived(device, glucoseConcentration, trend, quality, status, timeOffset, crcPresent);
 		}
 	}
 }

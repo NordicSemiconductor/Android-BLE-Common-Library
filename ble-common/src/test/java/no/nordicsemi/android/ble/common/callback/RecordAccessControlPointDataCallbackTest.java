@@ -33,22 +33,22 @@ public class RecordAccessControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onRecordAccessOperationCompleted() {
+		public void onRecordAccessOperationCompleted(@NonNull final BluetoothDevice device) {
 			RecordAccessControlPointDataCallbackTest.this.success = true;
 		}
 
 		@Override
-		public void onRecordAccessOperationCompletedWithNoRecordsFound() {
+		public void onRecordAccessOperationCompletedWithNoRecordsFound(@NonNull final BluetoothDevice device) {
 			RecordAccessControlPointDataCallbackTest.this.successNoRecords = true;
 		}
 
 		@Override
-		public void onNumberOfRecordsReceived(final int numberOfRecords) {
+		public void onNumberOfRecordsReceived(@NonNull final BluetoothDevice device, final int numberOfRecords) {
 			RecordAccessControlPointDataCallbackTest.this.numberOfRecords = numberOfRecords;
 		}
 
 		@Override
-		public void onRecordAccessOperationError(final int errorCode) {
+		public void onRecordAccessOperationError(@NonNull final BluetoothDevice device, final int errorCode) {
 			RecordAccessControlPointDataCallbackTest.this.error = errorCode;
 		}
 
