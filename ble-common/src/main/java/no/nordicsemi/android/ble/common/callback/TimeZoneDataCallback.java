@@ -37,7 +37,7 @@ public abstract class TimeZoneDataCallback implements ProfileDataCallback, TimeZ
 	 * @return the time offset in 15 minutes increments, or null if offset is outside ot range.
 	 */
 	@Nullable
-	static Integer readTimeZone(@NonNull final Data data, final int offset) {
+	public static Integer readTimeZone(@NonNull final Data data, final int offset) {
 		if (data.size() < offset + 1)
 			return null;
 

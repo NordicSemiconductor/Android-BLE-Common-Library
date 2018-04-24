@@ -23,8 +23,15 @@ public abstract class DSTOffsetDataCallback implements ProfileDataCallback, DSTO
 		onDSTOffsetReceived(device, offset);
 	}
 
+	/**
+	 * Returns the Daylight Saving Time Offset, or null if offset is out of data range.
+	 *
+	 * @param data input data.
+	 * @param offset offset to read DST Offset from.
+	 * @return DSTOffset field or null.
+	 */
 	@Nullable
-	static DSTOffset readDSTOffset(@NonNull final Data data, final int offset) {
+	public static DSTOffset readDSTOffset(@NonNull final Data data, final int offset) {
 		if (data.size() < offset + 1)
 			return null;
 

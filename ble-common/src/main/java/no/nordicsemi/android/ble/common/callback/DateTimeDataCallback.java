@@ -24,8 +24,21 @@ public abstract class DateTimeDataCallback implements ProfileDataCallback, DateT
 		onDateTimeReceived(device, calendar);
 	}
 
+	/**
+	 * Returns a Gregorian Calendar object with YEAR, MONTH, DATE, HOUR, MINUTE, SECONDS set from
+	 * the data at given offset using the Date Time characteristic format.
+	 * MILLISECONDS are set to 0. Time Zone and DST offset are from the local time zone.
+	 * <p>
+	 * If YEAR, MONTH or DATE are set to 0 in the data, the corresponding fields in the calendar are 'unset',
+	 * that is {@code calendar.isSet(Calendar.YEAR)} returns false.
+	 * </p>
+	 *
+	 * @param data input data (7 bytes required).
+	 * @param offset offset to read from.
+	 * @return Calendar object or null.
+	 */
 	@Nullable
-	static Calendar readDateTime(@NonNull final Data data, final int offset) {
+	public static Calendar readDateTime(@NonNull final Data data, final int offset) {
 		if (data.size() < offset + 7)
 			return null;
 
@@ -38,7 +51,7 @@ public abstract class DateTimeDataCallback implements ProfileDataCallback, DateT
 		else
 			calendar.clear(Calendar.YEAR);
 		if (month > 0)
-			calendar.set(Calendar.MONTH, month - 1); // months are 1-based
+			calendar.set(Calendar.MONTH, month - 1); // months are 1-based in Date Time characteristic
 		else
 			calendar.clear(Calendar.MONTH);
 		if (day > 0)
