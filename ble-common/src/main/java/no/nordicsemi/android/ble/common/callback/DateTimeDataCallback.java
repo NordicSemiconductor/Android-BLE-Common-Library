@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 import no.nordicsemi.android.ble.common.profile.DateTimeCallback;
 import no.nordicsemi.android.ble.data.Data;

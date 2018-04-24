@@ -12,10 +12,16 @@ public interface DSTOffsetCallback {
 		DOUBLE_DAYLIGHT_TIME(8),
 		UNKNOWN(255);
 
-		public byte value;
+		/**
+		 * Offset of the Daylight Saving Time in minutes.
+		 */
+		public int offset;
 
 		DSTOffset(final int code) {
-			this.value = (byte) code;
+			if (code != 255)
+				this.offset = code * 15; // convert to minutes
+			else
+				this.offset = 0;
 		}
 
 		@Nullable
