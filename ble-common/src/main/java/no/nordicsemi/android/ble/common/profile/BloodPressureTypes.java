@@ -1,7 +1,7 @@
 package no.nordicsemi.android.ble.common.profile;
 
 @SuppressWarnings("WeakerAccess")
-public interface BloodPressureMeasurementTypes {
+public interface BloodPressureTypes {
 	int UNIT_mmHG = 0;
 	int UNIT_kPa = 1;
 

@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import java.util.Calendar;
 
-public interface IntermediateCuffPressureCallback extends BloodPressureMeasurementTypes {
+public interface IntermediateCuffPressureCallback extends BloodPressureTypes {
 
 	/**
 	 * Callback called when Intermediate Cuff Pressure packet has been received.

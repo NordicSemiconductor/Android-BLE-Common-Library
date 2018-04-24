@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
-public interface BloodPressureMeasurementCallback extends BloodPressureMeasurementTypes {
+public interface BloodPressureMeasurementCallback extends BloodPressureTypes {
 
 	/**
 	 * Callback called when Blood Pressure Measurement packet has been received.
