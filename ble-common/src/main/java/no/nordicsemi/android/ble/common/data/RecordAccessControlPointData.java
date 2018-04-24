@@ -111,7 +111,7 @@ public final class RecordAccessControlPointData {
 	}
 
 	public static Data reportNumberOfAllStoredRecords() {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_ALL_RECORDS);
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_ALL_RECORDS);
 	}
 
 	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
