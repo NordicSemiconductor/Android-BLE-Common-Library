@@ -41,11 +41,11 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 * @param device      target device.
 	 * @param requestCode request code that has completed with an error. One of CGM_OP_CODE_* constants,
 	 *                    or other if such was requested.
-	 * @param error       the received error code, see CGM_ERROR_* constants.
+	 * @param errorCode   the received error code, see CGM_ERROR_* constants.
 	 * @param secured     true, if the value received was secured with E2E-CRC value and the CRC matched
 	 *                    the packet. False, if the CRC field was not present.
 	 */
-	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int error, final boolean secured);
+	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int errorCode, final boolean secured);
 
 	/**
 	 * Callback called when a CGM Specific Ops response was received with and incorrect E2E CRC.

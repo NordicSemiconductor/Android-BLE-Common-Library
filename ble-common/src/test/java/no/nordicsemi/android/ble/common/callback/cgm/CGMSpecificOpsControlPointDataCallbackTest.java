@@ -57,8 +57,8 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 		}
 
 		@Override
-		public void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int error, final boolean secured) {
-			CGMSpecificOpsControlPointDataCallbackTest.this.error = error;
+		public void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode, final int errorCode, final boolean secured) {
+			CGMSpecificOpsControlPointDataCallbackTest.this.error = errorCode;
 			CGMSpecificOpsControlPointDataCallbackTest.this.requestCode = requestCode;
 			CGMSpecificOpsControlPointDataCallbackTest.this.secured = secured;
 		}

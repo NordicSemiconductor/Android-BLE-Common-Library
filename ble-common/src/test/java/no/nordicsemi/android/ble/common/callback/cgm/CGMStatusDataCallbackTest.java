@@ -21,7 +21,7 @@ public class CGMStatusDataCallbackTest {
 	public void onContinuousGlucoseMonitorStatusChanged_withCrc() {
 		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
 				assertNotNull("Status present", status);
 				assertTrue(status.sessionStopped);
@@ -69,7 +69,7 @@ public class CGMStatusDataCallbackTest {
 	public void onContinuousGlucoseMonitorStatusChanged_noCrc() {
 		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
 				assertNotNull("Status present", status);
 				assertTrue(status.sessionStopped);
@@ -116,7 +116,7 @@ public class CGMStatusDataCallbackTest {
 	public void onContinuousGlucoseMonitorStatusReceivedWithCrcError() {
 		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
 				assertEquals("Invalid CRC reported as valid packet", 1, 2);
 			}
@@ -144,7 +144,7 @@ public class CGMStatusDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final DataCallback callback = new CGMStatusDataCallback() {
 			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, final CGMStatus status,
+			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
 				assertEquals("Invalid data reported as valid packet", 1, 2);
 			}

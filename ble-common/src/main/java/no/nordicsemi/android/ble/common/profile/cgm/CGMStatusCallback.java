@@ -23,7 +23,7 @@ public interface CGMStatusCallback extends CGMTypes {
 	 *                   invalid CRC value check {@link #onContinuousGlucoseMonitorStatusReceivedWithCrcError(BluetoothDevice,Data)}.
 	 */
 	void onContinuousGlucoseMonitorStatusChanged(final @NonNull BluetoothDevice device,
-												 final CGMStatus status, final int timeOffset,
+												 final @NonNull CGMStatus status, final int timeOffset,
 												 final boolean secured);
 
 	/**
