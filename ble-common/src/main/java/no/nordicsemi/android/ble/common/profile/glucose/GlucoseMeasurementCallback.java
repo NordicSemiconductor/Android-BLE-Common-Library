@@ -48,47 +48,50 @@ public interface GlucoseMeasurementCallback {
 		public boolean sensorReadInterrupted;
 		public boolean generalDeviceFault;
 		public boolean timeFault;
-		public int status;
+		public int value;
 
-		public GlucoseStatus(final int status) {
-			this.status = status;
+		public GlucoseStatus(final int value) {
+			this.value = value;
 
-			deviceBatteryLow = (status & 0x0001) != 0;
-			sensorMalfunction = (status & 0x0002) != 0;
-			sampleSizeInsufficient = (status & 0x0004) != 0;
-			stripInsertionError = (status & 0x0008) != 0;
-			stripTypeIncorrect = (status & 0x0010) != 0;
-			sensorResultLowerThenDeviceCanProcess = (status & 0x0020) != 0;
-			sensorResultHigherThenDeviceCanProcess = (status & 0x0040) != 0;
-			sensorTemperatureTooHigh = (status & 0x0080) != 0;
-			sensorTemperatureTooLow = (status & 0x0100) != 0;
-			sensorReadInterrupted = (status & 0x0200) != 0;
-			generalDeviceFault = (status & 0x0400) != 0;
-			timeFault = (status & 0x0800) != 0;
+			deviceBatteryLow = (value & 0x0001) != 0;
+			sensorMalfunction = (value & 0x0002) != 0;
+			sampleSizeInsufficient = (value & 0x0004) != 0;
+			stripInsertionError = (value & 0x0008) != 0;
+			stripTypeIncorrect = (value & 0x0010) != 0;
+			sensorResultLowerThenDeviceCanProcess = (value & 0x0020) != 0;
+			sensorResultHigherThenDeviceCanProcess = (value & 0x0040) != 0;
+			sensorTemperatureTooHigh = (value & 0x0080) != 0;
+			sensorTemperatureTooLow = (value & 0x0100) != 0;
+			sensorReadInterrupted = (value & 0x0200) != 0;
+			generalDeviceFault = (value & 0x0400) != 0;
+			timeFault = (value & 0x0800) != 0;
 		}
 	}
 
 	/**
 	 * Callback called when Glucose Measurement value was received.
+	 * Except from the BluetoothDevice, only the sequence number and sample time is required to be non-null.
 	 *
-	 * @param device               target device.
-	 * @param glucoseConcentration glucose concentration in the provided unit.
-	 * @param unit                 sample unit, one of {@link #UNIT_kg_L} or {@link #UNIT_mol_L}.
-	 * @param type                 sample type, see TYPE_* constants.
-	 * @param sampleLocation       sample location, see SAMPLE_LOCATION_* constants.
-	 * @param sequenceNumber       represents the chronological order of the patient records in the Server
-	 *                             measurement database. The initial default value is 0.
-	 *                             The Sequence Number is incremented by 1 for each successive
-	 *                             Glucose Measurement characteristic value. The maximum value for
-	 *                             Sequence Number permitted is 0xFFFF. Assuming a high use of 8 times per day,
-	 *                             the maximum value of the Sequence Number would be reached in ~22 years.
-	 *                             Since product life expectancy of a Glucose Sensor is ~ 5 years,
-	 *                             this value significantly exceeds that expectation.
-	 * @param time                 base time with time offset added, if such was present in the packet.
+	 * @param device                    target device.
+	 * @param sequenceNumber            represents the chronological order of the patient records in the Server
+	 *                                  measurement database. The initial default value is 0.
+	 *                                  The Sequence Number is incremented by 1 for each successive
+	 *                                  Glucose Measurement characteristic value. The maximum value for
+	 *                                  Sequence Number permitted is 0xFFFF. Assuming a high use of 8 times per day,
+	 *                                  the maximum value of the Sequence Number would be reached in ~22 years.
+	 *                                  Since product life expectancy of a Glucose Sensor is ~ 5 years,
+	 *                                  this value significantly exceeds that expectation.
+	 * @param time                      base time with time offset added, if such was present in the packet.
+	 * @param glucoseConcentration      glucose concentration in the provided unit.
+	 * @param unit                      sample unit, one of {@link #UNIT_kg_L} or {@link #UNIT_mol_L}.
+	 * @param type                      sample type, see TYPE_* constants.
+	 * @param sampleLocation            sample location, see SAMPLE_LOCATION_* constants.
+	 * @param contextInformationFollows true, if Glucose Measurement Context will be sent immediately after
+	 *                                  this packet. False otherwise.
 	 */
 	void onGlucoseMeasurementReceived(final @NonNull BluetoothDevice device,
-									  final float glucoseConcentration, final int unit,
+									  final int sequenceNumber, final @NonNull Calendar time,
+									  final @Nullable Float glucoseConcentration, final @Nullable Integer unit,
 									  final @Nullable Integer type, final @Nullable Integer sampleLocation,
-									  final @Nullable GlucoseStatus status,
-									  final int sequenceNumber, final @NonNull Calendar time);
+									  final @Nullable GlucoseStatus status, final boolean contextInformationFollows);
 }

@@ -2,18 +2,18 @@ package no.nordicsemi.android.ble.common.profile.bp;
 
 @SuppressWarnings("WeakerAccess")
 public interface BloodPressureTypes {
-	int UNIT_mmHG = 0;
+	int UNIT_mmHg = 0;
 	int UNIT_kPa = 1;
 
 	class BPMStatus {
-		public boolean bodyMovementDetected;
-		public boolean cuffTooLose;
-		public boolean irregularPulseDetected;
-		public boolean pulseRateInRange;
-		public boolean pulseRateExceedsUpperLimit;
-		public boolean pulseRateIsLessThenLowerLimit;
-		public boolean improperMeasurementPosition;
-		public int value;
+		public final boolean bodyMovementDetected;
+		public final boolean cuffTooLose;
+		public final boolean irregularPulseDetected;
+		public final boolean pulseRateInRange;
+		public final boolean pulseRateExceedsUpperLimit;
+		public final boolean pulseRateIsLessThenLowerLimit;
+		public final boolean improperMeasurementPosition;
+		public final int value;
 
 		public BPMStatus(final int status) {
 			this.value = status;

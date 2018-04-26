@@ -19,13 +19,13 @@ public interface GlucoseMeasurementContextCallback {
 		SUPPER(6),
 		BRUNCH(7);
 
-		public byte value;
+		public final byte value;
 
 		Carbohydrate(final int code) {
 			this.value = (byte) code;
 		}
 
-		static Carbohydrate from(final int code) {
+		public static Carbohydrate from(final int code) {
 			switch (code) {
 				case 1:
 					return BREAKFAST;
@@ -55,13 +55,13 @@ public interface GlucoseMeasurementContextCallback {
 		CASUAL(4),
 		BEDTIME(5);
 
-		public byte value;
+		public final byte value;
 
 		Meal(final int code) {
 			this.value = (byte) code;
 		}
 
-		static Meal from(final int code) {
+		public static Meal from(final int code) {
 			switch (code) {
 				case 1:
 					return PREPRANDIAL;
@@ -86,13 +86,13 @@ public interface GlucoseMeasurementContextCallback {
 		LAB_TEST(3),
 		NOT_AVAILABLE(15);
 
-		public byte value;
+		public final byte value;
 
 		Tester(final int code) {
 			this.value = (byte) code;
 		}
 
-		static Tester from(final int code) {
+		public static Tester from(final int code) {
 			switch (code) {
 				case 1:
 					return SELF;
@@ -117,13 +117,13 @@ public interface GlucoseMeasurementContextCallback {
 		NO_HEALTH_ISSUES(5),
 		NOT_AVAILABLE(15);
 
-		public byte value;
+		public final byte value;
 
 		Health(final int code) {
 			this.value = (byte) code;
 		}
 
-		static Health from(final int code) {
+		public static Health from(final int code) {
 			switch (code) {
 				case 1:
 					return MINOR_HEALTH_ISSUES;
@@ -151,13 +151,13 @@ public interface GlucoseMeasurementContextCallback {
 		LONG_ACTING_INSULIN(4),
 		PRE_MIXED_INSULIN(5);
 
-		public byte value;
+		public final byte value;
 
 		Medication(final int code) {
 			this.value = (byte) code;
 		}
 
-		static Medication from(final int code) {
+		public static Medication from(final int code) {
 			switch (code) {
 				case 1:
 					return RAPID_ACTING_INSULIN;

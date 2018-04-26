@@ -8,18 +8,18 @@ public interface GlucoseFeatureCallback {
 
 	@SuppressWarnings("WeakerAccess")
 	class GlucoseFeatures {
-		public boolean lowBatteryDetectionSupported;
-		public boolean sensorMalfunctionDetectionSupported;
-		public boolean sensorSampleSizeSupported;
-		public boolean sensorStripInsertionErrorDetectionSupported;
-		public boolean sensorStripTypeErrorDetectionSupported;
-		public boolean sensorResultHighLowSupported;
-		public boolean sensorTempHighLowDetectionSupported;
-		public boolean sensorReadInterruptDetectionSupported;
-		public boolean generalDeviceFaultSupported;
-		public boolean timeFaultSupported;
-		public boolean multipleBondSupported;
-		public int value;
+		public final boolean lowBatteryDetectionSupported;
+		public final boolean sensorMalfunctionDetectionSupported;
+		public final boolean sensorSampleSizeSupported;
+		public final boolean sensorStripInsertionErrorDetectionSupported;
+		public final boolean sensorStripTypeErrorDetectionSupported;
+		public final boolean sensorResultHighLowSupported;
+		public final boolean sensorTempHighLowDetectionSupported;
+		public final boolean sensorReadInterruptDetectionSupported;
+		public final boolean generalDeviceFaultSupported;
+		public final boolean timeFaultSupported;
+		public final boolean multipleBondSupported;
+		public final int value;
 
 		public GlucoseFeatures(final int features) {
 			this.value = features;

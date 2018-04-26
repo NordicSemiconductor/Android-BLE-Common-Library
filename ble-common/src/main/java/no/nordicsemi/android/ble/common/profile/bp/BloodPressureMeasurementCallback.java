@@ -16,7 +16,7 @@ public interface BloodPressureMeasurementCallback extends BloodPressureTypes {
 	 * @param systolic             systolic compound of blood pressure measurement.
 	 * @param diastolic            diastolic compound of blood pressure measurement.
 	 * @param meanArterialPressure mean arterial pressure compound of blood pressure measurement.
-	 * @param unit                 measurement unit, one of {@link #UNIT_mmHG} or {@link #UNIT_kPa}.
+	 * @param unit                 measurement unit, one of {@link #UNIT_mmHg} or {@link #UNIT_kPa}.
 	 * @param pulseRate            optional pulse rate in beats per minute.
 	 * @param userID               optional user ID. Value 255 means 'unknown user'.
 	 * @param status               optional measurement status.

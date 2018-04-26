@@ -13,7 +13,7 @@ public interface IntermediateCuffPressureCallback extends BloodPressureTypes {
 	 *
 	 * @param device       target device.
 	 * @param cuffPressure cuff pressure.
-	 * @param unit         measurement unit, one of {@link #UNIT_mmHG} or {@link #UNIT_kPa}.
+	 * @param unit         measurement unit, one of {@link #UNIT_mmHg} or {@link #UNIT_kPa}.
 	 * @param pulseRate    optional pulse rate in beats per minute.
 	 * @param userID       optional user ID. Value 255 means 'unknown user'.
 	 * @param status       optional measurement status.

@@ -21,24 +21,24 @@ public interface CGMTypes {
 	int SAMPLE_LOCATION_VALUE_NOT_AVAILABLE = 15;
 
 	class CGMFeatures {
-		public boolean calibrationSupported;
-		public boolean patientHighLowAlertsSupported;
-		public boolean hypoAlertsSupported;
-		public boolean hyperAlertsSupported;
-		public boolean rateOfIncreaseDecreaseAlertsSupported;
-		public boolean deviceSpecificAlertSupported;
-		public boolean sensorMalfunctionDetectionSupported;
-		public boolean sensorTempHighLowDetectionSupported;
-		public boolean sensorResultHighLowSupported;
-		public boolean lowBatteryDetectionSupported;
-		public boolean sensorTypeErrorDetectionSupported;
-		public boolean generalDeviceFaultSupported;
-		public boolean e2eCrcSupported;
-		public boolean multipleBondSupported;
-		public boolean multipleSessionsSupported;
-		public boolean cgmTrendInfoSupported;
-		public boolean cgmQualityInfoSupported;
-		public int value;
+		public final boolean calibrationSupported;
+		public final boolean patientHighLowAlertsSupported;
+		public final boolean hypoAlertsSupported;
+		public final boolean hyperAlertsSupported;
+		public final boolean rateOfIncreaseDecreaseAlertsSupported;
+		public final boolean deviceSpecificAlertSupported;
+		public final boolean sensorMalfunctionDetectionSupported;
+		public final boolean sensorTempHighLowDetectionSupported;
+		public final boolean sensorResultHighLowSupported;
+		public final boolean lowBatteryDetectionSupported;
+		public final boolean sensorTypeErrorDetectionSupported;
+		public final boolean generalDeviceFaultSupported;
+		public final boolean e2eCrcSupported;
+		public final boolean multipleBondSupported;
+		public final boolean multipleSessionsSupported;
+		public final boolean cgmTrendInfoSupported;
+		public final boolean cgmQualityInfoSupported;
+		public final int value;
 
 		public CGMFeatures(final int features) {
 			this.value = features;
@@ -64,10 +64,10 @@ public interface CGMTypes {
 	}
 
 	class CGMCalibrationStatus {
-		public boolean rejected;
-		public boolean dataOutOfRange;
-		public boolean processPending;
-		public int value;
+		public final boolean rejected;
+		public final boolean dataOutOfRange;
+		public final boolean processPending;
+		public final int value;
 
 		public CGMCalibrationStatus(final int status) {
 			this.value = status;
@@ -79,29 +79,29 @@ public interface CGMTypes {
 	}
 
 	class CGMStatus {
-		public boolean sessionStopped;
-		public boolean deviceBatteryLow;
-		public boolean sensorTypeIncorrectForDevice;
-		public boolean sensorMalfunction;
-		public boolean deviceSpecificAlert;
-		public boolean generalDeviceFault;
-		public boolean timeSyncRequired;
-		public boolean calibrationNotAllowed;
-		public boolean calibrationRecommended;
-		public boolean calibrationRequired;
-		public boolean sensorTemperatureTooHigh;
-		public boolean sensorTemperatureTooLow;
-		public boolean sensorResultLowerThenPatientLowLevel;
-		public boolean sensorResultHigherThenPatientHighLevel;
-		public boolean sensorResultLowerThenHypoLevel;
-		public boolean sensorResultHigherThenHyperLevel;
-		public boolean sensorRateOfDecreaseExceeded;
-		public boolean sensorRateOfIncreaseExceeded;
-		public boolean sensorResultLowerThenDeviceCanProcess;
-		public boolean sensorResultHigherThenDeviceCanProcess;
-		public int warningStatus;
-		public int calibrationTempStatus;
-		public int sensorStatus;
+		public final boolean sessionStopped;
+		public final boolean deviceBatteryLow;
+		public final boolean sensorTypeIncorrectForDevice;
+		public final boolean sensorMalfunction;
+		public final boolean deviceSpecificAlert;
+		public final boolean generalDeviceFault;
+		public final boolean timeSyncRequired;
+		public final boolean calibrationNotAllowed;
+		public final boolean calibrationRecommended;
+		public final boolean calibrationRequired;
+		public final boolean sensorTemperatureTooHigh;
+		public final boolean sensorTemperatureTooLow;
+		public final boolean sensorResultLowerThenPatientLowLevel;
+		public final boolean sensorResultHigherThenPatientHighLevel;
+		public final boolean sensorResultLowerThenHypoLevel;
+		public final boolean sensorResultHigherThenHyperLevel;
+		public final boolean sensorRateOfDecreaseExceeded;
+		public final boolean sensorRateOfIncreaseExceeded;
+		public final boolean sensorResultLowerThenDeviceCanProcess;
+		public final boolean sensorResultHigherThenDeviceCanProcess;
+		public final int warningStatus;
+		public final int calibrationTempStatus;
+		public final int sensorStatus;
 
 		public CGMStatus(final int warningStatus, final int calibrationTempStatus, final int sensorStatus) {
 			this.warningStatus = warningStatus;
