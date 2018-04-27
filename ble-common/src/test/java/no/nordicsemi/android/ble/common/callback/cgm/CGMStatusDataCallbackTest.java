@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +19,7 @@ public class CGMStatusDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorStatusChanged_withCrc() {
-		final DataCallback callback = new CGMStatusDataCallback() {
+		final DataReceivedCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
@@ -67,7 +67,7 @@ public class CGMStatusDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorStatusChanged_noCrc() {
-		final DataCallback callback = new CGMStatusDataCallback() {
+		final DataReceivedCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
@@ -114,7 +114,7 @@ public class CGMStatusDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorStatusReceivedWithCrcError() {
-		final DataCallback callback = new CGMStatusDataCallback() {
+		final DataReceivedCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {
@@ -142,7 +142,7 @@ public class CGMStatusDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived() {
-		final DataCallback callback = new CGMStatusDataCallback() {
+		final DataReceivedCallback callback = new CGMStatusDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
 																final int timeOffset, final boolean secured) {

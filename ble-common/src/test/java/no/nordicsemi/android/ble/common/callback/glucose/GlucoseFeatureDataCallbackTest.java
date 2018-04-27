@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseFeatureCallback;
 import no.nordicsemi.android.ble.data.Data;
 
@@ -16,7 +16,7 @@ public class GlucoseFeatureDataCallbackTest {
 	private boolean invalidData;
 	private GlucoseFeatureCallback.GlucoseFeatures result;
 
-	private DataCallback callback = new GlucoseFeatureDataCallback() {
+	private DataReceivedCallback callback = new GlucoseFeatureDataCallback() {
 		@Override
 		public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			success = false;

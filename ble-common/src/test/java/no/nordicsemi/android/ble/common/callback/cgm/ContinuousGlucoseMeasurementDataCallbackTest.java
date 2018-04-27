@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
@@ -21,7 +21,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementReceived_full() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
+		final DataReceivedCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementReceived(@NonNull final BluetoothDevice device, final float glucoseConcentration,
 															   @Nullable final Float cgmTrend, @Nullable final Float cgmQuality,
@@ -79,7 +79,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementReceived_small() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
+		final DataReceivedCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementReceived(@NonNull final BluetoothDevice device, final float glucoseConcentration,
 															   @Nullable final Float cgmTrend, @Nullable final Float cgmQuality,
@@ -117,7 +117,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementReceived_double() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
+		final DataReceivedCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			private int time = 5;
 
 			@Override
@@ -166,7 +166,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMeasurementReceived_crcError() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
+		final DataReceivedCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementReceived(@NonNull final BluetoothDevice device, final float glucoseConcentration,
 															   @Nullable final Float cgmTrend, @Nullable final Float cgmQuality,
@@ -202,7 +202,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_tooShort() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
+		final DataReceivedCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementReceived(@NonNull final BluetoothDevice device, final float glucoseConcentration,
 															   @Nullable final Float cgmTrend, @Nullable final Float cgmQuality,
@@ -235,7 +235,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived() {
-		final DataCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
+		final DataReceivedCallback callback = new ContinuousGlucoseMeasurementDataCallback() {
 			@Override
 			public void onContinuousGlucoseMeasurementReceived(@NonNull final BluetoothDevice device, final float glucoseConcentration,
 															   @Nullable final Float cgmTrend, @Nullable final Float cgmQuality,

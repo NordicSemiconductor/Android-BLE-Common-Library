@@ -5,8 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
-import no.nordicsemi.android.ble.common.callback.csc.CyclingSpeedAndCadenceDataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.*;
@@ -16,7 +15,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onWheelMeasurementReceived() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			protected void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
 				assertEquals("Wheel measurement", 12345, wheelRevolutions);
@@ -50,7 +49,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onCrankMeasurementReceived() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			protected void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
 				assertEquals("Crank measurement", 345, crankRevolutions);
@@ -84,7 +83,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onWheelAndCrankMeasurementReceived() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			protected void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
 				assertEquals("Wheel measurement", 12345, wheelRevolutions);
@@ -127,7 +126,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onDistanceChanged() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct CSC data reported as invalid", 1, 2);
@@ -162,7 +161,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onCrankDataChanged_onlyCrankData() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct CSC data reported as invalid", 1, 2);
@@ -196,7 +195,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onCrankDataChanged() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Correct CSC data reported as invalid", 1, 2);
@@ -238,7 +237,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived() {
-		final DataCallback callback = new CyclingSpeedAndCadenceDataCallback() {
+		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
 			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 				assertEquals("Invalid CSC data", 1, 1);

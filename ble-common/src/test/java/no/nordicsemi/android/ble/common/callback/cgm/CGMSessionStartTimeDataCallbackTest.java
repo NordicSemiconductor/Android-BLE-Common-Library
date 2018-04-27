@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.*;
@@ -20,7 +20,7 @@ public class CGMSessionStartTimeDataCallbackTest {
 	private boolean verified;
 	private Calendar result;
 
-	private final DataCallback callback = new CGMSessionStartTimeDataCallback() {
+	private final DataReceivedCallback callback = new CGMSessionStartTimeDataCallback() {
 		@Override
 		public void onContinuousGlucoseMonitorSessionStartTimeReceived(@NonNull final BluetoothDevice device, @NonNull final Calendar calendar, final boolean secured) {
 			success = true;

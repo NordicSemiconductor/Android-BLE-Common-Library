@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.profile.DSTOffsetCallback;
 import no.nordicsemi.android.ble.data.Data;
 
@@ -19,7 +19,7 @@ public class DSTOffsetDataCallbackTest {
 	private boolean success;
 	private boolean invalidData;
 
-	private final DataCallback callback = new DSTOffsetDataCallback() {
+	private final DataReceivedCallback callback = new DSTOffsetDataCallback() {
 		@Override
 		public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			success = false;

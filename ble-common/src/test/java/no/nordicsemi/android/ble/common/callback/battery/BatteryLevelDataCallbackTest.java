@@ -5,8 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
-import no.nordicsemi.android.ble.common.callback.battery.BatteryLevelDataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +15,7 @@ public class BatteryLevelDataCallbackTest {
 
 	@Test
 	public void onBatteryLevelChanged_fullBattery() {
-		final DataCallback callback = new BatteryLevelDataCallback() {
+		final DataReceivedCallback callback = new BatteryLevelDataCallback() {
 			@Override
 			public void onBatteryLevelChanged(@NonNull final BluetoothDevice device, final int batteryLevel) {
 				assertEquals("Correct data", batteryLevel, 100);
@@ -33,7 +32,7 @@ public class BatteryLevelDataCallbackTest {
 
 	@Test
 	public void onBatteryLevelChanged_lowBattery() {
-		final DataCallback callback = new BatteryLevelDataCallback() {
+		final DataReceivedCallback callback = new BatteryLevelDataCallback() {
 			@Override
 			public void onBatteryLevelChanged(@NonNull final BluetoothDevice device, final int batteryLevel) {
 				assertEquals("Correct data", batteryLevel, 15);
@@ -50,7 +49,7 @@ public class BatteryLevelDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_dataTooLong() {
-		final DataCallback callback = new BatteryLevelDataCallback() {
+		final DataReceivedCallback callback = new BatteryLevelDataCallback() {
 			@Override
 			public void onBatteryLevelChanged(@NonNull final BluetoothDevice device, final int batteryLevel) {
 				assertEquals("Invalid date returned Battery Level", 1, 2);
@@ -67,7 +66,7 @@ public class BatteryLevelDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_batteryLevelOutOfRange() {
-		final DataCallback callback = new BatteryLevelDataCallback() {
+		final DataReceivedCallback callback = new BatteryLevelDataCallback() {
 			@Override
 			public void onBatteryLevelChanged(@NonNull final BluetoothDevice device, final int batteryLevel) {
 				assertEquals("Invalid date returned Battery Level", 1, 2);

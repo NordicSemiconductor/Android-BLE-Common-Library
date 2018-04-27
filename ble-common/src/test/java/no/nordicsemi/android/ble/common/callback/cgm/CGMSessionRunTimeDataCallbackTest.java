@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.*;
@@ -16,7 +16,7 @@ public class CGMSessionRunTimeDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorSessionRunTimeReceived_withCrc() {
-		final DataCallback callback = new CGMSessionRunTimeDataCallback() {
+		final DataReceivedCallback callback = new CGMSessionRunTimeDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorSessionRunTimeReceived(@NonNull final BluetoothDevice device, final int sessionRunTime, final boolean secured) {
 				called = true;
@@ -45,7 +45,7 @@ public class CGMSessionRunTimeDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorSessionRunTimeReceived_noCrc() {
-		final DataCallback callback = new CGMSessionRunTimeDataCallback() {
+		final DataReceivedCallback callback = new CGMSessionRunTimeDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorSessionRunTimeReceived(@NonNull final BluetoothDevice device, final int sessionRunTime, final boolean secured) {
 				called = true;
@@ -73,7 +73,7 @@ public class CGMSessionRunTimeDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseMonitorSessionRunTimeReceivedWithCrcError() {
-		final DataCallback callback = new CGMSessionRunTimeDataCallback() {
+		final DataReceivedCallback callback = new CGMSessionRunTimeDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorSessionRunTimeReceived(@NonNull final BluetoothDevice device, final int sessionRunTime, final boolean secured) {
 				assertEquals("Invalid CRC but correct packet reported", 1, 2);
@@ -100,7 +100,7 @@ public class CGMSessionRunTimeDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived() {
-		final DataCallback callback = new CGMSessionRunTimeDataCallback() {
+		final DataReceivedCallback callback = new CGMSessionRunTimeDataCallback() {
 			@Override
 			public void onContinuousGlucoseMonitorSessionRunTimeReceived(@NonNull final BluetoothDevice device, final int sessionRunTime, final boolean secured) {
 				assertEquals("Invalid packet but correct packet reported", 1, 2);

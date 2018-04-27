@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class RecordAccessControlPointDataCallbackTest {
 	private int error;
 	private int numberOfRecords;
 
-	private final DataCallback callback = new RecordAccessControlPointDataCallback() {
+	private final DataReceivedCallback callback = new RecordAccessControlPointDataCallback() {
 		@Override
 		public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			// Reset flags

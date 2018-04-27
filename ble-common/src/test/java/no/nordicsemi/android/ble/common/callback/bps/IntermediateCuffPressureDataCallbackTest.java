@@ -8,8 +8,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
-import no.nordicsemi.android.ble.common.callback.bps.IntermediateCuffPressureDataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -24,7 +23,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 
 	@Test
 	public void onIntermediateCuffPressureReceived_full() {
-		final DataCallback callback = new IntermediateCuffPressureDataCallback() {
+		final DataReceivedCallback callback = new IntermediateCuffPressureDataCallback() {
 			@Override
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
@@ -90,7 +89,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 
 	@Test
 	public void onIntermediateCuffPressureReceived_some() {
-		final DataCallback callback = new IntermediateCuffPressureDataCallback() {
+		final DataReceivedCallback callback = new IntermediateCuffPressureDataCallback() {
 			@Override
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
@@ -136,7 +135,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 
 	@Test
 	public void onIntermediateCuffPressureReceived_minimal() {
-		final DataCallback callback = new IntermediateCuffPressureDataCallback() {
+		final DataReceivedCallback callback = new IntermediateCuffPressureDataCallback() {
 			@Override
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
@@ -170,7 +169,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_toShort() {
-		final DataCallback callback = new IntermediateCuffPressureDataCallback() {
+		final DataReceivedCallback callback = new IntermediateCuffPressureDataCallback() {
 			@Override
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,
@@ -195,7 +194,7 @@ public class IntermediateCuffPressureDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_noTimestamp() {
-		final DataCallback callback = new IntermediateCuffPressureDataCallback() {
+		final DataReceivedCallback callback = new IntermediateCuffPressureDataCallback() {
 			@Override
 			public void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
 														   final float cuffPressure, final int unit,

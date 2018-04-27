@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseMeasurementCallback;
 import no.nordicsemi.android.ble.data.Data;
 
@@ -18,7 +18,7 @@ public class GlucoseMeasurementDataCallbackTest {
 	private boolean success;
 	private boolean invalidData;
 
-	private final DataCallback callback = new GlucoseMeasurementDataCallback() {
+	private final DataReceivedCallback callback = new GlucoseMeasurementDataCallback() {
 		@Override
 		public void onGlucoseMeasurementReceived(@NonNull final BluetoothDevice device, final int sequenceNumber,
 												 @NonNull final Calendar time, @Nullable final Float glucoseConcentration,

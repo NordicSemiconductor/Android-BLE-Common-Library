@@ -8,8 +8,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
-import no.nordicsemi.android.ble.common.callback.bps.BloodPressureMeasurementDataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.*;
@@ -19,7 +18,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 
 	@Test
 	public void onBloodPressureMeasurementReceived_full() {
-		final DataCallback callback = new BloodPressureMeasurementDataCallback() {
+		final DataReceivedCallback callback = new BloodPressureMeasurementDataCallback() {
 			@Override
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
@@ -89,7 +88,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 
 	@Test
 	public void onBloodPressureMeasurementReceived_some() {
-		final DataCallback callback = new BloodPressureMeasurementDataCallback() {
+		final DataReceivedCallback callback = new BloodPressureMeasurementDataCallback() {
 			@Override
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
@@ -139,7 +138,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 
 	@Test
 	public void onBloodPressureMeasurementReceived_minimal() {
-		final DataCallback callback = new BloodPressureMeasurementDataCallback() {
+		final DataReceivedCallback callback = new BloodPressureMeasurementDataCallback() {
 			@Override
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
@@ -177,7 +176,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_toShort() {
-		final DataCallback callback = new BloodPressureMeasurementDataCallback() {
+		final DataReceivedCallback callback = new BloodPressureMeasurementDataCallback() {
 			@Override
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,
@@ -202,7 +201,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_noTimestamp() {
-		final DataCallback callback = new BloodPressureMeasurementDataCallback() {
+		final DataReceivedCallback callback = new BloodPressureMeasurementDataCallback() {
 			@Override
 			public void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
 														   final float systolic, final float diastolic, final float meanArterialPressure, final int unit,

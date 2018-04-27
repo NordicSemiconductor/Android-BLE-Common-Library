@@ -5,9 +5,7 @@ import android.support.annotation.NonNull;
 
 import org.junit.Test;
 
-import java.util.Calendar;
-
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +20,7 @@ public class TimeZoneDataCallbackTest {
 	private boolean unknownTimeZone;
 	private boolean invalidData;
 
-	private final DataCallback callback = new TimeZoneDataCallback() {
+	private final DataReceivedCallback callback = new TimeZoneDataCallback() {
 		@Override
 		public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			success = false;

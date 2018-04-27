@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.DataCallback;
+import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class DateTimeDataCallbackTest {
 
 	@Test
 	public void onDateTimeReceived_today() {
-		final DataCallback callback = new DateTimeDataCallback() {
+		final DataReceivedCallback callback = new DateTimeDataCallback() {
 			@Override
 			public void onDateTimeReceived(@NonNull final BluetoothDevice device, @NonNull final Calendar calendar) {
 				assertTrue("Year set", calendar.isSet(Calendar.YEAR));
@@ -46,7 +46,7 @@ public class DateTimeDataCallbackTest {
 
 	@Test
 	public void onDateTimeReceived_dateNotKnown() {
-		final DataCallback callback = new DateTimeDataCallback() {
+		final DataReceivedCallback callback = new DateTimeDataCallback() {
 			@Override
 			public void onDateTimeReceived(@NonNull final BluetoothDevice device, @NonNull final Calendar calendar) {
 				assertFalse("Year not set", calendar.isSet(Calendar.YEAR));
@@ -69,7 +69,7 @@ public class DateTimeDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_dataTooLong() {
-		final DataCallback callback = new DateTimeDataCallback() {
+		final DataReceivedCallback callback = new DateTimeDataCallback() {
 			@Override
 			public void onDateTimeReceived(@NonNull final BluetoothDevice device, @NonNull final Calendar calendar) {
 				assertEquals("Incorrect Date and Time reported as correct", 1, 2);
@@ -86,7 +86,7 @@ public class DateTimeDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived_dataTooShort() {
-		final DataCallback callback = new DateTimeDataCallback() {
+		final DataReceivedCallback callback = new DateTimeDataCallback() {
 			@Override
 			public void onDateTimeReceived(@NonNull final BluetoothDevice device, @NonNull final Calendar calendar) {
 				assertEquals("Incorrect Date and Time reported as correct", 1, 2);
