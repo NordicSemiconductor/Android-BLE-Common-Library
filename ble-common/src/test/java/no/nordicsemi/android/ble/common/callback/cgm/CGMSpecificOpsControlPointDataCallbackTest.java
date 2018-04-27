@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -182,7 +183,7 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseCalibrationValueReceived() {
-		final Data data = new Data(new byte[11]);
+		final MutableData data = new MutableData(new byte[11]);
 		data.setValue(6, Data.FORMAT_UINT8, 0);
 		data.setValue(1, 2, Data.FORMAT_SFLOAT, 1);
 		data.setValue(10, Data.FORMAT_UINT16, 3);
@@ -198,7 +199,7 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 
 	@Test
 	public void onContinuousGlucoseCalibrationValueReceived_withCrc() {
-		final Data data = new Data(new byte[13]);
+		final MutableData data = new MutableData(new byte[13]);
 		data.setValue(6, Data.FORMAT_UINT8, 0);
 		data.setValue(1, 2, Data.FORMAT_SFLOAT, 1);
 		data.setValue(10, Data.FORMAT_UINT16, 3);

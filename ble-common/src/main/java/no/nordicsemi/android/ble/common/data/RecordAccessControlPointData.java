@@ -3,6 +3,7 @@ package no.nordicsemi.android.ble.common.data;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 @SuppressWarnings("unused")
 public final class RecordAccessControlPointData {
@@ -149,7 +150,7 @@ public final class RecordAccessControlPointData {
 	private static Data create(final byte opCode, final byte operator, final @NonNull FilterType filter, final int formatType, final int... parameters) {
 		final int parameterLen = formatType & 0x0F;
 
-		final Data data = new Data(new byte[2 + 1 + parameters.length * parameterLen]);
+		final MutableData data = new MutableData(new byte[2 + 1 + parameters.length * parameterLen]);
 		data.setByte(opCode, 0);
 		data.setByte(operator, 1);
 		if (parameters.length > 0) {

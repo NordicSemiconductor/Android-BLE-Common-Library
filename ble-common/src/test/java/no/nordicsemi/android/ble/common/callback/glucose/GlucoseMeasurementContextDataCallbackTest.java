@@ -9,6 +9,7 @@ import org.junit.Test;
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseMeasurementContextCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 import static org.junit.Assert.*;
 
@@ -75,7 +76,7 @@ public class GlucoseMeasurementContextDataCallbackTest {
 
 	@Test
 	public void onGlucoseMeasurementContextReceived_full() {
-		final Data data = new Data(new byte[17]);
+		final MutableData data = new MutableData(new byte[17]);
 		data.setValue(0xFF, Data.FORMAT_UINT8, 0); // Flags
 		data.setValue(0, Data.FORMAT_UINT16, 1); // Sequence number
 		data.setValue(0xb3, Data.FORMAT_UINT8, 3); // Extended flags - ignored
@@ -95,7 +96,7 @@ public class GlucoseMeasurementContextDataCallbackTest {
 
 	@Test
 	public void onGlucoseMeasurementContextReceived_empty() {
-		final Data data = new Data(new byte[17]);
+		final MutableData data = new MutableData(new byte[17]);
 		data.setValue(0x00, Data.FORMAT_UINT8, 0); // Flags
 		data.setValue(1, Data.FORMAT_UINT16, 1);
 		callback.onDataReceived(null, data);
@@ -105,7 +106,7 @@ public class GlucoseMeasurementContextDataCallbackTest {
 
 	@Test
 	public void onInvalidDataReceived() {
-		final Data data = new Data(new byte[5]);
+		final MutableData data = new MutableData(new byte[5]);
 		data.setValue(0xFF, Data.FORMAT_UINT8, 0); // Flags
 		data.setValue(0, Data.FORMAT_UINT16, 1); // Sequence number
 		data.setValue(0xb3, Data.FORMAT_UINT8, 3); // Extended flags - ignored

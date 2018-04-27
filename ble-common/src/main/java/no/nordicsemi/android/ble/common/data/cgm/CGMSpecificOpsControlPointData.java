@@ -3,6 +3,7 @@ package no.nordicsemi.android.ble.common.data.cgm;
 import no.nordicsemi.android.ble.common.profile.cgm.CGMTypes;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 public final class CGMSpecificOpsControlPointData implements CGMTypes {
 	private static final byte OP_CODE_SET_COMMUNICATION_INTERVAL = 1;
@@ -61,7 +62,7 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 										   final int sampleType, final int sampleLocation,
 										   final int calibrationTime, final int nextCalibrationTime,
 										   final boolean secure) {
-		final Data data = new Data(new byte[11 + (secure ? 2 : 0)]);
+		final MutableData data = new MutableData(new byte[11 + (secure ? 2 : 0)]);
 		data.setByte(OP_CODE_SET_CALIBRATION_VALUE, 0);
 		data.setValue(glucoseConcentrationOfCalibration, Data.FORMAT_SFLOAT, 1);
 		data.setValue(calibrationTime, Data.FORMAT_UINT16, 3);
@@ -130,26 +131,26 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 	}
 
 	private static Data create(final byte opCode, final boolean secure) {
-		final Data data = new Data(new byte[1 + (secure ? 2 : 0)]);
+		final MutableData data = new MutableData(new byte[1 + (secure ? 2 : 0)]);
 		data.setByte(opCode, 0);
 		return appendCrc(data, secure);
 	}
 
 	private static Data create(final byte opCode, final int value, final int format, final boolean secure) {
-		final Data data = new Data(new byte[1 + (format & 0xF) + (secure ? 2 : 0)]);
+		final MutableData data = new MutableData(new byte[1 + (format & 0xF) + (secure ? 2 : 0)]);
 		data.setByte(opCode, 0);
 		data.setValue(value, format, 1);
 		return appendCrc(data, secure);
 	}
 
 	private static Data create(final byte opCode, final float value, final boolean secure) {
-		final Data data = new Data(new byte[3 + (secure ? 2 : 0)]);
+		final MutableData data = new MutableData(new byte[3 + (secure ? 2 : 0)]);
 		data.setByte(opCode, 0);
 		data.setValue(value, Data.FORMAT_SFLOAT, 1);
 		return appendCrc(data, secure);
 	}
 
-	private static Data appendCrc(final Data data, final boolean secure) {
+	private static Data appendCrc(final MutableData data, final boolean secure) {
 		if (secure) {
 			final int length = data.size() - 2;
 			final int crc = CRC16.MCRF4XX(data.getValue(), 0, length);

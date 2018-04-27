@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -57,7 +58,7 @@ public class CGMFeatureDataCallbackTest {
 				assertEquals("Correct packet but invalid data reported", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[6]);
+		final MutableData data = new MutableData(new byte[6]);
 		assertTrue(data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0));
 		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
 		assertTrue(data.setValue(0xC18A, Data.FORMAT_UINT16, 4));
@@ -106,7 +107,7 @@ public class CGMFeatureDataCallbackTest {
 				assertEquals("Correct packet but invalid data reported", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[6]);
+		final MutableData data = new MutableData(new byte[6]);
 		data.setValue(0b11000111001101110, Data.FORMAT_UINT24, 0);
 		data.setValue(0x16, Data.FORMAT_UINT8, 3);
 		data.setValue(0xFFFF, Data.FORMAT_UINT16, 4);
@@ -134,7 +135,7 @@ public class CGMFeatureDataCallbackTest {
 				assertEquals("Wrong CRC but invalid data reported", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[6]);
+		final MutableData data = new MutableData(new byte[6]);
 		assertTrue(data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0));
 		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
 		assertTrue(data.setValue(0xBEAF, Data.FORMAT_UINT16, 4));
@@ -162,7 +163,7 @@ public class CGMFeatureDataCallbackTest {
 				called = true;
 			}
 		};
-		final Data data = new Data(new byte[4]);
+		final MutableData data = new MutableData(new byte[4]);
 		assertTrue(data.setValue(0b11001111001101110, Data.FORMAT_UINT24, 0));
 		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
 		called = false;
@@ -189,7 +190,7 @@ public class CGMFeatureDataCallbackTest {
 				called = true;
 			}
 		};
-		final Data data = new Data(new byte[6]);
+		final MutableData data = new MutableData(new byte[6]);
 		assertTrue(data.setValue(0b11000111001101110, Data.FORMAT_UINT24, 0));
 		assertTrue(data.setValue(0x16, Data.FORMAT_UINT8, 3));
 		assertTrue(data.setValue(0xBEAF, Data.FORMAT_UINT16, 4));

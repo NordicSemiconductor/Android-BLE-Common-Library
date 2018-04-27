@@ -7,8 +7,11 @@ import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 public class CyclingSpeedAndCadenceDataCallbackTest {
@@ -37,7 +40,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				// ignore
 			}
 		};
-		final Data data = new Data(new byte[7]);
+		final MutableData data = new MutableData(new byte[7]);
 		// Flags
 		assertTrue(data.setByte(0x01, 0));
 		// Wheel revolutions
@@ -71,7 +74,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				// ignore
 			}
 		};
-		final Data data = new Data(new byte[5]);
+		final MutableData data = new MutableData(new byte[5]);
 		// Flags
 		assertTrue(data.setByte(0x02, 0));
 		// Crank revolutions
@@ -111,7 +114,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				// ignore
 			}
 		};
-		final Data data = new Data(new byte[1 + 6 + 4]);
+		final MutableData data = new MutableData(new byte[1 + 6 + 4]);
 		// Flags
 		assertTrue(data.setByte(0x03, 0));
 		// Wheel revolutions
@@ -144,7 +147,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				assertEquals("Crank data not available and reported", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[7]);
+		final MutableData data = new MutableData(new byte[7]);
 		// Flags
 		assertTrue(data.setByte(0x01, 0));
 		// Wheel revolutions
@@ -178,7 +181,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				assertEquals("Gear ratio", 0.0f, gearRatio, 0); // Gear ration not available, as no wheel data
 			}
 		};
-		final Data data = new Data(new byte[5]);
+		final MutableData data = new MutableData(new byte[5]);
 		// Flags
 		assertTrue(data.setByte(0x02, 0));
 		// Crank revolutions
@@ -214,7 +217,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				assertEquals("Gear ratio", 10.0f, gearRatio, 0);
 			}
 		};
-		final Data data = new Data(new byte[11]);
+		final MutableData data = new MutableData(new byte[11]);
 		// Flags
 		assertTrue(data.setByte(0x03, 0));
 		// Wheel revolutions
@@ -253,7 +256,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 				assertEquals("Invalid data reported as correct", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[9]); // 11 bytes are required
+		final MutableData data = new MutableData(new byte[9]); // 11 bytes are required
 		// Flags
 		assertTrue(data.setByte(0x03, 0));
 		// Wheel revolutions

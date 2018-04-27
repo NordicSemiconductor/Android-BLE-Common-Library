@@ -9,6 +9,7 @@ import org.junit.Test;
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -54,7 +55,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[15]);
+		final MutableData data = new MutableData(new byte[15]);
 		// Size
 		assertTrue(data.setValue(15, Data.FORMAT_UINT8, 0));
 		// Flags
@@ -102,7 +103,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[6]);
+		final MutableData data = new MutableData(new byte[6]);
 		// Size
 		assertTrue(data.setValue(6, Data.FORMAT_UINT8, 0));
 		// Flags
@@ -142,7 +143,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[12]);
+		final MutableData data = new MutableData(new byte[12]);
 		// Size
 		assertTrue(data.setValue(6, Data.FORMAT_UINT8, 0));
 		// Flags
@@ -185,7 +186,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[8]);
+		final MutableData data = new MutableData(new byte[8]);
 		// Size
 		assertTrue(data.setValue(8, Data.FORMAT_UINT8, 0));
 		// Flags
@@ -220,7 +221,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 				assertEquals("Invalid data", 1, 1);
 			}
 		};
-		final Data data = new Data(new byte[5]);
+		final MutableData data = new MutableData(new byte[5]);
 		// Size
 		assertTrue(data.setValue(6, Data.FORMAT_UINT8, 0));
 		// Flags
@@ -253,7 +254,7 @@ public class ContinuousGlucoseMeasurementDataCallbackTest {
 				assertEquals("Invalid data", 1, 1);
 			}
 		};
-		final Data data = new Data(new byte[7]);
+		final MutableData data = new MutableData(new byte[7]);
 		// Size
 		assertTrue(data.setValue(7, Data.FORMAT_UINT8, 0));
 		// Flags

@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 import static org.junit.Assert.*;
 
@@ -57,7 +58,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 				assertEquals("Correct BPM reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[19]);
+		final MutableData data = new MutableData(new byte[19]);
 		// Flags
 		data.setByte((byte) 0b11110, 0);
 		// Systolic, diastolic and mean AP in mmHg
@@ -117,7 +118,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 				assertEquals("Correct BPM reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[11]);
+		final MutableData data = new MutableData(new byte[11]);
 		// Flags
 		data.setByte((byte) 0b10101, 0);
 		// Systolic, diastolic and mean AP in mmHg
@@ -159,7 +160,7 @@ public class BloodPressureMeasurementDataCallbackTest {
 				assertEquals("Correct BPM reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[7]);
+		final MutableData data = new MutableData(new byte[7]);
 		// Flags
 		data.setByte((byte) 0b00000, 0);
 		// Systolic, diastolic and mean AP in mmHg

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.data.Data;
+import no.nordicsemi.android.ble.data.MutableData;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -58,7 +59,7 @@ public class CGMStatusDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[7]);
+		final MutableData data = new MutableData(new byte[7]);
 		data.setValue(5, Data.FORMAT_UINT16, 0);
 		data.setValue(0xff3f3f, Data.FORMAT_UINT24, 2); // all flags set
 		data.setValue(0xE0A7, Data.FORMAT_UINT16, 5);
@@ -106,7 +107,7 @@ public class CGMStatusDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[5]);
+		final MutableData data = new MutableData(new byte[5]);
 		data.setValue(6, Data.FORMAT_UINT16, 0);
 		data.setValue(0x010101, Data.FORMAT_UINT24, 2);
 		callback.onDataReceived(null, data);
@@ -131,7 +132,7 @@ public class CGMStatusDataCallbackTest {
 				assertEquals("Correct data reported as invalid", 1, 2);
 			}
 		};
-		final Data data = new Data(new byte[7]);
+		final MutableData data = new MutableData(new byte[7]);
 		data.setValue(6, Data.FORMAT_UINT16, 0);
 		data.setValue(0x010101, Data.FORMAT_UINT24, 2);
 		data.setValue(0xE0A7, Data.FORMAT_UINT16, 5);
@@ -159,7 +160,7 @@ public class CGMStatusDataCallbackTest {
 				called = true;
 			}
 		};
-		final Data data = new Data(new byte[6]);
+		final MutableData data = new MutableData(new byte[6]);
 		data.setValue(6, Data.FORMAT_UINT16, 0);
 		data.setValue(0x010101, Data.FORMAT_UINT24, 2);
 		data.setValue(1, Data.FORMAT_UINT8, 5);
