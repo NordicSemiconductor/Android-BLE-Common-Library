@@ -3,12 +3,18 @@ package no.nordicsemi.android.ble.common.callback;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.RecordAccessControlPointCallback;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Record Access Control Point callback that parses received data.
+ * If the value does match characteristic specification the
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.record_access_control_point.xml
+ */
 @SuppressWarnings("ConstantConditions")
-public abstract class RecordAccessControlPointDataCallback implements ProfileDataCallback, RecordAccessControlPointCallback {
+public abstract class RecordAccessControlPointDataCallback extends ProfileReadResponse implements RecordAccessControlPointCallback {
 	private final static int OP_CODE_NUMBER_OF_STORED_RECORDS_RESPONSE = 5;
 	private final static int OP_CODE_RESPONSE_CODE = 6;
 	private final static int OPERATOR_NULL = 0;
@@ -17,6 +23,8 @@ public abstract class RecordAccessControlPointDataCallback implements ProfileDat
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() < 3) {
 			onInvalidDataReceived(device, data);
 			return;

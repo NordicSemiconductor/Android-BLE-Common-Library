@@ -5,16 +5,24 @@ import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.callback.DateTimeDataCallback;
 import no.nordicsemi.android.ble.common.profile.bp.BloodPressureMeasurementCallback;
 import no.nordicsemi.android.ble.data.Data;
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 
-@SuppressWarnings("ConstantConditions")
-public abstract class BloodPressureMeasurementDataCallback implements ProfileDataCallback, BloodPressureMeasurementCallback {
+/**
+ * Data callback that parses value into Blood Pressure Measurement data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.blood_pressure_measurement.xml
+ */
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
+public abstract class BloodPressureMeasurementDataCallback extends ProfileReadResponse implements BloodPressureMeasurementCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() < 7) {
 			onInvalidDataReceived(device, data);
 			return;
@@ -73,5 +81,21 @@ public abstract class BloodPressureMeasurementDataCallback implements ProfileDat
 		}
 
 		onBloodPressureMeasurementReceived(device, systolic, diastolic, meanArterialPressure, unit, pulseRate, userId, status, calendar);
+	}
+
+	public static float toMmHg(final float value, final int unit) {
+		if (unit == UNIT_mmHg) {
+			return value;
+		} else {
+			return value / 0.133322387415f;
+		}
+	}
+
+	public static float toKPa(final float value, final int unit) {
+		if (unit == UNIT_kPa) {
+			return value;
+		} else {
+			return value * 0.133322387415f;
+		}
 	}
 }

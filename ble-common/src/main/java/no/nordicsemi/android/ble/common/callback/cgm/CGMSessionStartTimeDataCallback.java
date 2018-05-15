@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.callback.DSTOffsetDataCallback;
 import no.nordicsemi.android.ble.common.callback.DateTimeDataCallback;
 import no.nordicsemi.android.ble.common.callback.TimeZoneDataCallback;
@@ -16,11 +16,22 @@ import no.nordicsemi.android.ble.common.profile.DSTOffsetCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Data callback that parses value into CGM Session Start Time data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * If the device supports E2E CRC validation and the CRC is not valid, the
+ * {@link #onContinuousGlucoseMonitorSessionStartTimeReceivedWithCrcError(BluetoothDevice, Data)}
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_session_start_time.xml
+ */
 @SuppressWarnings("ConstantConditions")
-public abstract class CGMSessionStartTimeDataCallback implements ProfileDataCallback, CGMSessionStartTimeCallback {
+public abstract class CGMSessionStartTimeDataCallback extends ProfileReadResponse implements CGMSessionStartTimeCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() != 9 && data.size() != 11) {
 			onInvalidDataReceived(device, data);
 			return;

@@ -33,7 +33,7 @@ public interface ContinuousGlucoseMeasurementCallback extends CGMTypes {
 	 */
 	void onContinuousGlucoseMeasurementReceived(final @NonNull BluetoothDevice device, final float glucoseConcentration,
 												final @Nullable Float cgmTrend, final @Nullable Float cgmQuality,
-												final CGMStatus status, final int timeOffset, final boolean secured);
+												final @Nullable CGMStatus status, final int timeOffset, final boolean secured);
 
 	/**
 	 * Callback called when a CGM packet with E2E field was received but the CRC check has failed.

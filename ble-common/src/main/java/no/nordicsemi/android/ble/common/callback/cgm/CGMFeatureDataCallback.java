@@ -3,16 +3,27 @@ package no.nordicsemi.android.ble.common.callback.cgm;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.cgm.CGMFeatureCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Data callback that parses value into CGM Feature data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * If the device supports E2E CRC validation and the CRC is not valid, the
+ * {@link #onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(BluetoothDevice, Data)}
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_feature.xml
+ */
 @SuppressWarnings("ConstantConditions")
-public abstract class CGMFeatureDataCallback implements ProfileDataCallback, CGMFeatureCallback {
+public abstract class CGMFeatureDataCallback extends ProfileReadResponse implements CGMFeatureCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() != 6) {
 			onInvalidDataReceived(device, data);
 			return;

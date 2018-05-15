@@ -4,14 +4,22 @@ import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.TimeZoneCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-public abstract class TimeZoneDataCallback implements ProfileDataCallback, TimeZoneCallback {
+/**
+ * Data callback that parses 1-byte value into a Time Zone offset.
+ * If the value received is shorter than 1 byte the
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.time_zone.xml
+ */
+public abstract class TimeZoneDataCallback extends ProfileReadResponse implements TimeZoneCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		final Integer offset = readTimeZone(data, 0);
 		if (offset == null) {
 			onInvalidDataReceived(device, data);

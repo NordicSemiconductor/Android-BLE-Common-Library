@@ -5,17 +5,24 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Calendar;
-import java.util.TimeZone;
 
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.DateTimeCallback;
 import no.nordicsemi.android.ble.data.Data;
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 
+/**
+ * Data callback that parses 7-byte value into a Calendar instance.
+ * If the value received is shorter than 7 bytes the
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.date_time.xml
+ */
 @SuppressWarnings("ConstantConditions")
-public abstract class DateTimeDataCallback implements ProfileDataCallback, DateTimeCallback {
+public abstract class DateTimeDataCallback extends ProfileReadResponse implements DateTimeCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		final Calendar calendar = readDateTime(data, 0);
 		if (calendar == null) {
 			onInvalidDataReceived(device, data);

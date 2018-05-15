@@ -3,13 +3,22 @@ package no.nordicsemi.android.ble.common.callback.cgm;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.cgm.CGMSpecificOpsControlPointCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Data callback that parses value into CGM Session Start Time data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * If the device supports E2E CRC validation and the CRC is not valid, the
+ * {@link #onCGMSpecificOpsResponseReceivedWithCrcError(BluetoothDevice, Data)}
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_specific_ops_control_point.xml
+ */
 @SuppressWarnings("ConstantConditions")
-public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileDataCallback, CGMSpecificOpsControlPointCallback {
+public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileReadResponse implements CGMSpecificOpsControlPointCallback {
 	private final static int OP_CODE_COMMUNICATION_INTERVAL_RESPONSE = 3;
 	private final static int OP_CODE_CALIBRATION_VALUE_RESPONSE = 6;
 	private final static int OP_CODE_PATIENT_HIGH_ALERT_LEVEL_RESPONSE = 9;
@@ -23,6 +32,8 @@ public abstract class CGMSpecificOpsControlPointDataCallback implements ProfileD
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() < 2) {
 			onInvalidDataReceived(device, data);
 			return;

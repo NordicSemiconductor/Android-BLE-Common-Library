@@ -17,7 +17,7 @@ public interface CGMSessionRunTimeCallback {
 	 *
 	 * @param device         target device.
 	 * @param sessionRunTime the expected run time of the CGM session depending on physiological
-	 *                       effects in future devices., in hours.
+	 *                       effects in future devices, in hours.
 	 * @param secured        true if the packet was sent with E2E-CRC value that was verified to match the packet,
 	 *                       false if the packet didn't contain CRC field. For a callback in case of
 	 *                       invalid CRC value check {@link #onContinuousGlucoseMonitorSessionRunTimeReceivedWithCrcError(BluetoothDevice, Data)}.

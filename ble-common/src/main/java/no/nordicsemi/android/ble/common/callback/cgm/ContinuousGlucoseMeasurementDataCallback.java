@@ -3,16 +3,32 @@ package no.nordicsemi.android.ble.common.callback.cgm;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.cgm.ContinuousGlucoseMeasurementCallback;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Data callback that parses value into CGM data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * If the device supports E2E CRC validation and the CRC is not valid, the
+ * {@link #onContinuousGlucoseMeasurementReceivedWithCrcError(BluetoothDevice, Data)}
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_measurement.xml
+ */
 @SuppressWarnings("ConstantConditions")
-public abstract class ContinuousGlucoseMeasurementDataCallback implements ProfileDataCallback, ContinuousGlucoseMeasurementCallback {
+public abstract class ContinuousGlucoseMeasurementDataCallback extends ProfileReadResponse implements ContinuousGlucoseMeasurementCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
+		if (data.size() < 1) {
+			onInvalidDataReceived(device, data);
+			return;
+		}
+
 		int offset = 0;
 
 		while (offset < data.size()) {

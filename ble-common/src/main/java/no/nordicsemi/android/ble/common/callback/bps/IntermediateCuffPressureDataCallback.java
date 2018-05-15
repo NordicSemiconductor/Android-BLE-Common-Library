@@ -5,16 +5,24 @@ import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.callback.DateTimeDataCallback;
 import no.nordicsemi.android.ble.common.profile.bp.IntermediateCuffPressureCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-@SuppressWarnings("ConstantConditions")
-public abstract class IntermediateCuffPressureDataCallback implements ProfileDataCallback, IntermediateCuffPressureCallback {
+/**
+ * Data callback that parses value into Intermediate Cuff Pressure data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.intermediate_cuff_pressure.xml
+ */
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
+public abstract class IntermediateCuffPressureDataCallback extends ProfileReadResponse implements IntermediateCuffPressureCallback {
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() < 7) {
 			onInvalidDataReceived(device, data);
 			return;
@@ -73,5 +81,21 @@ public abstract class IntermediateCuffPressureDataCallback implements ProfileDat
 		}
 
 		onIntermediateCuffPressureReceived(device, cuffPressure, unit, pulseRate, userId, status, calendar);
+	}
+
+	public static float toMmHg(final float value, final int unit) {
+		if (unit == UNIT_mmHg) {
+			return value;
+		} else {
+			return value / 0.133322387415f;
+		}
+	}
+
+	public static float toKPa(final float value, final int unit) {
+		if (unit == UNIT_kPa) {
+			return value;
+		} else {
+			return value * 0.133322387415f;
+		}
 	}
 }

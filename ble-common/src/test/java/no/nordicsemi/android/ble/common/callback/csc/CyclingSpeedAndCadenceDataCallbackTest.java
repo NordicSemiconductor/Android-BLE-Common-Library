@@ -20,7 +20,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 	public void onWheelMeasurementReceived() {
 		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
-			protected void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
+			public void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
 				assertEquals("Wheel measurement", 12345, wheelRevolutions);
 				assertEquals("Wheel last event time", 1000, lastWheelEventTime);
 			}
@@ -54,7 +54,7 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 	public void onCrankMeasurementReceived() {
 		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
-			protected void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
+			public void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
 				assertEquals("Crank measurement", 345, crankRevolutions);
 				assertEquals("Crank last event time", 2000, lastCrankEventTime);
 			}
@@ -88,13 +88,13 @@ public class CyclingSpeedAndCadenceDataCallbackTest {
 	public void onWheelAndCrankMeasurementReceived() {
 		final DataReceivedCallback callback = new CyclingSpeedAndCadenceDataCallback() {
 			@Override
-			protected void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
+			public void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
 				assertEquals("Wheel measurement", 12345, wheelRevolutions);
 				assertEquals("Wheel last event time", 1000, lastWheelEventTime);
 			}
 
 			@Override
-			protected void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
+			public void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
 				assertEquals("Crank measurement", 345, crankRevolutions);
 				assertEquals("Crank last event time", 2000, lastCrankEventTime);
 			}

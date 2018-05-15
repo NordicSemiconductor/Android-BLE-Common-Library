@@ -3,12 +3,21 @@ package no.nordicsemi.android.ble.common.callback.csc;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.csc.CyclingSpeedAndCadenceCallback;
+import no.nordicsemi.android.ble.common.profile.csc.CyclingSpeedAndCadenceMeasurementCallback;
 import no.nordicsemi.android.ble.data.Data;
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 
+/**
+ * Data callback that parses value into CSC Measurement data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.csc_measurement.xml
+ */
 @SuppressWarnings({"WeakerAccess", "unused"})
-public abstract class CyclingSpeedAndCadenceDataCallback implements ProfileDataCallback, CyclingSpeedAndCadenceCallback {
+public abstract class CyclingSpeedAndCadenceDataCallback extends ProfileReadResponse
+		implements CyclingSpeedAndCadenceMeasurementCallback, CyclingSpeedAndCadenceCallback {
 	private long mInitialWheelRevolutions = -1;
 	private long mLastWheelRevolutions = -1;
 	private int mLastWheelEventTime = -1;
@@ -16,9 +25,10 @@ public abstract class CyclingSpeedAndCadenceDataCallback implements ProfileDataC
 	private int mLastCrankEventTime = -1;
 	private float mWheelCadence = -1;
 
-	@SuppressWarnings("ConstantConditions")
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, final @NonNull Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() < 1) {
 			onInvalidDataReceived(device, data);
 			return;
@@ -30,7 +40,7 @@ public abstract class CyclingSpeedAndCadenceDataCallback implements ProfileDataC
 		offset += 1;
 
 		final boolean wheelRevPresent = (flags & 0x01) != 0;
-		final boolean crankRevPreset  = (flags & 0x02) != 0;
+		final boolean crankRevPreset = (flags & 0x02) != 0;
 
 		if (data.size() < 1 + (wheelRevPresent ? 6 : 0) + (crankRevPreset ? 4 : 0)) {
 			onInvalidDataReceived(device, data);
@@ -63,16 +73,8 @@ public abstract class CyclingSpeedAndCadenceDataCallback implements ProfileDataC
 		}
 	}
 
-	/**
-	 * Method called when the data received had wheel revolution data present.
-	 * The default implementation calculates the total distance, distance since connection and
-	 * current speed and calls {@link CyclingSpeedAndCadenceCallback#onDistanceChanged(BluetoothDevice, float, float, float)}.
-	 *
-	 * @param device target device.
-	 * @param wheelRevolutions cumulative wheel revolutions since the CSC device was reset (UINT32).
-	 * @param lastWheelEventTime last wheel event time in 1/1024 s (UINT16).
-	 */
-	protected void onWheelMeasurementReceived(final @NonNull BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
+	@Override
+	public void onWheelMeasurementReceived(final @NonNull BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
 		if (mLastWheelEventTime == lastWheelEventTime)
 			return;
 
@@ -97,16 +99,8 @@ public abstract class CyclingSpeedAndCadenceDataCallback implements ProfileDataC
 		mLastWheelEventTime = lastWheelEventTime;
 	}
 
-	/**
-	 * Method called when the data received had crank revolution data present.
-	 * The default implementation calculates the crank cadence and gear ratio and
-	 * calls {@link CyclingSpeedAndCadenceCallback#onCrankDataChanged(BluetoothDevice, float, float)}
-	 *
-	 * @param device target device.
-	 * @param crankRevolutions cumulative crank revolutions since the CSC device was reset (UINT16).
-	 * @param lastCrankEventTime last crank event time in 1/1024 s (UINT16).
-	 */
-	protected void onCrankMeasurementReceived(final @NonNull BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
+	@Override
+	public void onCrankMeasurementReceived(final @NonNull BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
 		if (mLastCrankEventTime == lastCrankEventTime)
 			return;
 
