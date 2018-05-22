@@ -16,7 +16,7 @@ import no.nordicsemi.android.ble.data.Data;
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.csc_measurement.xml
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
-public abstract class CyclingSpeedAndCadenceDataCallback extends ProfileReadResponse
+public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends ProfileReadResponse
 		implements CyclingSpeedAndCadenceMeasurementCallback, CyclingSpeedAndCadenceCallback {
 	private long mInitialWheelRevolutions = -1;
 	private long mLastWheelRevolutions = -1;
