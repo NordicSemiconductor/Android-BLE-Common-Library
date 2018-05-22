@@ -10,7 +10,14 @@ import no.nordicsemi.android.ble.common.callback.DateTimeDataCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseMeasurementCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-@SuppressWarnings("ConstantConditions")
+/**
+ * Data callback that parses value into Glucose Measurement data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.glucose_measurement.xml
+ */
+@SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class GlucoseMeasurementDataCallback implements ProfileDataCallback, GlucoseMeasurementCallback {
 
 	@Override
@@ -78,5 +85,37 @@ public abstract class GlucoseMeasurementDataCallback implements ProfileDataCallb
 
 		onGlucoseMeasurementReceived(device, sequenceNumber, baseTime /* with offset */,
 				glucoseConcentration, unit, type, sampleLocation, status, contextInformationFollows);
+	}
+
+	public static float toKgPerL(final float value, final int unit) {
+		if (unit == UNIT_kg_L) {
+			return value;
+		} else {
+			return value * 18.2f / 100f;
+		}
+	}
+
+	public static float toMgPerDecilitre(final float value, final int unit) {
+		if (unit == UNIT_kg_L) {
+			return value * 100000f;
+		} else {
+			return value * 18.2f * 1000f;
+		}
+	}
+
+	public static float toMolPerL(final float value, final int unit) {
+		if (unit == UNIT_mol_L) {
+			return value;
+		} else {
+			return value * 100f / 18.2f;
+		}
+	}
+
+	public static float toMmolPerL(final float value, final int unit) {
+		if (unit == UNIT_mol_L) {
+			return value * 1000f;
+		} else {
+			return value * 100000f / 18.2f;
+		}
 	}
 }

@@ -7,6 +7,13 @@ import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseMeasurementContextCallback;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Data callback that parses value into Glucose Measurement Context data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.glucose_measurement_context.xml
+ */
 @SuppressWarnings("ConstantConditions")
 public abstract class GlucoseMeasurementContextDataCallback implements ProfileDataCallback, GlucoseMeasurementContextCallback {
 

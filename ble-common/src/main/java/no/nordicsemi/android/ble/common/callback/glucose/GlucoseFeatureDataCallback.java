@@ -7,6 +7,13 @@ import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseFeatureCallback;
 import no.nordicsemi.android.ble.data.Data;
 
+/**
+ * Data callback that parses value into Glucose Feature data.
+ * If the value received do not match required syntax
+ * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
+ * will be called.
+ * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.glucose_feature.xml
+ */
 @SuppressWarnings("ConstantConditions")
 public abstract class GlucoseFeatureDataCallback implements ProfileDataCallback, GlucoseFeatureCallback {
 
