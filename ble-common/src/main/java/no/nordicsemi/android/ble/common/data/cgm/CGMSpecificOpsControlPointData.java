@@ -5,6 +5,7 @@ import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.data.MutableData;
 
+@SuppressWarnings("unused")
 public final class CGMSpecificOpsControlPointData implements CGMTypes {
 	private static final byte OP_CODE_SET_COMMUNICATION_INTERVAL = 1;
 	private static final byte OP_CODE_GET_COMMUNICATION_INTERVAL = 2;
