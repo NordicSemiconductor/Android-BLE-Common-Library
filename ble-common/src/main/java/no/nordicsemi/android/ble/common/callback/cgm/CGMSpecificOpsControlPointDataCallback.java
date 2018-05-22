@@ -17,7 +17,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_specific_ops_control_point.xml
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "UnnecessaryReturnStatement"})
 public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileReadResponse implements CGMSpecificOpsControlPointCallback {
 	private final static int OP_CODE_COMMUNICATION_INTERVAL_RESPONSE = 3;
 	private final static int OP_CODE_CALIBRATION_VALUE_RESPONSE = 6;
@@ -92,7 +92,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileRead
 			case OP_CODE_COMMUNICATION_INTERVAL_RESPONSE:
 				final int interval = data.getIntValue(Data.FORMAT_UINT8, 1);
 				onContinuousGlucoseCommunicationIntervalReceived(device, interval, crcPresent);
-				break;
+				return;
 			case OP_CODE_CALIBRATION_VALUE_RESPONSE:
 				final float glucoseConcentrationOfCalibration = data.getFloatValue(Data.FORMAT_SFLOAT, 1);
 				final int calibrationTime = data.getIntValue(Data.FORMAT_UINT16, 3);
@@ -105,7 +105,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileRead
 				onContinuousGlucoseCalibrationValueReceived(device, glucoseConcentrationOfCalibration,
 						calibrationTime, nextCalibrationTime, calibrationType, calibrationSampleLocation,
 						calibrationDataRecordNumber, new CGMCalibrationStatus(calibrationStatus), crcPresent);
-				break;
+				return;
 			case OP_CODE_RESPONSE_CODE:
 				final int requestCode = data.getIntValue(Data.FORMAT_UINT8, 1); // ignore
 				final int responseCode = data.getIntValue(Data.FORMAT_UINT8, 2);
@@ -114,7 +114,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileRead
 				} else {
 					onCGMSpecificOpsOperationError(device, requestCode, responseCode, crcPresent);
 				}
-				break;
+				return;
 		}
 
 		// Read SFLOAT value
@@ -122,22 +122,22 @@ public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileRead
 		switch (opCode) {
 			case OP_CODE_PATIENT_HIGH_ALERT_LEVEL_RESPONSE:
 				onContinuousGlucosePatientHighAlertReceived(device, value, crcPresent);
-				break;
+				return;
 			case OP_CODE_PATIENT_LOW_ALERT_LEVEL_RESPONSE:
 				onContinuousGlucosePatientLowAlertReceived(device, value, crcPresent);
-				break;
+				return;
 			case OP_CODE_HYPO_ALERT_LEVEL_RESPONSE:
 				onContinuousGlucoseHypoAlertReceived(device, value, crcPresent);
-				break;
+				return;
 			case OP_CODE_HYPER_ALERT_LEVEL_RESPONSE:
 				onContinuousGlucoseHyperAlertReceived(device, value, crcPresent);
-				break;
+				return;
 			case OP_CODE_RATE_OF_DECREASE_ALERT_LEVEL_RESPONSE:
 				onContinuousGlucoseRateOfDecreaseAlertReceived(device, value, crcPresent);
-				break;
+				return;
 			case OP_CODE_RATE_OF_INCREASE_ALERT_LEVEL_RESPONSE:
 				onContinuousGlucoseRateOfIncreaseAlertReceived(device, value, crcPresent);
-				break;
+				return;
 		}
 	}
 }

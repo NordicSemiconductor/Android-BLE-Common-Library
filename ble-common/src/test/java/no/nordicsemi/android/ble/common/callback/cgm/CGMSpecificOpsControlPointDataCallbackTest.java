@@ -263,7 +263,15 @@ public class CGMSpecificOpsControlPointDataCallbackTest {
 	}
 
 	@Test
-	public void onContinuousGlucoseCommunicationIntervalReceived() {
+	public void onContinuousGlucoseCommunicationIntervalReceived_notSecured() {
+		final Data data = new Data(new byte[] { 3, 11 });
+		callback.onDataReceived(null, data);
+		assertEquals("Interval", 11, interval);
+		assertFalse(secured);
+	}
+
+	@Test
+	public void onContinuousGlucoseCommunicationIntervalReceived_secured() {
 		final Data data = new Data(new byte[] { 3, 10, (byte) 0x8A, (byte) 0x75});
 		callback.onDataReceived(null, data);
 		assertEquals("Interval", 10, interval);
