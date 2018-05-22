@@ -26,7 +26,8 @@ public interface CyclingSpeedAndCadenceCallback {
 	 * @param distance      distance traveled since the phone connected to the CSC device, in meters.
 	 * @param speed         current speed, in meters per second.
 	 */
-	void onDistanceChanged(@NonNull final BluetoothDevice device, final float totalDistance, final float distance, final float speed);
+	void onDistanceChanged(@NonNull final BluetoothDevice device, final float totalDistance,
+						   final float distance, final float speed);
 
 	/**
 	 * Callback called when the crank data (cadence or gear ratio) has changed.
@@ -35,5 +36,6 @@ public interface CyclingSpeedAndCadenceCallback {
 	 * @param crankCadence new crank cadence, in revolutions per minute.
 	 * @param gearRatio    new gear ratio.
 	 */
-	void onCrankDataChanged(@NonNull final BluetoothDevice device, final float crankCadence, final float gearRatio);
+	void onCrankDataChanged(@NonNull final BluetoothDevice device, final float crankCadence,
+							final float gearRatio);
 }

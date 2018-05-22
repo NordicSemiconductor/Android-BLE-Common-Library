@@ -18,7 +18,7 @@ public interface CyclingSpeedAndCadenceFeatureCallback {
 	}
 
 	/**
-	 * Method called when the CSC Feature characteristic has been read,
+	 * Method called when the CSC Feature characteristic has been read.
 	 *
 	 * @param features device features.
 	 */
