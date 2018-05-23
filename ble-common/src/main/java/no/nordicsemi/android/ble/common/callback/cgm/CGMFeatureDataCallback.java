@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -17,8 +18,16 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_feature.xml
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public abstract class CGMFeatureDataCallback extends ProfileReadResponse implements CGMFeatureCallback {
+
+	public CGMFeatureDataCallback() {
+		// empty
+	}
+
+	protected CGMFeatureDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

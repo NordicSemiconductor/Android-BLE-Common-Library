@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.rsc;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -14,9 +15,17 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.rsc_measurement.xml
  */
-@SuppressWarnings("unused")
+@SuppressWarnings("WeakerAccess")
 public abstract class RunningSpeedAndCadenceMeasurementDataCallback extends ProfileReadResponse
 		implements RunningSpeedAndCadenceMeasurementCallback {
+
+	public RunningSpeedAndCadenceMeasurementDataCallback() {
+		// empty
+	}
+
+	protected RunningSpeedAndCadenceMeasurementDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

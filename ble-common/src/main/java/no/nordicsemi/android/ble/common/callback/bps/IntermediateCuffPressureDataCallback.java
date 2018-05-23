@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.bps;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import java.util.Calendar;
@@ -18,6 +19,14 @@ import no.nordicsemi.android.ble.data.Data;
  */
 @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public abstract class IntermediateCuffPressureDataCallback extends ProfileReadResponse implements IntermediateCuffPressureCallback {
+
+	public IntermediateCuffPressureDataCallback() {
+		// empty
+	}
+
+	protected IntermediateCuffPressureDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

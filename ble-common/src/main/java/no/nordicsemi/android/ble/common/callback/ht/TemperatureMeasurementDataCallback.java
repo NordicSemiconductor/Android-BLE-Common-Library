@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import java.util.Calendar;
@@ -19,6 +20,14 @@ import no.nordicsemi.android.ble.data.Data;
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class TemperatureMeasurementDataCallback extends ProfileReadResponse implements TemperatureMeasurementCallback {
+
+	public TemperatureMeasurementDataCallback() {
+		// empty
+	}
+
+	protected TemperatureMeasurementDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

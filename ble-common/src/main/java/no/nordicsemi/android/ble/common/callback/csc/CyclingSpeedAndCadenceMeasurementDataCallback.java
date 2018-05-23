@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.csc;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -24,6 +25,14 @@ public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends Prof
 	private int mLastCrankRevolutions = -1;
 	private int mLastCrankEventTime = -1;
 	private float mWheelCadence = -1;
+
+	public CyclingSpeedAndCadenceMeasurementDataCallback() {
+		// empty
+	}
+
+	protected CyclingSpeedAndCadenceMeasurementDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, final @NonNull Data data) {

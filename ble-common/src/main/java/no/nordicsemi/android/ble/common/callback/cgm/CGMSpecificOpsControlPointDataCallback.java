@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -17,7 +18,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.cgm_specific_ops_control_point.xml
  */
-@SuppressWarnings({"ConstantConditions", "UnnecessaryReturnStatement"})
+@SuppressWarnings({"ConstantConditions", "UnnecessaryReturnStatement", "WeakerAccess"})
 public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileReadResponse implements CGMSpecificOpsControlPointCallback {
 	private final static int OP_CODE_COMMUNICATION_INTERVAL_RESPONSE = 3;
 	private final static int OP_CODE_CALIBRATION_VALUE_RESPONSE = 6;
@@ -29,6 +30,14 @@ public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileRead
 	private final static int OP_CODE_RATE_OF_INCREASE_ALERT_LEVEL_RESPONSE = 24;
 	private final static int OP_CODE_RESPONSE_CODE = 28;
 	private final static int CGM_RESPONSE_SUCCESS = 1;
+
+	public CGMSpecificOpsControlPointDataCallback() {
+		// empty
+	}
+
+	protected CGMSpecificOpsControlPointDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

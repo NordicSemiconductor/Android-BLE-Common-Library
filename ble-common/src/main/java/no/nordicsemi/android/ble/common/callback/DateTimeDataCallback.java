@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -16,8 +17,16 @@ import no.nordicsemi.android.ble.data.Data;
  * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.date_time.xml
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public abstract class DateTimeDataCallback extends ProfileReadResponse implements DateTimeCallback {
+
+	public DateTimeDataCallback() {
+		// empty
+	}
+
+	protected DateTimeDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

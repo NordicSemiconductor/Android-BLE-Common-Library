@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.battery;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -15,6 +16,14 @@ import no.nordicsemi.android.ble.data.Data;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class BatteryLevelDataCallback extends ProfileReadResponse implements BatteryLevelCallback {
+
+	public BatteryLevelDataCallback() {
+		// empty
+	}
+
+	protected BatteryLevelDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Override

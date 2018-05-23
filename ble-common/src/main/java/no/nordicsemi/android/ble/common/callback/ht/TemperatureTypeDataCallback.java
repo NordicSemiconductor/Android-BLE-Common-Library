@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -14,7 +15,16 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.temperature_type.xml
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class TemperatureTypeDataCallback extends ProfileReadResponse implements TemperatureTypeCallback {
+
+	public TemperatureTypeDataCallback() {
+		// empty
+	}
+
+	protected TemperatureTypeDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {

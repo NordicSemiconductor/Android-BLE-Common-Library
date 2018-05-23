@@ -1,11 +1,12 @@
 package no.nordicsemi.android.ble.common.callback.glucose;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
-import no.nordicsemi.android.ble.callback.profile.ProfileDataCallback;
+import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.callback.DateTimeDataCallback;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseMeasurementCallback;
 import no.nordicsemi.android.ble.data.Data;
@@ -17,11 +18,21 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.glucose_measurement.xml
  */
-@SuppressWarnings({"ConstantConditions", "unused"})
-public abstract class GlucoseMeasurementDataCallback implements ProfileDataCallback, GlucoseMeasurementCallback {
+@SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
+public abstract class GlucoseMeasurementDataCallback extends ProfileReadResponse implements GlucoseMeasurementCallback {
+
+	public GlucoseMeasurementDataCallback() {
+		// empty
+	}
+
+	protected GlucoseMeasurementDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+		super.onDataReceived(device, data);
+
 		if (data.size() < 10) {
 			onInvalidDataReceived(device, data);
 			return;

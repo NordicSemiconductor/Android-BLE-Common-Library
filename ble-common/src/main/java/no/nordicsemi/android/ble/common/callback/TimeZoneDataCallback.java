@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -14,7 +15,15 @@ import no.nordicsemi.android.ble.data.Data;
  * {@link #onInvalidDataReceived(BluetoothDevice, Data)} callback will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.time_zone.xml
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class TimeZoneDataCallback extends ProfileReadResponse implements TimeZoneCallback {
+	public TimeZoneDataCallback() {
+		// empty
+	}
+
+	protected TimeZoneDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
