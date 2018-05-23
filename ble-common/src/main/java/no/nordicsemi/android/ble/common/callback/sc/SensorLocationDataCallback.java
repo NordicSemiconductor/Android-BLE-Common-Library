@@ -1,6 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.sc;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.Parcel;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -14,7 +15,16 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.sensor_location.xml
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class SensorLocationDataCallback extends ProfileReadResponse implements SensorLocationCallback {
+
+	public SensorLocationDataCallback() {
+		// empty
+	}
+
+	protected SensorLocationDataCallback(final Parcel in) {
+		super(in);
+	}
 
 	@Override
 	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
