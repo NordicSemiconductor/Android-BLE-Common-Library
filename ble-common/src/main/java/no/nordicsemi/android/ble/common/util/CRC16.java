@@ -26,7 +26,7 @@ public final class CRC16 {
 	 * @param length Length of the range in bytes.
 	 * @return the CRC-16 CCITT (Kermit).
 	 */
-	public static int CCITT_Kermit(final @NonNull byte[] data, final int offset, final int length) {
+	public static int CCITT_Kermit(@NonNull final byte[] data, final int offset, final int length) {
 		return CRC(0x1021, 0x0000, data, offset, length, true, true, 0x0000);
 	}
 
@@ -42,7 +42,7 @@ public final class CRC16 {
 	 * @param length Length of the range in bytes.
 	 * @return the CRC-16 CCITT-FALSE.
 	 */
-	public static int CCITT_FALSE(final @NonNull byte[] data, final int offset, final int length) {
+	public static int CCITT_FALSE(@NonNull final byte[] data, final int offset, final int length) {
 //		Other implementation of the same algorithm:
 //		int crc = 0xFFFF;
 //
@@ -72,7 +72,7 @@ public final class CRC16 {
 	 * @param length Length of the range in bytes.
 	 * @return the CRC-16 MCRF4XX.
 	 */
-	public static int MCRF4XX(final @NonNull byte[] data, final int offset, final int length) {
+	public static int MCRF4XX(@NonNull final byte[] data, final int offset, final int length) {
 		return CRC(0x1021, 0xFFFF, data, offset, length, true, true, 0x0000);
 	}
 
@@ -88,7 +88,7 @@ public final class CRC16 {
 	 * @param length Length of the range in bytes.
 	 * @return the CRC-16 AUG-CCITT.
 	 */
-	public static int AUG_CCITT(final @NonNull byte[] data, final int offset, final int length) {
+	public static int AUG_CCITT(@NonNull final byte[] data, final int offset, final int length) {
 		return CRC(0x1021, 0x1D0F, data, offset, length, false, false, 0x0000);
 	}
 
@@ -105,7 +105,7 @@ public final class CRC16 {
 	 * @param length Length of the range in bytes.
 	 * @return the CRC-16.
 	 */
-	public static int ARC(final @NonNull byte[] data, final int offset, final int length) {
+	public static int ARC(@NonNull final byte[] data, final int offset, final int length) {
 		return CRC(0x8005, 0x0000, data, offset, length, true, true, 0x0000);
 	}
 
@@ -122,7 +122,7 @@ public final class CRC16 {
 	 * @param length Length of the range in bytes.
 	 * @return the CRC-16 MAXIM.
 	 */
-	public static int MAXIM(final @NonNull byte[] data, final int offset, final int length) {
+	public static int MAXIM(@NonNull final byte[] data, final int offset, final int length) {
 		return CRC(0x8005, 0x0000, data, offset, length, true, true, 0xFFFF);
 	}
 
@@ -141,7 +141,7 @@ public final class CRC16 {
 	 * @param refout True if the output data should be reversed.
 	 * @return CRC calculated with given parameters.
 	 */
-	public static int CRC(final int poly, final int init, final @NonNull byte[] data, final int offset, final int length, final boolean refin, final boolean refout, final int xorout) {
+	public static int CRC(final int poly, final int init, @NonNull final byte[] data, final int offset, final int length, final boolean refin, final boolean refout, final int xorout) {
 		int crc = init;
 
 		for (int i = offset; i < offset + length && i < data.length; ++i) {

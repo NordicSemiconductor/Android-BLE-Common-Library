@@ -91,20 +91,4 @@ public abstract class IntermediateCuffPressureDataCallback extends ProfileReadRe
 
 		onIntermediateCuffPressureReceived(device, cuffPressure, unit, pulseRate, userId, status, calendar);
 	}
-
-	public static float toMmHg(final float value, final int unit) {
-		if (unit == UNIT_mmHg) {
-			return value;
-		} else {
-			return value / 0.133322387415f;
-		}
-	}
-
-	public static float toKPa(final float value, final int unit) {
-		if (unit == UNIT_kPa) {
-			return value;
-		} else {
-			return value * 0.133322387415f;
-		}
-	}
 }

@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.measurement_interval.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class MeasurementIntervalDataCallback extends ProfileReadResponse implements MeasurementIntervalCallback {
 
 	public MeasurementIntervalDataCallback() {
@@ -36,6 +36,6 @@ public abstract class MeasurementIntervalDataCallback extends ProfileReadRespons
 		}
 
 		final int interval = data.getIntValue(Data.FORMAT_UINT16, 0);
-		onMeasurementIntervalReceived(interval);
+		onMeasurementIntervalReceived(device, interval);
 	}
 }

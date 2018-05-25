@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.rsc_measurement.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class RunningSpeedAndCadenceMeasurementDataCallback extends ProfileReadResponse
 		implements RunningSpeedAndCadenceMeasurementCallback {
 

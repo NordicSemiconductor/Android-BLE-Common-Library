@@ -18,7 +18,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.temperature_measurement.xml
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings({"unused", "WeakerAccess", "ConstantConditions"})
 public abstract class TemperatureMeasurementDataCallback extends ProfileReadResponse implements TemperatureMeasurementCallback {
 
 	public TemperatureMeasurementDataCallback() {
@@ -65,22 +65,6 @@ public abstract class TemperatureMeasurementDataCallback extends ProfileReadResp
 			// offset += 1;
 		}
 
-		onTemperatureMeasurementReceived(temperature, unit, calendar, type);
-	}
-
-	public static float toCelsius(final float temperature, final int unit) {
-		if (unit == UNIT_C) {
-			return temperature;
-		} else {
-			return (temperature - 32f) / 1.8f;
-		}
-	}
-
-	public static float toFahrenheit(final float temperature, final int unit) {
-		if (unit == UNIT_F) {
-			return temperature;
-		} else {
-			return temperature * 1.8f + 32f;
-		}
+		onTemperatureMeasurementReceived(device, temperature, unit, calendar, type);
 	}
 }

@@ -21,9 +21,9 @@ public interface CyclingSpeedAndCadenceCallback {
 	 * The distance and speed calculations are based on the wheel circumference obtained
 	 * with {@link #getWheelCircumference()}. Make sure it returns the correct value.
 	 *
-	 * @param device        target device.
-	 * @param totalDistance total distance traveled since the measuring device was reset, in meters.
-	 * @param distance      distance traveled since the phone connected to the CSC device, in meters.
+	 * @param device        the target device.
+	 * @param totalDistance the total distance traveled since the measuring device was reset, in meters.
+	 * @param distance      the distance traveled since the phone connected to the CSC device, in meters.
 	 * @param speed         current speed, in meters per second.
 	 */
 	void onDistanceChanged(@NonNull final BluetoothDevice device, final float totalDistance,
@@ -32,7 +32,7 @@ public interface CyclingSpeedAndCadenceCallback {
 	/**
 	 * Callback called when the crank data (cadence or gear ratio) has changed.
 	 *
-	 * @param device       target device.
+	 * @param device       the target device.
 	 * @param crankCadence new crank cadence, in revolutions per minute.
 	 * @param gearRatio    new gear ratio.
 	 */

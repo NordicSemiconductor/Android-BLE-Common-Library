@@ -11,19 +11,23 @@ public interface BloodPressureMeasurementCallback extends BloodPressureTypes {
 
 	/**
 	 * Callback called when Blood Pressure Measurement packet has been received.
+	 * Use {@link #toKPa(float, int)} or {@link #toMmHg(float, int)} to convert pressure units.
 	 *
-	 * @param device               target device.
-	 * @param systolic             systolic compound of blood pressure measurement.
-	 * @param diastolic            diastolic compound of blood pressure measurement.
-	 * @param meanArterialPressure mean arterial pressure compound of blood pressure measurement.
-	 * @param unit                 measurement unit, one of {@link #UNIT_mmHg} or {@link #UNIT_kPa}.
-	 * @param pulseRate            optional pulse rate in beats per minute.
-	 * @param userID               optional user ID. Value 255 means 'unknown user'.
-	 * @param status               optional measurement status.
-	 * @param calendar             optional measurement timestamp.
+	 * @param device               the target device.
+	 * @param systolic             the systolic compound of blood pressure measurement.
+	 * @param diastolic            the diastolic compound of blood pressure measurement.
+	 * @param meanArterialPressure the mean arterial pressure compound of blood pressure measurement.
+	 * @param unit                 the measurement unit, one of {@link #UNIT_mmHg} or {@link #UNIT_kPa}.
+	 * @param pulseRate            an optional pulse rate in beats per minute.
+	 * @param userID               an optional user ID. Value 255 means 'unknown user'.
+	 * @param status               an optional measurement status.
+	 * @param calendar             an optional measurement timestamp.
 	 */
-	void onBloodPressureMeasurementReceived(final @NonNull BluetoothDevice device, final float systolic, final float diastolic,
+	void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
+											final float systolic, final float diastolic,
 											final float meanArterialPressure, final int unit,
-											final @Nullable Float pulseRate, final @Nullable Integer userID,
-											final @Nullable BPMStatus status, final @Nullable Calendar calendar);
+											@Nullable final Float pulseRate,
+											@Nullable final Integer userID,
+											@Nullable final BPMStatus status,
+											@Nullable final Calendar calendar);
 }

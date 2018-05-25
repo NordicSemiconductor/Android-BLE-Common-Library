@@ -27,7 +27,7 @@ public abstract class BatteryLevelDataCallback extends ProfileReadResponse imple
 
 	@SuppressWarnings("ConstantConditions")
 	@Override
-	public void onDataReceived(@NonNull final BluetoothDevice device, final @NonNull Data data) {
+	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 		super.onDataReceived(device, data);
 
 		if (data.size() == 1) {

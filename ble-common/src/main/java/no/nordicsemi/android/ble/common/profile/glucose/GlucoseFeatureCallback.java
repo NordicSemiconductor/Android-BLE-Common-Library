@@ -41,8 +41,9 @@ public interface GlucoseFeatureCallback {
 	/**
 	 * Callback called when Glucose Feature value was received.
 	 *
-	 * @param device   target device.
-	 * @param features supported features.
+	 * @param device   the target device.
+	 * @param features the features supported by the target device.
 	 */
-	void onGlucoseFeaturesReceived(final @NonNull BluetoothDevice device, final @NonNull GlucoseFeatures features);
+	void onGlucoseFeaturesReceived(@NonNull final BluetoothDevice device,
+								   @NonNull final GlucoseFeatures features);
 }

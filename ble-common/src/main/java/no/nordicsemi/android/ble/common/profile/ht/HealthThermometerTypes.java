@@ -1,9 +1,7 @@
 package no.nordicsemi.android.ble.common.profile.ht;
 
+@SuppressWarnings("unused")
 public interface HealthThermometerTypes {
-	int UNIT_C = 0;
-	int UNIT_F = 1;
-
 	int TYPE_ARMPIT = 1;
 	int TYPE_BODY = 2;
 	int TYPE_EAR = 3;

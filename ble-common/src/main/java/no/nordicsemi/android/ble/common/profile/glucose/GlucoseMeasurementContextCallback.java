@@ -178,25 +178,33 @@ public interface GlucoseMeasurementContextCallback {
 	/**
 	 * Callback called when Glucose Measurement Context value was received.
 	 *
-	 * @param device             target device.
-	 * @param sequenceNumber     the sequence number that matches the Glucose Measurement sequence number.
-	 * @param carbohydrate       optional carbohydrate ID.
+	 * @param device             the target device.
+	 * @param sequenceNumber     the sequence number that matches the Glucose Measurement
+	 *                           sequence number.
+	 * @param carbohydrate       an optional carbohydrate ID.
 	 * @param carbohydrateAmount amount of carbohydrate in grams.
-	 * @param meal               optional meal ID.
-	 * @param tester             optional tester ID.
-	 * @param health             optional health information.
+	 * @param meal               an optional meal ID.
+	 * @param tester             an optional tester ID.
+	 * @param health             an optional health information.
 	 * @param exerciseDuration   exercise duration in seconds. Value 65535 means an overrun.
 	 * @param exerciseIntensity  exercise intensity in percent.
-	 * @param medication         optional medication ID.
-	 * @param medicationAmount   amount of medication in milligrams or milliliters, depending on the medicationUnit value.
-	 * @param medicationUnit     the unit of medication amount. One of {@link #UNIT_mg} of {@link #UNIT_ml}.
-	 * @param HbA1c              amount of glycated haemoglobin in percentage.
+	 * @param medication         an optional medication ID.
+	 * @param medicationAmount   amount of medication in milligrams or milliliters,
+	 *                           depending on the medicationUnit value.
+	 * @param medicationUnit     the unit of medication amount ({@link #UNIT_mg} or {@link #UNIT_ml}).
+	 * @param HbA1c              the amount of glycated haemoglobin, in percentage.
 	 */
-	void onGlucoseMeasurementContextReceived(final @NonNull BluetoothDevice device, final int sequenceNumber,
-											 final @Nullable Carbohydrate carbohydrate, final @Nullable Float carbohydrateAmount,
-											 final @Nullable Meal meal,
-											 final @Nullable Tester tester, final @Nullable Health health,
-											 final @Nullable Integer exerciseDuration, final @Nullable Integer exerciseIntensity,
-											 final @Nullable Medication medication, final @Nullable Float medicationAmount, final @Nullable Integer medicationUnit,
-											 final @Nullable Float HbA1c);
+	void onGlucoseMeasurementContextReceived(@NonNull final BluetoothDevice device,
+											 final int sequenceNumber,
+											 @Nullable final Carbohydrate carbohydrate,
+											 @Nullable final Float carbohydrateAmount,
+											 @Nullable final Meal meal,
+											 @Nullable final Tester tester,
+											 @Nullable final Health health,
+											 @Nullable final Integer exerciseDuration,
+											 @Nullable final Integer exerciseIntensity,
+											 @Nullable final Medication medication,
+											 @Nullable final Float medicationAmount,
+											 @Nullable final Integer medicationUnit,
+											 @Nullable final Float HbA1c);
 }

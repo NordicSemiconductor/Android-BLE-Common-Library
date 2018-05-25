@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -17,9 +20,10 @@ public class TemperatureTypeDataCallbackTest {
 		final ProfileReadResponse response = new TemperatureTypeDataCallback() {
 
 			@Override
-			public void onTemperatureTypeReceived(final int type) {
+			public void onTemperatureTypeReceived(@NonNull final BluetoothDevice device,
+												  final int type) {
 				called = true;
-				assertEquals("Temp Type", HealthThermometerTypes.TYPE_EAR, type);
+				assertEquals("Temperature Type", HealthThermometerTypes.TYPE_EAR, type);
 			}
 		};
 
@@ -34,7 +38,8 @@ public class TemperatureTypeDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final ProfileReadResponse response = new TemperatureTypeDataCallback() {
 			@Override
-			public void onTemperatureTypeReceived(final int type) {
+			public void onTemperatureTypeReceived(@NonNull final BluetoothDevice device,
+												  final int type) {
 				called = true;
 			}
 		};

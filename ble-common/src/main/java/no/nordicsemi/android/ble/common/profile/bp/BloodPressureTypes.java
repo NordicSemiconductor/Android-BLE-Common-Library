@@ -27,4 +27,36 @@ public interface BloodPressureTypes {
 			improperMeasurementPosition = (status & 0x20) != 0;
 		}
 	}
+
+	/**
+	 * Converts the value provided in given unit to mmHg.
+	 * If the unit is already {@link #UNIT_mmHg} it will be returned as is.
+	 *
+	 * @param value the pressure value in given unit.
+	 * @param unit the unit of the value ({@link #UNIT_mmHg} or {@link #UNIT_kPa}).
+	 * @return Value in mmHg.
+	 */
+	static float toMmHg(final float value, final int unit) {
+		if (unit == UNIT_mmHg) {
+			return value;
+		} else {
+			return value / 0.133322387415f;
+		}
+	}
+
+	/**
+	 * Converts the value provided in given unit to kPa.
+	 * If the unit is already {@link #UNIT_kPa} it will be returned as is.
+	 *
+	 * @param value the pressure value in given unit.
+	 * @param unit the unit of the value ({@link #UNIT_mmHg} or {@link #UNIT_kPa}).
+	 * @return Value in kPa.
+	 */
+	static float toKPa(final float value, final int unit) {
+		if (unit == UNIT_kPa) {
+			return value;
+		} else {
+			return value * 0.133322387415f;
+		}
+	}
 }

@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.sensor_location.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class SensorLocationDataCallback extends ProfileReadResponse implements SensorLocationCallback {
 
 	public SensorLocationDataCallback() {
@@ -36,6 +36,6 @@ public abstract class SensorLocationDataCallback extends ProfileReadResponse imp
 		}
 
 		final int location = data.getIntValue(Data.FORMAT_UINT8, 0);
-		onSensorLocationReceived(location);
+		onSensorLocationReceived(device, location);
 	}
 }

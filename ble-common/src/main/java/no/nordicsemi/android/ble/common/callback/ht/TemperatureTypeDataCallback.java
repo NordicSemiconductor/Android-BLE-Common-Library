@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.temperature_type.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class TemperatureTypeDataCallback extends ProfileReadResponse implements TemperatureTypeCallback {
 
 	public TemperatureTypeDataCallback() {
@@ -36,6 +36,6 @@ public abstract class TemperatureTypeDataCallback extends ProfileReadResponse im
 		}
 
 		final int type = data.getIntValue(Data.FORMAT_UINT8, 0);
-		onTemperatureTypeReceived(type);
+		onTemperatureTypeReceived(device, type);
 	}
 }

@@ -20,17 +20,17 @@ public interface SpeedAndCadenceControlPointCallback extends SensorLocationTypes
 	 * In case of {@link #SC_OP_CODE_REQUEST_SUPPORTED_SENSOR_LOCATIONS} request, the
 	 * {@link #onSupportedSensorLocationsReceived(BluetoothDevice, int[])} will be called instead.
 	 *
-	 * @param device      target device.
-	 * @param requestCode request code that has completed. One of SC_OP_CODE_* constants.
+	 * @param device      the target device.
+	 * @param requestCode the request code that has completed. One of SC_OP_CODE_* constants.
 	 */
 	void onSCOperationCompleted(@NonNull final BluetoothDevice device, final int requestCode);
 
 	/**
 	 * Callback called when a SC Control Point request has failed.
 	 *
-	 * @param device      target device.
-	 * @param requestCode request code that has completed with an error. One of SC_OP_CODE_* constants,
-	 *                    or other if such was requested.
+	 * @param device      the target device.
+	 * @param requestCode the request code that has completed with an error.
+	 *                    One of SC_OP_CODE_* constants, or other if such was requested.
 	 * @param errorCode   the received error code, see SC_ERROR_* constants.
 	 */
 	void onSCOperationError(@NonNull final BluetoothDevice device, final int requestCode,
@@ -40,8 +40,8 @@ public interface SpeedAndCadenceControlPointCallback extends SensorLocationTypes
 	 * Callback indicating successful response for
 	 * {@link #SC_OP_CODE_REQUEST_SUPPORTED_SENSOR_LOCATIONS} request.
 	 *
-	 * @param device    target device.
-	 * @param locations array of supported locations. See SENSOR_LOCATION_* constants.
+	 * @param device    the target device.
+	 * @param locations an array with supported locations. See SENSOR_LOCATION_* constants.
 	 */
 	void onSupportedSensorLocationsReceived(@NonNull final BluetoothDevice device,
 											@NonNull final int[] locations);

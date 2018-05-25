@@ -70,28 +70,93 @@ public interface GlucoseMeasurementCallback {
 
 	/**
 	 * Callback called when Glucose Measurement value was received.
-	 * Except from the BluetoothDevice, only the sequence number and sample time is required to be non-null.
+	 * Except from the BluetoothDevice, only the sequence number and sample time is required
+	 * to be non-null.
 	 *
-	 * @param device                    target device.
-	 * @param sequenceNumber            represents the chronological order of the patient records in the Server
-	 *                                  measurement database. The initial default value is 0.
-	 *                                  The Sequence Number is incremented by 1 for each successive
-	 *                                  Glucose Measurement characteristic value. The maximum value for
-	 *                                  Sequence Number permitted is 0xFFFF. Assuming a high use of 8 times per day,
-	 *                                  the maximum value of the Sequence Number would be reached in ~22 years.
-	 *                                  Since product life expectancy of a Glucose Sensor is ~ 5 years,
-	 *                                  this value significantly exceeds that expectation.
-	 * @param time                      base time with time offset added, if such was present in the packet.
-	 * @param glucoseConcentration      glucose concentration in the provided unit.
-	 * @param unit                      sample unit, one of {@link #UNIT_kg_L} or {@link #UNIT_mol_L}.
-	 * @param type                      sample type, see TYPE_* constants.
-	 * @param sampleLocation            sample location, see SAMPLE_LOCATION_* constants.
-	 * @param contextInformationFollows true, if Glucose Measurement Context will be sent immediately after
-	 *                                  this packet. False otherwise.
+	 * @param device                    the target device.
+	 * @param sequenceNumber            represents the chronological order of the patient records
+	 *                                  in the Server measurement database. The initial default
+	 *                                  value is 0. The Sequence Number is incremented by 1 for
+	 *                                  each successive Glucose Measurement characteristic value.
+	 *                                  The maximum value for Sequence Number permitted is 0xFFFF.
+	 *                                  Assuming a high use of 8 times per day, the maximum value
+	 *                                  of the Sequence Number would be reached in ~22 years.
+	 *                                  Since product life expectancy of a Glucose Sensor is
+	 *                                  ~ 5 years, this value significantly exceeds that expectation.
+	 * @param time                      the base time with time offset added, if such was present
+	 *                                  in the packet.
+	 * @param glucoseConcentration      the glucose concentration in the provided unit.
+	 * @param unit                      the sample unit ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
+	 * @param type                      the sample type, see TYPE_* constants.
+	 * @param sampleLocation            the sample location, see SAMPLE_LOCATION_* constants.
+	 * @param contextInformationFollows true, if Glucose Measurement Context will be sent
+	 *                                  immediately after this packet. False otherwise.
 	 */
-	void onGlucoseMeasurementReceived(final @NonNull BluetoothDevice device,
-									  final int sequenceNumber, final @NonNull Calendar time,
-									  final @Nullable Float glucoseConcentration, final @Nullable Integer unit,
-									  final @Nullable Integer type, final @Nullable Integer sampleLocation,
-									  final @Nullable GlucoseStatus status, final boolean contextInformationFollows);
+	void onGlucoseMeasurementReceived(@NonNull final BluetoothDevice device,
+									  final int sequenceNumber, @NonNull final Calendar time,
+									  @Nullable final Float glucoseConcentration, @Nullable final Integer unit,
+									  @Nullable final Integer type, @Nullable final Integer sampleLocation,
+									  @Nullable final GlucoseStatus status, final boolean contextInformationFollows);
+
+	/**
+	 * Converts the value provided in given unit to kg/L.
+	 * If the unit is already {@link #UNIT_kg_L} it will be returned as is.
+	 *
+	 * @param value the glucose concentration value in given unit.
+	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
+	 * @return Value in kg/L.
+	 */
+	static float toKgPerL(final float value, final int unit) {
+		if (unit == UNIT_kg_L) {
+			return value;
+		} else {
+			return value * 18.2f / 100f;
+		}
+	}
+
+	/**
+	 * Converts the value provided in given unit to mg/dL.
+	 *
+	 * @param value the glucose concentration value in given unit.
+	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
+	 * @return Value in mg/dL.
+	 */
+	static float toMgPerDecilitre(final float value, final int unit) {
+		if (unit == UNIT_kg_L) {
+			return value * 100000f;
+		} else {
+			return value * 18.2f * 1000f;
+		}
+	}
+
+	/**
+	 * Converts the value provided in given unit to mol/L.
+	 * If the unit is already {@link #UNIT_mol_L} it will be returned as is.
+	 *
+	 * @param value the glucose concentration value in given unit.
+	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
+	 * @return Value in mol/L.
+	 */
+	static float toMolPerL(final float value, final int unit) {
+		if (unit == UNIT_mol_L) {
+			return value;
+		} else {
+			return value * 100f / 18.2f;
+		}
+	}
+
+	/**
+	 * Converts the value provided in given unit to mmol/L.
+	 *
+	 * @param value the glucose concentration value in given unit.
+	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
+	 * @return Value in mmol/L.
+	 */
+	static float toMmolPerL(final float value, final int unit) {
+		if (unit == UNIT_mol_L) {
+			return value * 1000f;
+		} else {
+			return value * 100000f / 18.2f;
+		}
+	}
 }

@@ -18,8 +18,9 @@ public interface BodySensorLocationCallback {
 	/**
 	 * Callback received when Body Sensor Location characteristic has been read.
 	 *
-	 * @param device         target device.
+	 * @param device         the target device.
 	 * @param sensorLocation the sensor location, see SENSOR_LOCATION_* constants.
 	 */
-	void onBodySensorLocationReceived(final @NonNull BluetoothDevice device, final int sensorLocation);
+	void onBodySensorLocationReceived(@NonNull final BluetoothDevice device,
+									  final int sensorLocation);
 }

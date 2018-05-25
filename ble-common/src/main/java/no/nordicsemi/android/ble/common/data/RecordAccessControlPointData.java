@@ -51,15 +51,15 @@ public final class RecordAccessControlPointData {
 		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LAST_RECORD);
 	}
 
-	public static Data reportStoredRecordsLessThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
+	public static Data reportStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
 		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, filter, formatType, parameter);
 	}
 
-	public static Data reportStoredRecordsGreaterThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
+	public static Data reportStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
 		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, filter, formatType, parameter);
 	}
 
-	public static Data reportStoredRecordsFromRange(final @NonNull FilterType filter, final int formatType, final int start, final int end) {
+	public static Data reportStoredRecordsFromRange(@NonNull final FilterType filter, final int formatType, final int start, final int end) {
 		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_WITHING_RANGE, filter, formatType, start, end);
 	}
 
@@ -87,15 +87,15 @@ public final class RecordAccessControlPointData {
 		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LAST_RECORD);
 	}
 
-	public static Data deleteStoredRecordsLessThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
+	public static Data deleteStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
 		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, filter, formatType, parameter);
 	}
 
-	public static Data deleteStoredRecordsGreaterThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
+	public static Data deleteStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
 		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, filter, formatType, parameter);
 	}
 
-	public static Data deleteStoredRecordsFromRange(final @NonNull FilterType filter, final int formatType, final int start, final int end) {
+	public static Data deleteStoredRecordsFromRange(@NonNull final FilterType filter, final int formatType, final int start, final int end) {
 		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_WITHING_RANGE, filter, formatType, start, end);
 	}
 
@@ -115,15 +115,15 @@ public final class RecordAccessControlPointData {
 		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_ALL_RECORDS);
 	}
 
-	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
+	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
 		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, filter, formatType, parameter);
 	}
 
-	public static Data reportNumberOfStoredRecordsGreaterThenOrEqualTo(final @NonNull FilterType filter, final int formatType, final int parameter) {
+	public static Data reportNumberOfStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
 		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, filter, formatType, parameter);
 	}
 
-	public static Data reportNumberOfStoredRecordsFromRange(final @NonNull FilterType filter, final int formatType, final int start, final int end) {
+	public static Data reportNumberOfStoredRecordsFromRange(@NonNull final FilterType filter, final int formatType, final int start, final int end) {
 		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_WITHING_RANGE, filter, formatType, start, end);
 	}
 
@@ -147,7 +147,7 @@ public final class RecordAccessControlPointData {
 		return Data.opCode(opCode, operator);
 	}
 
-	private static Data create(final byte opCode, final byte operator, final @NonNull FilterType filter, final int formatType, final int... parameters) {
+	private static Data create(final byte opCode, final byte operator, @NonNull final FilterType filter, final int formatType, final int... parameters) {
 		final int parameterLen = formatType & 0x0F;
 
 		final MutableData data = new MutableData(new byte[2 + 1 + parameters.length * parameterLen]);

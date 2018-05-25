@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.csc_feature.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class CyclingSpeedAndCadenceFeatureDataCallback extends ProfileReadResponse implements CyclingSpeedAndCadenceFeatureCallback {
 
 	public CyclingSpeedAndCadenceFeatureDataCallback() {
@@ -37,6 +37,6 @@ public abstract class CyclingSpeedAndCadenceFeatureDataCallback extends ProfileR
 
 		final int value = data.getIntValue(Data.FORMAT_UINT16, 0);
 		final CSCFeatures features = new CSCFeatures(value);
-		onCyclingSpeedAndCadenceFeaturesReceived(features);
+		onCyclingSpeedAndCadenceFeaturesReceived(device, features);
 	}
 }

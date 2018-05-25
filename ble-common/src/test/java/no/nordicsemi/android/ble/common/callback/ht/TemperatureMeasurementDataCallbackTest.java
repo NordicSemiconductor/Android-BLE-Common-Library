@@ -1,5 +1,7 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import org.junit.Test;
@@ -20,7 +22,10 @@ public class TemperatureMeasurementDataCallbackTest {
 	public void onTemperatureMeasurementReceived() {
 		final ProfileReadResponse response = new TemperatureMeasurementDataCallback() {
 			@Override
-			public void onTemperatureMeasurementReceived(final float temperature, final int unit, @Nullable final Calendar calendar, @Nullable final Integer type) {
+			public void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
+														 final float temperature, final int unit,
+														 @Nullable final Calendar calendar,
+														 @Nullable final Integer type) {
 				called = true;
 				assertEquals("Temperature", 37.60f, temperature, 0.001f);
 				assertEquals("Unit", TemperatureMeasurementCallback.UNIT_C, unit);
@@ -51,7 +56,10 @@ public class TemperatureMeasurementDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final ProfileReadResponse response = new TemperatureMeasurementDataCallback() {
 			@Override
-			public void onTemperatureMeasurementReceived(final float temperature, final int unit, @Nullable final Calendar calendar, @Nullable final Integer type) {
+			public void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
+														 final float temperature, final int unit,
+														 @Nullable final Calendar calendar,
+														 @Nullable final Integer type) {
 				called = true;
 			}
 		};

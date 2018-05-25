@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.callback.rsc;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -20,7 +23,8 @@ public class RunningSpeedAndCadenceFeatureDataCallbackTest {
 	public void onRunningSpeedAndCadenceFeaturesReceived() {
 		final ProfileReadResponse callback = new RunningSpeedAndCadenceFeatureDataCallback() {
 			@Override
-			public void onRunningSpeedAndCadenceFeaturesReceived(final RSCFeatures features) {
+			public void onRunningSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+																 @NonNull final RSCFeatures features) {
 				called = true;
 				assertNotNull(features);
 				assertTrue("Instantaneous Stride Length Measurement supported", features.instantaneousStrideLengthMeasurementSupported);
@@ -43,7 +47,8 @@ public class RunningSpeedAndCadenceFeatureDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final ProfileReadResponse callback = new RunningSpeedAndCadenceFeatureDataCallback() {
 			@Override
-			public void onRunningSpeedAndCadenceFeaturesReceived(final RSCFeatures features) {
+			public void onRunningSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+																 @NonNull final RSCFeatures features) {
 				called = true;
 			}
 		};

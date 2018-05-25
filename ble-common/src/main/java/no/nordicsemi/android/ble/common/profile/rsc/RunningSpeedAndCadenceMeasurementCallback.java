@@ -10,15 +10,15 @@ public interface RunningSpeedAndCadenceMeasurementCallback {
 	/**
 	 * Method called when the Running Speed And Cadence Measurement data was received.
 	 *
-	 * @param device               target device.
+	 * @param device               the target device.
 	 * @param running              true if running was detected, false if walking.
-	 * @param instantaneousSpeed   instantaneous Speed in m/s unit.
-	 * @param instantaneousCadence instantaneous Cadence in steps per minute.
-	 * @param strideLength         instantaneous Stride Length in centimeters.
-	 * @param totalDistance        the Total Distance in meters (UINT32).
+	 * @param instantaneousSpeed   instantaneous speed in m/s unit.
+	 * @param instantaneousCadence instantaneous cadence in steps per minute.
+	 * @param strideLength         instantaneous stride length in centimeters.
+	 * @param totalDistance        the total distance in meters (UINT32).
 	 */
-	void onRSCMeasurementReceived(final @NonNull BluetoothDevice device, final boolean running,
+	void onRSCMeasurementReceived(@NonNull final BluetoothDevice device, final boolean running,
 								  final float instantaneousSpeed, final int instantaneousCadence,
-								  final @Nullable Integer strideLength,
-								  final @Nullable Long totalDistance);
+								  @Nullable final Integer strideLength,
+								  @Nullable final Long totalDistance);
 }

@@ -28,10 +28,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when a CGM Specific Ops request has finished successfully.
 	 *
-	 * @param device      target device.
-	 * @param requestCode request code that has completed. One of CGM_OP_CODE_* constants.
-	 * @param secured     true, if the value received was secured with E2E-CRC value and the CRC matched
-	 *                    the packet. False, if the CRC field was not present.
+	 * @param device      the target device.
+	 * @param requestCode the request code that has completed. One of CGM_OP_CODE_* constants.
+	 * @param secured     true, if the value received was secured with E2E-CRC value and the
+	 *                    CRC matched the packet. False, if the CRC field was not present.
 	 */
 	void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device,
 											final int requestCode,
@@ -40,12 +40,12 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when a CGM Specific Ops request has failed.
 	 *
-	 * @param device      target device.
-	 * @param requestCode request code that has completed with an error. One of CGM_OP_CODE_* constants,
-	 *                    or other if such was requested.
+	 * @param device      the target device.
+	 * @param requestCode the request code that has completed with an error.
+	 *                    One of CGM_OP_CODE_* constants, or other if such was requested.
 	 * @param errorCode   the received error code, see CGM_ERROR_* constants.
-	 * @param secured     true, if the value received was secured with E2E-CRC value and the CRC matched
-	 *                    the packet. False, if the CRC field was not present.
+	 * @param secured     true, if the value received was secured with E2E-CRC value and the
+	 *                    CRC matched the packet. False, if the CRC field was not present.
 	 */
 	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode,
 										final int errorCode, final boolean secured);
@@ -53,8 +53,8 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when a CGM Specific Ops response was received with and incorrect E2E CRC.
 	 *
-	 * @param device target device.
-	 * @param data   CGM Specific Ops packet data that was received, including the CRC field.
+	 * @param device the target device.
+	 * @param data   the CGM Specific Ops packet data that was received, including the CRC field.
 	 */
 	default void onCGMSpecificOpsResponseReceivedWithCrcError(@NonNull final BluetoothDevice device,
 															  @NonNull final Data data) {
@@ -64,10 +64,11 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called as a result of 'Fet CGM communication interval' procedure.
 	 *
-	 * @param device   target device.
-	 * @param interval the time interval in minutes after which the CGM Measurement is sent to the client.
-	 * @param secured  true, if the value received was secured with E2E-CRC value and the CRC matched
-	 *                 the packet. False, if the CRC field was not present.
+	 * @param device   the target device.
+	 * @param interval the time interval in minutes after which the CGM Measurement is sent to
+	 *                 the client.
+	 * @param secured  true, if the value received was secured with E2E-CRC value and
+	 *                 the CRC matched the packet. False, if the CRC field was not present.
 	 */
 	default void onContinuousGlucoseCommunicationIntervalReceived(@NonNull final BluetoothDevice device,
 																  final int interval,
@@ -78,15 +79,15 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called after a calibration value is received from the server.
 	 *
-	 * @param device                            target device.
-	 * @param glucoseConcentrationOfCalibration glucose concentration value is transmitted in mg/dL.
+	 * @param device                            the target device.
+	 * @param glucoseConcentrationOfCalibration the glucose concentration value is transmitted in mg/dL.
 	 * @param calibrationTime                   the time the calibration value has been measured as
 	 *                                          relative offset to the Session Start Time in minutes.
 	 * @param nextCalibrationTime               the relative offset to the Session Start Time when the
 	 *                                          next calibration is required. A value of 0 means that
 	 *                                          a calibration is required instantly.
-	 * @param type                              sample type, see TYPE_* constants.
-	 * @param sampleLocation                    sample location, see SAMPLE_LOCATION_* constants.
+	 * @param type                              the sample type, see TYPE_* constants.
+	 * @param sampleLocation                    the sample location, see SAMPLE_LOCATION_* constants.
 	 * @param calibrationDataRecordNumber       a unique number of the calibration record.
 	 *                                          A value of 0 represents no calibration value is stored.
 	 * @param status                            the status of the calibration procedure of the Server
@@ -95,20 +96,21 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                                          value and the CRC matched the packet. False, if the
 	 *                                          CRC field was not present.
 	 */
-	default void onContinuousGlucoseCalibrationValueReceived(final @NonNull BluetoothDevice device,
-													 final float glucoseConcentrationOfCalibration,
-													 final int calibrationTime, final int nextCalibrationTime,
-													 final int type, final int sampleLocation,
-													 final int calibrationDataRecordNumber,
-													 final @NonNull CGMCalibrationStatus status,
-													 final boolean secured) {
+	default void onContinuousGlucoseCalibrationValueReceived(
+			@NonNull final BluetoothDevice device,
+			final float glucoseConcentrationOfCalibration,
+			final int calibrationTime, final int nextCalibrationTime,
+			final int type, final int sampleLocation,
+			final int calibrationDataRecordNumber,
+			@NonNull final CGMCalibrationStatus status,
+			final boolean secured) {
 		// empty
 	}
 
 	/**
 	 * Callback called when the Patient High Alert response was received.
 	 *
-	 * @param device     target device.
+	 * @param device     the target device.
 	 * @param alertLevel a level of glucose concentration in mg/dL to trigger the Patient High Alert
 	 *                   in the Sensor Status Annunciation field.
 	 * @param secured    true, if the value received was secured with E2E-CRC
@@ -124,7 +126,7 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when the Patient Low Alert response was received.
 	 *
-	 * @param device     target device.
+	 * @param device     the target device.
 	 * @param alertLevel a level of glucose concentration in mg/dL to trigger the Patient Low Alert
 	 *                   in the Sensor Status Annunciation field.
 	 * @param secured    true, if the value received was secured with E2E-CRC
@@ -140,6 +142,7 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when the Hypo Alert response was received.
 	 *
+	 * @param device     the target device.
 	 * @param alertLevel a level of glucose concentration in mg/dL to trigger the Hypo Alert
 	 *                   in the Sensor Status Annunciation field.
 	 * @param secured    true, if the value received was secured with E2E-CRC
@@ -155,7 +158,7 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when the Hyper Alert response was received.
 	 *
-	 * @param device     target device.
+	 * @param device     the target device.
 	 * @param alertLevel a level of glucose concentration in mg/dL to trigger the Hyper Alert
 	 *                   in the Sensor Status Annunciation field.
 	 * @param secured    true, if the value received was secured with E2E-CRC
@@ -171,7 +174,7 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when the Rate Of Decrease Alert response was received.
 	 *
-	 * @param device     target device.
+	 * @param device     the target device.
 	 * @param alertLevel a rate of glucose concentration change in mg/dL/min to trigger the
 	 *                   Rate Of Decrease Alert in the Sensor Status Annunciation field.
 	 * @param secured    true, if the value received was secured with E2E-CRC
@@ -187,6 +190,7 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	/**
 	 * Callback called when the Hyper Alert response was received.
 	 *
+	 * @param device     the target device.
 	 * @param alertLevel a rate of glucose concentration change in mg/dL/min to trigger the
 	 *                   Rate Of Increase Alert in the Sensor Status Annunciation field.
 	 * @param secured    true, if the value received was secured with E2E-CRC

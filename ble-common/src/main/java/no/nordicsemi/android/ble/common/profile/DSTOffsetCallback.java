@@ -40,8 +40,8 @@ public interface DSTOffsetCallback {
 	/**
 	 * Callback called when DST Offset packet has been received.
 	 *
-	 * @param device target device.
-	 * @param offset Daylight Saving Time offset.
+	 * @param device the target device.
+	 * @param offset the Daylight Saving Time offset.
 	 */
-	void onDSTOffsetReceived(@NonNull final BluetoothDevice device, final @NonNull DSTOffset offset);
+	void onDSTOffsetReceived(@NonNull final BluetoothDevice device, @NonNull final DSTOffset offset);
 }

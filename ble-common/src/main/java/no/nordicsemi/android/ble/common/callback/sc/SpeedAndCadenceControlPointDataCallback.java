@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.sc_control_point.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class SpeedAndCadenceControlPointDataCallback extends ProfileReadResponse implements SpeedAndCadenceControlPointCallback {
 	private final static int SC_OP_CODE_RESPONSE_CODE = 16;
 	private final static int SC_RESPONSE_SUCCESS = 1;

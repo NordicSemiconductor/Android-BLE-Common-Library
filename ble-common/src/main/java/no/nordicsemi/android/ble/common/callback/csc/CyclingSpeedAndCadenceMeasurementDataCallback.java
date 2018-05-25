@@ -16,7 +16,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.csc_measurement.xml
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess", "unused", "ConstantConditions"})
 public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends ProfileReadResponse
 		implements CyclingSpeedAndCadenceMeasurementCallback, CyclingSpeedAndCadenceCallback {
 	private long mInitialWheelRevolutions = -1;
@@ -35,7 +35,7 @@ public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends Prof
 	}
 
 	@Override
-	public void onDataReceived(@NonNull final BluetoothDevice device, final @NonNull Data data) {
+	public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 		super.onDataReceived(device, data);
 
 		if (data.size() < 1) {
@@ -83,7 +83,7 @@ public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends Prof
 	}
 
 	@Override
-	public void onWheelMeasurementReceived(final @NonNull BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
+	public void onWheelMeasurementReceived(@NonNull final BluetoothDevice device, final long wheelRevolutions, final int lastWheelEventTime) {
 		if (mLastWheelEventTime == lastWheelEventTime)
 			return;
 
@@ -109,7 +109,7 @@ public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends Prof
 	}
 
 	@Override
-	public void onCrankMeasurementReceived(final @NonNull BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
+	public void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
 		if (mLastCrankEventTime == lastCrankEventTime)
 			return;
 

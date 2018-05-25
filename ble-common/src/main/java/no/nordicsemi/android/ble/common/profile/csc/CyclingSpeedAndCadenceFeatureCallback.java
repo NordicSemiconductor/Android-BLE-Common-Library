@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.profile.csc;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 public interface CyclingSpeedAndCadenceFeatureCallback {
 
 	class CSCFeatures {
@@ -20,7 +23,9 @@ public interface CyclingSpeedAndCadenceFeatureCallback {
 	/**
 	 * Method called when the CSC Feature characteristic has been read.
 	 *
-	 * @param features device features.
+	 * @param device   the target device.
+	 * @param features the device features.
 	 */
-	void onCyclingSpeedAndCadenceFeaturesReceived(final CSCFeatures features);
+	void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+												  @NonNull final CSCFeatures features);
 }

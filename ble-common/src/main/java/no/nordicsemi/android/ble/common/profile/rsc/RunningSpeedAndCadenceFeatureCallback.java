@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.profile.rsc;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 @SuppressWarnings("unused")
 public interface RunningSpeedAndCadenceFeatureCallback {
 
@@ -26,7 +29,9 @@ public interface RunningSpeedAndCadenceFeatureCallback {
 	/**
 	 * Method called when the RSC Feature characteristic has been read.
 	 *
-	 * @param features device features.
+	 * @param device   the target device.
+	 * @param features the device features.
 	 */
-	void onRunningSpeedAndCadenceFeaturesReceived(final RSCFeatures features);
+	void onRunningSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+												  @NonNull final RSCFeatures features);
 }

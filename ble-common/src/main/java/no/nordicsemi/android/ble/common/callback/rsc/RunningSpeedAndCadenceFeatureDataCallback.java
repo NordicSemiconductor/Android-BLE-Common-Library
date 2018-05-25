@@ -15,7 +15,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.rsc_feature.xml
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "ConstantConditions"})
 public abstract class RunningSpeedAndCadenceFeatureDataCallback extends ProfileReadResponse implements RunningSpeedAndCadenceFeatureCallback {
 
 	public RunningSpeedAndCadenceFeatureDataCallback() {
@@ -37,6 +37,6 @@ public abstract class RunningSpeedAndCadenceFeatureDataCallback extends ProfileR
 
 		final int value = data.getIntValue(Data.FORMAT_UINT16, 0);
 		final RSCFeatures features = new RSCFeatures(value);
-		onRunningSpeedAndCadenceFeaturesReceived(features);
+		onRunningSpeedAndCadenceFeaturesReceived(device, features);
 	}
 }

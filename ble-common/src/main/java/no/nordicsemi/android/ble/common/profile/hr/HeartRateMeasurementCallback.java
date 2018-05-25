@@ -11,15 +11,15 @@ public interface HeartRateMeasurementCallback {
 	/**
 	 * Callback called when Hear Rate notification has been received.
 	 *
-	 * @param device          target device.
+	 * @param device          the target device.
 	 * @param heartRate       the current heart rate in beats per minute.
 	 * @param contactDetected information whether sensor contact has been detected, or not.
 	 *                        Null if this feature is not supported.
 	 * @param energyExpanded  the energy expanded in kilo Joules, or null if feature is not supported.
-	 * @param rrIntervals     optional list of RR intervals, each in 1/1024 of a second.
+	 * @param rrIntervals     an optional list of RR intervals, each in 1/1024 of a second unit.
 	 *                        Null if this feature is not supported.
 	 */
-	void onHeartRateMeasurementReceived(final @NonNull BluetoothDevice device,
+	void onHeartRateMeasurementReceived(@NonNull final BluetoothDevice device,
 										final int heartRate,
 										@Nullable final Boolean contactDetected,
 										@Nullable final Integer energyExpanded,

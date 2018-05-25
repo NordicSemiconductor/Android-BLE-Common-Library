@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -15,7 +18,7 @@ public class MeasurementIntervalDataCallbackTest {
 	public void onMeasurementIntervalReceived() {
 		final ProfileReadResponse response = new MeasurementIntervalDataCallback() {
 			@Override
-			public void onMeasurementIntervalReceived(final int interval) {
+			public void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device, final int interval) {
 				called = true;
 				assertEquals("Interval", 60, interval);
 			}
@@ -32,7 +35,7 @@ public class MeasurementIntervalDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final ProfileReadResponse response = new MeasurementIntervalDataCallback() {
 			@Override
-			public void onMeasurementIntervalReceived(final int interval) {
+			public void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device, final int interval) {
 				called = true;
 			}
 		};

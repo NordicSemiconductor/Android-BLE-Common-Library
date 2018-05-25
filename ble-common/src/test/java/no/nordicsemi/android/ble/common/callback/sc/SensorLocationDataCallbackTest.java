@@ -1,5 +1,8 @@
 package no.nordicsemi.android.ble.common.callback.sc;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
@@ -16,7 +19,7 @@ public class SensorLocationDataCallbackTest {
 	public void onSensorLocationReceived() {
 		final ProfileReadResponse callback = new SensorLocationDataCallback() {
 			@Override
-			public void onSensorLocationReceived(final int location) {
+			public void onSensorLocationReceived(@NonNull final BluetoothDevice device, final int location) {
 				called = true;
 				assertEquals("Location", SensorLocationCallback.SENSOR_LOCATION_REAR_WHEEL, location);
 			}
@@ -33,7 +36,7 @@ public class SensorLocationDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final ProfileReadResponse callback = new SensorLocationDataCallback() {
 			@Override
-			public void onSensorLocationReceived(final int location) {
+			public void onSensorLocationReceived(@NonNull final BluetoothDevice device, final int location) {
 				called = true;
 			}
 		};

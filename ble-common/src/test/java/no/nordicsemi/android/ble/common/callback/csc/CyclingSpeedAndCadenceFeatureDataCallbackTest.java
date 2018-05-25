@@ -1,13 +1,17 @@
 package no.nordicsemi.android.ble.common.callback.csc;
 
+import android.bluetooth.BluetoothDevice;
+import android.support.annotation.NonNull;
+
 import org.junit.Test;
 
-import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
-import no.nordicsemi.android.ble.common.profile.csc.CyclingSpeedAndCadenceFeatureCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 public class CyclingSpeedAndCadenceFeatureDataCallbackTest {
@@ -17,7 +21,8 @@ public class CyclingSpeedAndCadenceFeatureDataCallbackTest {
 	public void onCyclingSpeedAndCadenceFeaturesReceived() {
 		final ProfileReadResponse callback = new CyclingSpeedAndCadenceFeatureDataCallback() {
 			@Override
-			public void onCyclingSpeedAndCadenceFeaturesReceived(final CSCFeatures features) {
+			public void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+																 @NonNull final CSCFeatures features) {
 				called = true;
 				assertNotNull(features);
 				assertTrue("Wheel revolutions supported", features.wheelRevolutionDataSupported);
@@ -38,7 +43,8 @@ public class CyclingSpeedAndCadenceFeatureDataCallbackTest {
 	public void onInvalidDataReceived() {
 		final ProfileReadResponse callback = new CyclingSpeedAndCadenceFeatureDataCallback() {
 			@Override
-			public void onCyclingSpeedAndCadenceFeaturesReceived(final CSCFeatures features) {
+			public void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+																 @NonNull final CSCFeatures features) {
 				called = true;
 			}
 		};

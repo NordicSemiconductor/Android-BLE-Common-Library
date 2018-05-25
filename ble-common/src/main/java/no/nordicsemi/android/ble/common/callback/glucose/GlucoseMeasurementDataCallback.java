@@ -18,7 +18,7 @@ import no.nordicsemi.android.ble.data.Data;
  * will be called.
  * See: https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.glucose_measurement.xml
  */
-@SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public abstract class GlucoseMeasurementDataCallback extends ProfileReadResponse implements GlucoseMeasurementCallback {
 
 	public GlucoseMeasurementDataCallback() {
@@ -96,37 +96,5 @@ public abstract class GlucoseMeasurementDataCallback extends ProfileReadResponse
 
 		onGlucoseMeasurementReceived(device, sequenceNumber, baseTime /* with offset */,
 				glucoseConcentration, unit, type, sampleLocation, status, contextInformationFollows);
-	}
-
-	public static float toKgPerL(final float value, final int unit) {
-		if (unit == UNIT_kg_L) {
-			return value;
-		} else {
-			return value * 18.2f / 100f;
-		}
-	}
-
-	public static float toMgPerDecilitre(final float value, final int unit) {
-		if (unit == UNIT_kg_L) {
-			return value * 100000f;
-		} else {
-			return value * 18.2f * 1000f;
-		}
-	}
-
-	public static float toMolPerL(final float value, final int unit) {
-		if (unit == UNIT_mol_L) {
-			return value;
-		} else {
-			return value * 100f / 18.2f;
-		}
-	}
-
-	public static float toMmolPerL(final float value, final int unit) {
-		if (unit == UNIT_mol_L) {
-			return value * 1000f;
-		} else {
-			return value * 100000f / 18.2f;
-		}
 	}
 }
