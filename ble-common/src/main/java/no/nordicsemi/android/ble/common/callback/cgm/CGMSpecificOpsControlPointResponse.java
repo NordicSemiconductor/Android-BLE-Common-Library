@@ -38,9 +38,9 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     CGMSpecificOpsControlPointResponse response = setIndicationCallback(characteristic)
- *           .awaitValidAfter(() -> CGMSpecificOpsControlPointData.startSession(),
- *                            CGMSpecificOpsControlPointResponse.class);
+ *     CGMSpecificOpsControlPointResponse response = waitForIndication(characteristic)
+ *           .trigger(CGMSpecificOpsControlPointData.startSession())
+ *           .awaitValid(CGMSpecificOpsControlPointResponse.class);
  *     if (response.isOperationCompleted()) {
  *         ...
  *     }

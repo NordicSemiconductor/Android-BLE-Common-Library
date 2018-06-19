@@ -38,7 +38,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     GlucoseMeasurementContextResponse response = setNotificationCallback(characteristic)
+ *     GlucoseMeasurementContextResponse response = waitForNotification(characteristic)
  *           .awaitValid(GlucoseMeasurementContextResponse.class);
  *     Carbohydrate carbohydrate = response.getCarbohydrate();
  *     if (carbohydrate != null) {

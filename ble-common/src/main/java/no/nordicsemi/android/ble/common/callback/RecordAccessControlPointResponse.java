@@ -38,7 +38,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * <pre>
  * try {
  *     RecordAccessControlPointResponse response = readCharacteristic(characteristic)
- *           .awaitForValid(RecordAccessControlPointResponse.class);
+ *           .awaitValid(RecordAccessControlPointResponse.class);
  *     if (response.isOperationCompleted() && response.wereRecordsFound()) {
  *         int number = response.getNumberOfRecords();
  *         ...

@@ -42,7 +42,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     HeartRateMeasurementResponse response = setNotificationCallback(characteristic)
+ *     HeartRateMeasurementResponse response = waitForNotification(characteristic)
  *           .awaitValid(HeartRateMeasurementResponse.class);
  *     int heartRate = response.getHeartRate();
  *     ...

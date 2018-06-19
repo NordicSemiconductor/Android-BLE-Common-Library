@@ -38,7 +38,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     RunningSpeedAndCadenceMeasurementResponse response = setIndicationCallback(characteristic)
+ *     RunningSpeedAndCadenceMeasurementResponse response = waitForIndication(characteristic)
  *           .awaitValid(RunningSpeedAndCadenceMeasurementResponse.class);
  *     float speedMetersPerSecond = response.getInstantaneousSpeed();
  *     ...

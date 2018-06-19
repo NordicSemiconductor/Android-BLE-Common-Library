@@ -37,7 +37,8 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     DSTOffsetResponse response = readCharacteristic(characteristic).awaitValid(DSTOffsetResponse.class);
+ *     DSTOffsetResponse response = readCharacteristic(characteristic)
+ *           .awaitValid(DSTOffsetResponse.class);
  *     DSTOffset offset = response.getDSTOffset();
  *     ...
  * } catch ({@link RequestFailedException} e) {

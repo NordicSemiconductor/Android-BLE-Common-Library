@@ -39,7 +39,8 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     DateTimeResponse response = readCharacteristic(characteristic).awaitValid(DateTimeResponse.class);
+ *     DateTimeResponse response = readCharacteristic(characteristic)
+ *           .awaitValid(DateTimeResponse.class);
  *     Calendar calendar = response.getCalendar();
  *     ...
  * } catch ({@link RequestFailedException} e) {

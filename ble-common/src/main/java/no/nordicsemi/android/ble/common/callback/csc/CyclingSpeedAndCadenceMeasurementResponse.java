@@ -37,7 +37,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     CyclingSpeedAndCadenceResponse response = setNotificationCallback(characteristic)
+ *     CyclingSpeedAndCadenceResponse response = waitForNotification(characteristic)
  *           .awaitValid(CyclingSpeedAndCadenceResponse.class);
  *     float totalDistance = response.getTotalDistance(2340.0f);
  *     ...

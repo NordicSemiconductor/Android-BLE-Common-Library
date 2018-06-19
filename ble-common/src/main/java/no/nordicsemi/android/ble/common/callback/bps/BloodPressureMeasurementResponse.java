@@ -41,7 +41,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * <pre>
  * try {
  *     BloodPressureMeasurementResponse response = readCharacteristic(characteristic)
- *           .awaitForValid(BloodPressureMeasurementResponse.class);
+ *           .awaitValid(BloodPressureMeasurementResponse.class);
  *     if (response.getStatus() != null) {
  *         ...
  *     }

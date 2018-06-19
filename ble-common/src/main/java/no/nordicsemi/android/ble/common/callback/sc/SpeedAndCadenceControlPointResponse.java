@@ -38,9 +38,9 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     SpeedAndCadenceControlPointResponse response = setIndicationCallback(characteristic)
- *           .awaitValidAfter(() -> writeCharacteristic(characteristic, SpeedAndCadenceControlPointData.requestSupportedSensorLocations(),
- *           SpeedAndCadenceControlPointResponse.class);
+ *     SpeedAndCadenceControlPointResponse response = waitForIndication(characteristic)
+ *           .trigger(writeCharacteristic(characteristic, SpeedAndCadenceControlPointData.requestSupportedSensorLocations()))
+ *           .awaitValid(SpeedAndCadenceControlPointResponse.class);
  *     if (response.isOperationCompleted()) {
  *         int locations = response.getSupportedSensorLocations();
  *         ...

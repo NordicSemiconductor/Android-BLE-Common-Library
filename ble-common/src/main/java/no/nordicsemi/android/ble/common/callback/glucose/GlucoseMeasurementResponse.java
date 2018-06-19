@@ -40,7 +40,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     GlucoseMeasurementResponse response = setNotificationCallback(characteristic)
+ *     GlucoseMeasurementResponse response = waitForNotification(characteristic)
  *           .awaitValid(GlucoseMeasurementResponse.class);
  *     if (response.contextInformationFollows()) {
  *         ...

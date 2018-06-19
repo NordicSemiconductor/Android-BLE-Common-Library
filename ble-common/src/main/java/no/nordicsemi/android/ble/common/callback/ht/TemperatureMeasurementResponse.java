@@ -41,7 +41,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     TemperatureMeasurementResponse response = setNotificationCallback(characteristic)
+ *     TemperatureMeasurementResponse response = waitForNotification(characteristic)
  *           .awaitValid(TemperatureMeasurementResponse.class);
  *     float tempCelsius = response.getTemperatureCelsius());
  *     ...

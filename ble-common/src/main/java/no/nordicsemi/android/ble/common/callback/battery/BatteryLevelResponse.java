@@ -37,7 +37,8 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     BatteryLevelResponse response = readCharacteristic(characteristic).awaitForValid(BatteryLevelResponse.class);
+ *     BatteryLevelResponse response = readCharacteristic(characteristic)
+ *           .awaitValid(BatteryLevelResponse.class);
  *     int batteryLevel = response.getBatteryLevel();
  *     ...
  * } catch ({@link RequestFailedException} e) {

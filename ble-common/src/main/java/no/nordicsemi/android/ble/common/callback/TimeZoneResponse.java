@@ -37,7 +37,8 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     TimeZoneResponse response = readCharacteristic(characteristic).awaitForValid(TimeZoneResponse.class);
+ *     TimeZoneResponse response = readCharacteristic(characteristic)
+ *           .awaitValid(TimeZoneResponse.class);
  *     if (response.isTimeZoneOffsetKnown()) {
  *         int offset = response.getTimeZoneOffset();
  *         ...

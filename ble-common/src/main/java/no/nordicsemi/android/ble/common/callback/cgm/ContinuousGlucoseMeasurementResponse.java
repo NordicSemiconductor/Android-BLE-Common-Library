@@ -39,11 +39,9 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * Usage example:
  * <pre>
  * try {
- *     ContinuousGlucoseMeasurementResponse response = setNotificationCallback(characteristic)
+ *     ContinuousGlucoseMeasurementResponse response = waitForNotification(characteristic)
  *           .awaitValid(ContinuousGlucoseMeasurementResponse.class);
- *     if (response.isValid()) {
- *         float glucoseConcentration = response.getGlucoseConcentration();
- *     }
+ *     float glucoseConcentration = response.getGlucoseConcentration();
  *     ...
  * } catch ({@link RequestFailedException} e) {
  *     Log.w(TAG, "Request failed with status " + e.getStatus(), e);

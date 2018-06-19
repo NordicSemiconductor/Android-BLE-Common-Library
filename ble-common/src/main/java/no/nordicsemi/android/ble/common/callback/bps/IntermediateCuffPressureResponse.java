@@ -41,7 +41,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * <pre>
  * try {
  *     IntermediateCuffPressureResponse response = readCharacteristic(characteristic)
- *           .awaitForValid(IntermediateCuffPressureResponse.class);
+ *           .awaitValid(IntermediateCuffPressureResponse.class);
  *     float pressureMmHg = toMmHg(response.getCuffPressure(), response.getUnit());
  *     ...
  * } catch ({@link RequestFailedException} e) {

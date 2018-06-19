@@ -39,7 +39,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * <pre>
  * try {
  *     CGMFeatureResponse response = readCharacteristic(characteristic)
- *           .awaitForValid(CGMFeatureResponse.class);
+ *           .awaitValid(CGMFeatureResponse.class);
  *    if (response.getFeatures().calibrationSupported) {
  *        ...
  *    }

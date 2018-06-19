@@ -39,7 +39,7 @@ import no.nordicsemi.android.ble.exception.RequestFailedException;
  * <pre>
  * try {
  *     CGMSessionRunTimeResponse response = readCharacteristic(characteristic)
- *           .awaitForValid(CGMSessionRunTimeResponse.class);
+ *           .awaitValid(CGMSessionRunTimeResponse.class);
  *    int runTime = response.getRunTime();
  *     ...
  * } catch ({@link RequestFailedException} e) {
