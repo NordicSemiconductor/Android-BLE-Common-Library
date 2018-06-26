@@ -64,7 +64,8 @@ public interface RecordAccessControlPointCallback {
 															final int requestCode);
 
 	/**
-	 * Callback called as a result to 'Report number of stored records' request.
+	 * Callback called as a result to 'Report number of stored records' request, also when there
+	 * were no records found.
 	 *
 	 * @param device          the target device.
 	 * @param numberOfRecords the number of records matching given filter criteria.
