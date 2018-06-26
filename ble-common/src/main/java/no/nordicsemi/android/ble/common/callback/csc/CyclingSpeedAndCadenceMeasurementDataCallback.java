@@ -130,6 +130,7 @@ public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends Prof
 		mLastWheelEventTime = lastWheelEventTime;
 	}
 
+	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public void onCrankMeasurementReceived(@NonNull final BluetoothDevice device, final int crankRevolutions, final int lastCrankEventTime) {
 		if (mLastCrankEventTime == lastCrankEventTime)
@@ -149,9 +150,8 @@ public abstract class CyclingSpeedAndCadenceMeasurementDataCallback extends Prof
 				// Notify listener about the new measurement
 				onCrankDataChanged(device, crankCadence, gearRatio);
 			} else {
-
 				// Notify listener about the new measurement
-				onCrankDataChanged(device, 0, 0);
+				// onCrankDataChanged(device, 0, 0);
 			}
 		}
 		mLastCrankRevolutions = crankRevolutions;
