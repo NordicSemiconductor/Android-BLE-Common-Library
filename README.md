@@ -8,7 +8,7 @@ The library is under development. It's compatible with the Android BLE Library v
 [develop](https://github.com/NordicSemiconductor/Android-nRF-Toolbox/tree/develop) branch.
 
 Both the BLE Library and BLE Common Library may change until they go out of alpha version, after that they will have 
-version number 2.0. The current stable version of BLE Library is 1.0 (master branch).
+version number 2.0. The current stable version of BLE Library is 1.2 (master branch).
 
 ## Services
 
@@ -22,15 +22,13 @@ Currently the following service have been implemented:
 - Glucose (with Record Access Control Point)
 - Continuous Glucose (with Record Access Control Point)
 - Cycling Speed and Cadence
-
-Next coming are:
-
 - Heart Rate
 - Health Thermometer
 - Running Speed and Cadence
-- Bond Manager
 
-Apart from that Nordic UART service will also be implemented in here.
+Next coming are:
+
+- Bond Manager
 
 ## Testing
 
