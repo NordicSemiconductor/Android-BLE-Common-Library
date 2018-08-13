@@ -15,7 +15,7 @@ version number 2.0. The current stable version of BLE Library is 1.2 (master bra
 The library is available on jcenter and Maven-Central repositories. Add the following dependency to your *build.gradle* file:
 
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.0-alpha4'
+implementation 'no.nordicsemi.android:ble-common:2.0-alpha6'
 ```
 The BLE Common library depends on BLE Library with the same version number.
 
@@ -34,10 +34,6 @@ Currently the following service have been implemented:
 - Heart Rate
 - Health Thermometer
 - Running Speed and Cadence
-
-Next coming are:
-
-- Bond Manager (?)
 
 We are happy to accept PRs with other parsers.
 
