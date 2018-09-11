@@ -3,19 +3,19 @@
 [ ![Download](https://api.bintray.com/packages/nordic/android/ble-common-library/images/download.svg) ](https://bintray.com/nordic/android/ble-common-library/_latestVersion)
 
 This library is an addon to the [Android BLE Library](https://github.com/NordicSemiconductor/Android-BLE-Library) 
-which provides data parsers and other useful features for some Bluetooth SIG Adopted profies.
+which provides data parsers and other useful features for some Bluetooth SIG Adopted profiles.
 
 The library is under development. It's compatible with the Android BLE Library version from the 
 [develop](https://github.com/NordicSemiconductor/Android-BLE-Library/tree/develop) branch, and Android nRF Toolbox, also on 
 [develop](https://github.com/NordicSemiconductor/Android-nRF-Toolbox/tree/develop) branch.
 
-Both the BLE Library and BLE Common Library may change until they go out of alpha version, after that they will have 
+Both the BLE Library and BLE Common Library may change until they go out of beta version, after that they will have 
 version number 2.0. The current stable version of BLE Library is 1.2 (master branch).
 
 The library is available on jcenter and Maven-Central repositories. Add the following dependency to your *build.gradle* file:
 
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.0-alpha6'
+implementation 'no.nordicsemi.android:ble-common:2.0-beta1'
 ```
 The BLE Common library depends on BLE Library with the same version number.
 
