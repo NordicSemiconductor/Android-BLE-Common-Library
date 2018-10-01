@@ -15,7 +15,7 @@ version number 2.0. The current stable version of BLE Library is 1.2 (master bra
 The library is available on jcenter and Maven-Central repositories. Add the following dependency to your *build.gradle* file:
 
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.0-beta1'
+implementation 'no.nordicsemi.android:ble-common:2.0-beta4'
 ```
 The BLE Common library depends on BLE Library with the same version number.
 
