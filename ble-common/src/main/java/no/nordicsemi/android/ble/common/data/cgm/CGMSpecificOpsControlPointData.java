@@ -22,7 +22,12 @@
 
 package no.nordicsemi.android.ble.common.data.cgm;
 
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
+
 import no.nordicsemi.android.ble.common.profile.cgm.CGMTypes;
+import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleLocation;
+import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleType;
 import no.nordicsemi.android.ble.common.util.CRC16;
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.data.MutableData;
@@ -65,7 +70,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_RESET_DEVICE_SPECIFIC_ERROR, secure);
 	}
 
-	public static Data setCommunicationInterval(final int interval, final boolean secure) {
+	public static Data setCommunicationInterval(@IntRange(from = 0, to = 65535) final int interval,
+												final boolean secure) {
 		return create(OP_CODE_SET_COMMUNICATION_INTERVAL, interval, Data.FORMAT_UINT8, secure);
 	}
 
@@ -81,9 +87,11 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_COMMUNICATION_INTERVAL, secure);
 	}
 
-	public static Data setCalibrationValue(final float glucoseConcentrationOfCalibration,
-										   final int sampleType, final int sampleLocation,
-										   final int calibrationTime, final int nextCalibrationTime,
+	public static Data setCalibrationValue(@FloatRange(from = 0) final float glucoseConcentrationOfCalibration,
+										   @GlucoseSampleType final int sampleType,
+										   @GlucoseSampleLocation final int sampleLocation,
+										   @IntRange(from = 0, to = 65535) final int calibrationTime,
+										   @IntRange(from = 0, to = 65535) final int nextCalibrationTime,
 										   final boolean secure) {
 		final MutableData data = new MutableData(new byte[11 + (secure ? 2 : 0)]);
 		data.setByte(OP_CODE_SET_CALIBRATION_VALUE, 0);
@@ -97,7 +105,7 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return appendCrc(data, secure);
 	}
 
-	public static Data getCalibrationValue(final int calibrationDataRecordNumber, final boolean secure) {
+	public static Data getCalibrationValue(@IntRange(from = 0) final int calibrationDataRecordNumber, final boolean secure) {
 		return create(OP_CODE_GET_CALIBRATION_VALUE, calibrationDataRecordNumber, Data.FORMAT_UINT16, secure);
 	}
 
@@ -105,7 +113,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_CALIBRATION_VALUE, 0xFFFF, Data.FORMAT_UINT16, secure);
 	}
 
-	public static Data setPatientHighAlertLevel(final float level, final boolean secure) {
+	public static Data setPatientHighAlertLevel(@FloatRange(from = 0) final float level,
+												final boolean secure) {
 		return create(OP_CODE_SET_PATIENT_HIGH_ALERT_LEVEL, level, secure);
 	}
 
@@ -113,7 +122,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_PATIENT_HIGH_ALERT_LEVEL, secure);
 	}
 
-	public static Data setPatientLowAlertLevel(final float level, final boolean secure) {
+	public static Data setPatientLowAlertLevel(@FloatRange(from = 0) final float level,
+											   final boolean secure) {
 		return create(OP_CODE_SET_PATIENT_LOW_ALERT_LEVEL, level, secure);
 	}
 
@@ -121,7 +131,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_PATIENT_LOW_ALERT_LEVEL, secure);
 	}
 
-	public static Data setHypoAlertLevel(final float level, final boolean secure) {
+	public static Data setHypoAlertLevel(@FloatRange(from = 0) final float level,
+										 final boolean secure) {
 		return create(OP_CODE_SET_HYPO_ALERT_LEVEL, level, secure);
 	}
 
@@ -129,7 +140,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_HYPO_ALERT_LEVEL, secure);
 	}
 
-	public static Data setHyperAlertLevel(final float level, final boolean secure) {
+	public static Data setHyperAlertLevel(@FloatRange(from = 0) final float level,
+										  final boolean secure) {
 		return create(OP_CODE_SET_HYPER_ALERT_LEVEL, level, secure);
 	}
 
@@ -137,7 +149,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_HYPER_ALERT_LEVEL, secure);
 	}
 
-	public static Data setRateOfDecreaseAlertLevel(final float level, final boolean secure) {
+	public static Data setRateOfDecreaseAlertLevel(@FloatRange(from = 0) final float level,
+												   final boolean secure) {
 		return create(OP_CODE_SET_RATE_OF_DECREASE_ALERT_LEVEL, level, secure);
 	}
 
@@ -145,7 +158,8 @@ public final class CGMSpecificOpsControlPointData implements CGMTypes {
 		return create(OP_CODE_GET_RATE_OF_DECREASE_ALERT_LEVEL, secure);
 	}
 
-	public static Data setRateOfIncreaseAlertLevel(final float level, final boolean secure) {
+	public static Data setRateOfIncreaseAlertLevel(@FloatRange(from = 0) final float level,
+												   final boolean secure) {
 		return create(OP_CODE_SET_RATE_OF_INCREASE_ALERT_LEVEL, level, secure);
 	}
 

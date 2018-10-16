@@ -62,7 +62,7 @@ public abstract class TemperatureMeasurementDataCallback extends ProfileReadResp
 
 		int offset = 0;
 		final int flags = data.getIntValue(Data.FORMAT_UINT8, offset);
-		final int unit = flags & 0x01;
+		final int unit = (flags & 0x01) == UNIT_C ? UNIT_C : UNIT_F;
 		final boolean timestampPresent = (flags & 0x02) != 0;
 		final boolean temperatureTypePresent = (flags & 0x04) != 0;
 		offset += 1;

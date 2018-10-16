@@ -24,7 +24,7 @@ package no.nordicsemi.android.ble.common.data.hr;
 
 import no.nordicsemi.android.ble.data.Data;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public final class HeartRateControlPointData {
 	private static final byte[] RESET = { 0x01 };
 

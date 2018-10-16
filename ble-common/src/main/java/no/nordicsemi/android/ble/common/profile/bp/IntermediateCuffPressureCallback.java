@@ -23,6 +23,8 @@
 package no.nordicsemi.android.ble.common.profile.bp;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -42,7 +44,11 @@ public interface IntermediateCuffPressureCallback extends BloodPressureTypes {
 	 * @param status       an optional measurement status.
 	 * @param calendar     an optional measurement timestamp.
 	 */
-	void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device, final float cuffPressure, final int unit,
-											@Nullable final Float pulseRate, @Nullable final Integer userID,
-											@Nullable final BPMStatus status, @Nullable final Calendar calendar);
+	void onIntermediateCuffPressureReceived(@NonNull final BluetoothDevice device,
+											@FloatRange(from = 0) final float cuffPressure,
+											@BloodPressureUnit final int unit,
+											@Nullable @FloatRange(from = 0) final Float pulseRate,
+											@Nullable @IntRange(from = 0, to = 255) final Integer userID,
+											@Nullable final BPMStatus status,
+											@Nullable final Calendar calendar);
 }

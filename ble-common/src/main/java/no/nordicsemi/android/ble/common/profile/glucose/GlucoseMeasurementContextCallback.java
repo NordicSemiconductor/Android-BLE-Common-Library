@@ -23,6 +23,8 @@
 package no.nordicsemi.android.ble.common.profile.glucose;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -217,16 +219,16 @@ public interface GlucoseMeasurementContextCallback {
 	 * @param HbA1c              the amount of glycated haemoglobin, in percentage.
 	 */
 	void onGlucoseMeasurementContextReceived(@NonNull final BluetoothDevice device,
-											 final int sequenceNumber,
+											 @IntRange(from = 0, to = 65535) final int sequenceNumber,
 											 @Nullable final Carbohydrate carbohydrate,
 											 @Nullable final Float carbohydrateAmount,
 											 @Nullable final Meal meal,
 											 @Nullable final Tester tester,
 											 @Nullable final Health health,
-											 @Nullable final Integer exerciseDuration,
-											 @Nullable final Integer exerciseIntensity,
+											 @Nullable @IntRange(from = 0, to = 65535) final Integer exerciseDuration,
+											 @Nullable @IntRange(from = 0, to = 100) final Integer exerciseIntensity,
 											 @Nullable final Medication medication,
 											 @Nullable final Float medicationAmount,
-											 @Nullable final Integer medicationUnit,
-											 @Nullable final Float HbA1c);
+											 @Nullable @MedicationUnit final Integer medicationUnit,
+											 @Nullable @FloatRange(from = 0.0f, to = 100.0f) final Float HbA1c);
 }

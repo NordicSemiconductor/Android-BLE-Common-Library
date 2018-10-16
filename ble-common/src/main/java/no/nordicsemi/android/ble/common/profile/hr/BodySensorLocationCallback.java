@@ -44,5 +44,5 @@ public interface BodySensorLocationCallback {
 	 * @param sensorLocation the sensor location, see SENSOR_LOCATION_* constants.
 	 */
 	void onBodySensorLocationReceived(@NonNull final BluetoothDevice device,
-									  final int sensorLocation);
+									  @BodySensorLocation final int sensorLocation);
 }

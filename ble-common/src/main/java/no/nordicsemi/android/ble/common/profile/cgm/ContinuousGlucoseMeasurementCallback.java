@@ -23,6 +23,8 @@
 package no.nordicsemi.android.ble.common.profile.cgm;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -56,11 +58,11 @@ public interface ContinuousGlucoseMeasurementCallback extends CGMTypes {
 	 *                             {@link #onContinuousGlucoseMeasurementReceivedWithCrcError(BluetoothDevice, Data)}.
 	 */
 	void onContinuousGlucoseMeasurementReceived(@NonNull final BluetoothDevice device,
-												final float glucoseConcentration,
+												@FloatRange(from = 0) final float glucoseConcentration,
 												@Nullable final Float cgmTrend,
 												@Nullable final Float cgmQuality,
 												@Nullable final CGMStatus status,
-												final int timeOffset,
+												@IntRange(from = 0) final int timeOffset,
 												final boolean secured);
 
 	/**
@@ -69,8 +71,9 @@ public interface ContinuousGlucoseMeasurementCallback extends CGMTypes {
 	 * @param device the target device.
 	 * @param data   the CGM packet data that was received, including the CRC field.
 	 */
-	default void onContinuousGlucoseMeasurementReceivedWithCrcError(@NonNull final BluetoothDevice device,
-																	@NonNull final Data data) {
+	default void onContinuousGlucoseMeasurementReceivedWithCrcError(
+			@NonNull final BluetoothDevice device,
+			@NonNull final Data data) {
 		// ignore
 	}
 

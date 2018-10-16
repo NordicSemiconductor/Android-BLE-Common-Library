@@ -23,10 +23,37 @@
 package no.nordicsemi.android.ble.common.profile;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntDef;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 @SuppressWarnings("unused")
 public interface RecordAccessControlPointCallback {
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef(value = {
+			RACP_OP_CODE_REPORT_STORED_RECORDS,
+			RACP_OP_CODE_DELETE_STORED_RECORDS,
+			RACP_OP_CODE_ABORT_OPERATION,
+			RACP_OP_CODE_REPORT_NUMBER_OF_RECORDS
+	})
+	@interface RACPOpCode {}
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef(value = {
+			RACP_ERROR_OP_CODE_NOT_SUPPORTED,
+			RACP_EEROR_INVALID_OPERATOR,
+			RACP_ERROR_OPERATOR_NOT_SUPPORTED,
+			RACP_ERROR_INVALID_OPERAND,
+			RACP_ERROR_ABORT_UNSUCCESSFUL,
+			RACP_ERROR_PROCEDURE_NOT_COMPLETED,
+			RACP_ERROR_OPERAND_NOT_SUPPORTED
+	})
+	@interface RACPErrorCode {}
+
 	int RACP_OP_CODE_REPORT_STORED_RECORDS = 1;
 	int RACP_OP_CODE_DELETE_STORED_RECORDS = 2;
 	int RACP_OP_CODE_ABORT_OPERATION = 3;
@@ -51,7 +78,7 @@ public interface RecordAccessControlPointCallback {
 	 * @param requestCode the request code that has completed, one of RACP_OP_CODE_* constants.
 	 */
 	void onRecordAccessOperationCompleted(@NonNull final BluetoothDevice device,
-										  final int requestCode);
+										  @RACPOpCode final int requestCode);
 
 	/**
 	 * Callback called when the request to report or delete records has finished
@@ -61,7 +88,7 @@ public interface RecordAccessControlPointCallback {
 	 * @param requestCode the request code that has completed, one of RACP_OP_CODE_* constants.
 	 */
 	void onRecordAccessOperationCompletedWithNoRecordsFound(@NonNull final BluetoothDevice device,
-															final int requestCode);
+															@RACPOpCode final int requestCode);
 
 	/**
 	 * Callback called as a result to 'Report number of stored records' request, also when there
@@ -71,7 +98,7 @@ public interface RecordAccessControlPointCallback {
 	 * @param numberOfRecords the number of records matching given filter criteria.
 	 */
 	void onNumberOfRecordsReceived(@NonNull final BluetoothDevice device,
-								   final int numberOfRecords);
+								   @IntRange(from = 0) final int numberOfRecords);
 
 	/**
 	 * Callback called in case an error has been returned from the Record Access Control Point
@@ -87,5 +114,6 @@ public interface RecordAccessControlPointCallback {
 	 *                    is such was reported.
 	 */
 	void onRecordAccessOperationError(@NonNull final BluetoothDevice device,
-									  final int requestCode, final int errorCode);
+									  @RACPOpCode final int requestCode,
+									  @RACPErrorCode final int errorCode);
 }

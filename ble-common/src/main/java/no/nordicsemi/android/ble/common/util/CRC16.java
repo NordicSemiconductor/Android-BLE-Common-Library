@@ -31,6 +31,7 @@ import android.support.annotation.NonNull;
  * <p>Testing is based on 'check' from the link above and
  * <a href="https://www.lammertbies.nl/comm/info/crc-calculation.html">https://www.lammertbies.nl/comm/info/crc-calculation.html</a>.
  */
+@SuppressWarnings("WeakerAccess")
 public final class CRC16 {
 
 	private CRC16() {

@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.cgm;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
@@ -45,9 +46,10 @@ public interface CGMSessionRunTimeCallback {
 	 *                       For a callback in case of invalid CRC value check
 	 *                       {@link #onContinuousGlucoseMonitorSessionRunTimeReceivedWithCrcError(BluetoothDevice, Data)}.
 	 */
-	void onContinuousGlucoseMonitorSessionRunTimeReceived(@NonNull final BluetoothDevice device,
-														  final int sessionRunTime,
-														  final boolean secured);
+	void onContinuousGlucoseMonitorSessionRunTimeReceived(
+			@NonNull final BluetoothDevice device,
+			@IntRange(from = 0, to = 65535) final int sessionRunTime,
+			final boolean secured);
 
 	/**
 	 * Callback called when a CGM Session Run Time packet with E2E field was received but the CRC
@@ -56,8 +58,9 @@ public interface CGMSessionRunTimeCallback {
 	 * @param device the target device.
 	 * @param data   the CGM Session Run Time packet data that was received, including the CRC field.
 	 */
-	default void onContinuousGlucoseMonitorSessionRunTimeReceivedWithCrcError(@NonNull final BluetoothDevice device,
-																			  @NonNull final Data data) {
+	default void onContinuousGlucoseMonitorSessionRunTimeReceivedWithCrcError(
+			@NonNull final BluetoothDevice device,
+			@NonNull final Data data) {
 		// ignore
 	}
 }

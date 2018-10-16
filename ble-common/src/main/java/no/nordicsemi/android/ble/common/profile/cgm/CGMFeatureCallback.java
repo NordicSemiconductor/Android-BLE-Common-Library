@@ -25,6 +25,8 @@ package no.nordicsemi.android.ble.common.profile.cgm;
 import android.bluetooth.BluetoothDevice;
 import android.support.annotation.NonNull;
 
+import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleType;
+import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleLocation;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("unused")
@@ -46,10 +48,12 @@ public interface CGMFeatureCallback extends CGMTypes {
 	 *                       CRC matched the packet. False, if the
 	 *                       {@link CGMFeatures#e2eCrcSupported} feature is not supported.
 	 */
-	void onContinuousGlucoseMonitorFeaturesReceived(@NonNull final BluetoothDevice device,
-													@NonNull final CGMFeatures features,
-													final int type, final int sampleLocation,
-													final boolean secured);
+	void onContinuousGlucoseMonitorFeaturesReceived(
+			@NonNull final BluetoothDevice device,
+			@NonNull final CGMFeatures features,
+			@GlucoseSampleType final int type,
+			@GlucoseSampleLocation final int sampleLocation,
+			final boolean secured);
 
 	/**
 	 * Callback called when a CGM Feature packet with E2E field was received but the CRC check
@@ -58,8 +62,9 @@ public interface CGMFeatureCallback extends CGMTypes {
 	 * @param device the target device.
 	 * @param data   the CGM Feature packet data that was received, including the CRC field.
 	 */
-	default void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(@NonNull final BluetoothDevice device,
-																		@NonNull final Data data) {
+	default void onContinuousGlucoseMonitorFeaturesReceivedWithCrcError(
+			@NonNull final BluetoothDevice device,
+			@NonNull final Data data) {
 		// ignore
 	}
 }

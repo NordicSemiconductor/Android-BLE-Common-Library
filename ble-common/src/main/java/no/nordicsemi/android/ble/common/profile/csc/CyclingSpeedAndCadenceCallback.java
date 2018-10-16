@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.csc;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 
 public interface CyclingSpeedAndCadenceCallback {
@@ -34,6 +35,7 @@ public interface CyclingSpeedAndCadenceCallback {
 	 *
 	 * @return wheel circumference in mm. By default it returns {@link #WHEEL_CIRCUMFERENCE_DEFAULT}.
 	 */
+	@SuppressWarnings("SameReturnValue")
 	default float getWheelCircumference() {
 		return WHEEL_CIRCUMFERENCE_DEFAULT;
 	}
@@ -48,8 +50,10 @@ public interface CyclingSpeedAndCadenceCallback {
 	 * @param distance      the distance traveled since the phone connected to the CSC device, in meters.
 	 * @param speed         current speed, in meters per second.
 	 */
-	void onDistanceChanged(@NonNull final BluetoothDevice device, final float totalDistance,
-						   final float distance, final float speed);
+	void onDistanceChanged(@NonNull final BluetoothDevice device,
+						   @FloatRange(from = 0) final float totalDistance,
+						   @FloatRange(from = 0) final float distance,
+						   @FloatRange(from = 0) final float speed);
 
 	/**
 	 * Callback called when the crank data (cadence or gear ratio) has changed.
@@ -58,6 +62,7 @@ public interface CyclingSpeedAndCadenceCallback {
 	 * @param crankCadence new crank cadence, in revolutions per minute.
 	 * @param gearRatio    new gear ratio.
 	 */
-	void onCrankDataChanged(@NonNull final BluetoothDevice device, final float crankCadence,
+	void onCrankDataChanged(@NonNull final BluetoothDevice device,
+							@FloatRange(from = 0) final float crankCadence,
 							final float gearRatio);
 }

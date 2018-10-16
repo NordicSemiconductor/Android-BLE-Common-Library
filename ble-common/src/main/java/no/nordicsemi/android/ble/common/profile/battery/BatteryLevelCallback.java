@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.battery;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 public interface BatteryLevelCallback {
@@ -34,5 +35,6 @@ public interface BatteryLevelCallback {
 	 * @param device       the target device.
 	 * @param batteryLevel the battery value in percent.
 	 */
-	void onBatteryLevelChanged(@NonNull final BluetoothDevice device, final int batteryLevel);
+	void onBatteryLevelChanged(@NonNull final BluetoothDevice device,
+							   @IntRange(from = 0, to = 100) final int batteryLevel);
 }

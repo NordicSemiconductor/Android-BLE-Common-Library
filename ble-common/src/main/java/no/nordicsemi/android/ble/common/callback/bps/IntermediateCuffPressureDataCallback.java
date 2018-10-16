@@ -63,7 +63,7 @@ public abstract class IntermediateCuffPressureDataCallback extends ProfileReadRe
 		final int flags = data.getIntValue(Data.FORMAT_UINT8, offset++);
 
 		// See UNIT_* for unit options
-		final int unit = flags & 0x01;
+		final int unit = (flags & 0x01) == UNIT_mmHg ? UNIT_mmHg : UNIT_kPa;
 		final boolean timestampPresent         = (flags & 0x02) != 0;
 		final boolean pulseRatePresent         = (flags & 0x04) != 0;
 		final boolean userIdPresent            = (flags & 0x08) != 0;

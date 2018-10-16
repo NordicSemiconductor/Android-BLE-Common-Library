@@ -20,34 +20,25 @@
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package no.nordicsemi.android.ble.common.data.alert;
+package no.nordicsemi.android.ble.common.profile.glucose;
 
-import no.nordicsemi.android.ble.data.Data;
+@SuppressWarnings({"WeakerAccess", "unused"})
+public interface GlucoseTypes {
+	int TYPE_CAPILLARY_WHOLE_BLOOD = 1;
+	int TYPE_CAPILLARY_PLASMA = 2;
+	int TYPE_VENOUS_WHOLE_BLOOD = 3;
+	int TYPE_VENOUS_PLASMA = 4;
+	int TYPE_ARTERIAL_WHOLE_BLOOD = 5;
+	int TYPE_ARTERIAL_PLASMA = 6;
+	int TYPE_UNDETERMINED_WHOLE_BLOOD = 7;
+	int TYPE_UNDETERMINED_PLASMA = 8;
+	int TYPE_INTERSTITIAL_FLUID_ISF = 9;
+	int TYPE_CONTROL_SOLUTION = 10;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
-public final class AlertLevelData {
-	private static final byte[] HIGH_ALERT = { 0x02 };
-	private static final byte[] MILD_ALERT = { 0x01 };
-	private static final byte[] NO_ALERT = { 0x00 };
-
-	/**
-	 * Disables alert.
-	 */
-	public static Data noAlert() {
-		return new Data(NO_ALERT);
-	}
-
-	/**
-	 * Sets the alert level to MILD.
-	 */
-	public static Data mildAlert() {
-		return new Data(MILD_ALERT);
-	}
-
-	/**
-	 * Sets the alert level to HIGH.
-	 */
-	public static Data highAlert() {
-		return new Data(HIGH_ALERT);
-	}
+	int SAMPLE_LOCATION_FINGER = 1;
+	int SAMPLE_LOCATION_ALTERNATE_SITE_TEST = 2;
+	int SAMPLE_LOCATION_EARLOBE = 3;
+	int SAMPLE_LOCATION_CONTROL_SOLUTION = 4;
+	int SAMPLE_LOCATION_SUBCUTANEOUS_TISSUE = 5; // used in CGM
+	int SAMPLE_LOCATION_VALUE_NOT_AVAILABLE = 15;
 }

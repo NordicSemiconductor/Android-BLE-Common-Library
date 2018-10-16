@@ -33,6 +33,7 @@ public interface CyclingSpeedAndCadenceFeatureCallback {
 		public final boolean multipleSensorDataSupported;
 		public final int value;
 
+		@SuppressWarnings("WeakerAccess")
 		public CSCFeatures(final int features) {
 			this.value = features;
 

@@ -23,13 +23,14 @@
 package no.nordicsemi.android.ble.common.profile.glucose;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.Calendar;
 
 @SuppressWarnings("unused")
-public interface GlucoseMeasurementCallback {
+public interface GlucoseMeasurementCallback extends GlucoseTypes {
 	/**
 	 * Unit kg/L
 	 */
@@ -39,38 +40,21 @@ public interface GlucoseMeasurementCallback {
 	 */
 	int UNIT_mol_L = 1;
 
-	int TYPE_CAPILLARY_WHOLE_BLOOD = 1;
-	int TYPE_CAPILLARY_PLASMA = 2;
-	int TYPE_VENOUS_WHOLE_BLOOD = 3;
-	int TYPE_VENOUS_PLASMA = 4;
-	int TYPE_ARTERIAL_WHOLE_BLOOD = 5;
-	int TYPE_ARTERIAL_PLASMA = 6;
-	int TYPE_UNDETERMINED_WHOLE_BLOOD = 7;
-	int TYPE_UNDETERMINED_PLASMA = 8;
-	int TYPE_INTERSTITIAL_FLUID_ISF = 9;
-	int TYPE_CONTROL_SOLUTION = 10;
-
-	int SAMPLE_LOCATION_FINGER = 1;
-	int SAMPLE_LOCATION_ALTERNATE_SITE_TEST = 2;
-	int SAMPLE_LOCATION_EARLOBE = 3;
-	int SAMPLE_LOCATION_CONTROL_SOLUTION = 4;
-	int SAMPLE_LOCATION_VALUE_NOT_AVAILABLE = 15;
-
 	@SuppressWarnings("WeakerAccess")
 	class GlucoseStatus {
-		public boolean deviceBatteryLow;
-		public boolean sensorMalfunction;
-		public boolean sampleSizeInsufficient;
-		public boolean stripInsertionError;
-		public boolean stripTypeIncorrect;
-		public boolean sensorResultLowerThenDeviceCanProcess;
-		public boolean sensorResultHigherThenDeviceCanProcess;
-		public boolean sensorTemperatureTooHigh;
-		public boolean sensorTemperatureTooLow;
-		public boolean sensorReadInterrupted;
-		public boolean generalDeviceFault;
-		public boolean timeFault;
-		public int value;
+		public final boolean deviceBatteryLow;
+		public final boolean sensorMalfunction;
+		public final boolean sampleSizeInsufficient;
+		public final boolean stripInsertionError;
+		public final boolean stripTypeIncorrect;
+		public final boolean sensorResultLowerThenDeviceCanProcess;
+		public final boolean sensorResultHigherThenDeviceCanProcess;
+		public final boolean sensorTemperatureTooHigh;
+		public final boolean sensorTemperatureTooLow;
+		public final boolean sensorReadInterrupted;
+		public final boolean generalDeviceFault;
+		public final boolean timeFault;
+		public final int value;
 
 		public GlucoseStatus(final int value) {
 			this.value = value;
@@ -115,10 +99,14 @@ public interface GlucoseMeasurementCallback {
 	 *                                  immediately after this packet. False otherwise.
 	 */
 	void onGlucoseMeasurementReceived(@NonNull final BluetoothDevice device,
-									  final int sequenceNumber, @NonNull final Calendar time,
-									  @Nullable final Float glucoseConcentration, @Nullable final Integer unit,
-									  @Nullable final Integer type, @Nullable final Integer sampleLocation,
-									  @Nullable final GlucoseStatus status, final boolean contextInformationFollows);
+									  @IntRange(from = 0, to = 65535) final int sequenceNumber,
+									  @NonNull final Calendar time,
+									  @Nullable final Float glucoseConcentration,
+									  @Nullable @GlucoseUnit final Integer unit,
+									  @Nullable @GlucoseSampleType final Integer type,
+									  @Nullable @GlucoseSampleLocation final Integer sampleLocation,
+									  @Nullable final GlucoseStatus status,
+									  final boolean contextInformationFollows);
 
 	/**
 	 * Converts the value provided in given unit to kg/L.
@@ -143,7 +131,7 @@ public interface GlucoseMeasurementCallback {
 	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
 	 * @return Value in mg/dL.
 	 */
-	static float toMgPerDecilitre(final float value, final int unit) {
+	static float toMgPerDecilitre(final float value, @GlucoseUnit final int unit) {
 		if (unit == UNIT_kg_L) {
 			return value * 100000f;
 		} else {
@@ -159,7 +147,7 @@ public interface GlucoseMeasurementCallback {
 	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
 	 * @return Value in mol/L.
 	 */
-	static float toMolPerL(final float value, final int unit) {
+	static float toMolPerL(final float value, @GlucoseUnit final int unit) {
 		if (unit == UNIT_mol_L) {
 			return value;
 		} else {
@@ -174,7 +162,7 @@ public interface GlucoseMeasurementCallback {
 	 * @param unit  the unit of the value ({@link #UNIT_kg_L} or {@link #UNIT_mol_L}).
 	 * @return Value in mmol/L.
 	 */
-	static float toMmolPerL(final float value, final int unit) {
+	static float toMmolPerL(final float value, @GlucoseUnit final int unit) {
 		if (unit == UNIT_mol_L) {
 			return value * 1000f;
 		} else {

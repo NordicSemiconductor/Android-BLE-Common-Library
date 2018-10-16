@@ -23,10 +23,32 @@
 package no.nordicsemi.android.ble.common.profile.sc;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 @SuppressWarnings("unused")
 public interface SpeedAndCadenceControlPointCallback extends SensorLocationTypes {
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef(value = {
+			SC_OP_CODE_SET_CUMULATIVE_VALUE,
+			SC_OP_CODE_START_SENSOR_CALIBRATION,
+			SC_OP_CODE_UPDATE_SENSOR_LOCATION,
+			SC_OP_CODE_REQUEST_SUPPORTED_SENSOR_LOCATIONS
+	})
+	@interface SCOpCode {}
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef(value = {
+			SC_ERROR_OP_CODE_NOT_SUPPORTED,
+			SC_ERROR_INVALID_PARAMETER,
+			SC_ERROR_OPERATION_FAILED
+	})
+	@interface SCErrorCode {}
+
 	int SC_OP_CODE_SET_CUMULATIVE_VALUE = 1;
 	int SC_OP_CODE_START_SENSOR_CALIBRATION = 2;
 	int SC_OP_CODE_UPDATE_SENSOR_LOCATION = 3;
@@ -45,7 +67,8 @@ public interface SpeedAndCadenceControlPointCallback extends SensorLocationTypes
 	 * @param device      the target device.
 	 * @param requestCode the request code that has completed. One of SC_OP_CODE_* constants.
 	 */
-	void onSCOperationCompleted(@NonNull final BluetoothDevice device, final int requestCode);
+	void onSCOperationCompleted(@NonNull final BluetoothDevice device,
+								@SCOpCode final int requestCode);
 
 	/**
 	 * Callback called when a SC Control Point request has failed.
@@ -55,8 +78,9 @@ public interface SpeedAndCadenceControlPointCallback extends SensorLocationTypes
 	 *                    One of SC_OP_CODE_* constants, or other if such was requested.
 	 * @param errorCode   the received error code, see SC_ERROR_* constants.
 	 */
-	void onSCOperationError(@NonNull final BluetoothDevice device, final int requestCode,
-							final int errorCode);
+	void onSCOperationError(@NonNull final BluetoothDevice device,
+							@SCOpCode final int requestCode,
+							@SCErrorCode final int errorCode);
 
 	/**
 	 * Callback indicating successful response for

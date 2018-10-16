@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.csc;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 public interface CyclingSpeedAndCadenceMeasurementCallback {
@@ -38,7 +39,8 @@ public interface CyclingSpeedAndCadenceMeasurementCallback {
 	 * @param lastWheelEventTime the last wheel event time in 1/1024 s (UINT16).
 	 */
 	void onWheelMeasurementReceived(@NonNull final BluetoothDevice device,
-									final long wheelRevolutions, final int lastWheelEventTime);
+									@IntRange(from = 0, to = 4294967295L) final long wheelRevolutions,
+									@IntRange(from = 0, to = 65535) final int lastWheelEventTime);
 
 	/**
 	 * Method called when the data received had crank revolution data present.
@@ -50,5 +52,6 @@ public interface CyclingSpeedAndCadenceMeasurementCallback {
 	 * @param lastCrankEventTime the last crank event time in 1/1024 s (UINT16).
 	 */
 	void onCrankMeasurementReceived(@NonNull final BluetoothDevice device,
-									final int crankRevolutions, final int lastCrankEventTime);
+									@IntRange(from = 0, to = 65535) final int crankRevolutions,
+									@IntRange(from = 0, to = 65535) final int lastCrankEventTime);
 }

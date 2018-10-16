@@ -23,6 +23,8 @@
 package no.nordicsemi.android.ble.common.profile.bp;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -46,10 +48,12 @@ public interface BloodPressureMeasurementCallback extends BloodPressureTypes {
 	 * @param calendar             an optional measurement timestamp.
 	 */
 	void onBloodPressureMeasurementReceived(@NonNull final BluetoothDevice device,
-											final float systolic, final float diastolic,
-											final float meanArterialPressure, final int unit,
-											@Nullable final Float pulseRate,
-											@Nullable final Integer userID,
+											@FloatRange(from = 0) final float systolic,
+											@FloatRange(from = 0) final float diastolic,
+											@FloatRange(from = 0) final float meanArterialPressure,
+											@BloodPressureUnit final int unit,
+											@Nullable @FloatRange(from = 0) final Float pulseRate,
+											@Nullable @IntRange(from = 0, to = 255) final Integer userID,
 											@Nullable final BPMStatus status,
 											@Nullable final Calendar calendar);
 }

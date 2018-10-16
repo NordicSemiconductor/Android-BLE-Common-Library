@@ -22,6 +22,7 @@
 
 package no.nordicsemi.android.ble.common.data.sc;
 
+import no.nordicsemi.android.ble.common.profile.sc.SensorLocation;
 import no.nordicsemi.android.ble.common.profile.sc.SensorLocationTypes;
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.data.MutableData;
@@ -61,7 +62,7 @@ public final class SpeedAndCadenceControlPointData implements SensorLocationType
 	 * @param location new location id (UINT8). See SENSOR_LOCATION_* constants.
 	 * @return Data object.
 	 */
-	public static Data updateSensorLocation(final int location) {
+	public static Data updateSensorLocation(@SensorLocation final int location) {
 		final MutableData data =  new MutableData(new byte[2]);
 		data.setByte(SC_OP_CODE_UPDATE_SENSOR_LOCATION, 0);
 		data.setValue(location, Data.FORMAT_UINT8, 1);

@@ -47,9 +47,10 @@ public interface CGMSessionStartTimeCallback {
 	 *                 For a callback in case of invalid CRC value check
 	 *                 {@link #onContinuousGlucoseMonitorSessionStartTimeReceivedWithCrcError(BluetoothDevice, Data)}.
 	 */
-	void onContinuousGlucoseMonitorSessionStartTimeReceived(@NonNull final BluetoothDevice device,
-															@NonNull final Calendar calendar,
-															final boolean secured);
+	void onContinuousGlucoseMonitorSessionStartTimeReceived(
+			@NonNull final BluetoothDevice device,
+			@NonNull final Calendar calendar,
+			final boolean secured);
 
 	/**
 	 * Callback called when a CGM Session Start Time packet with E2E field was received but the

@@ -34,5 +34,6 @@ public interface TemperatureTypeCallback extends HealthThermometerTypes {
 	 * @param device the target device.
 	 * @param type   indicates where the temperature was measured, see TYPE_* constants.
 	 */
-	void onTemperatureTypeReceived(@NonNull final BluetoothDevice device, final int type);
+	void onTemperatureTypeReceived(@NonNull final BluetoothDevice device,
+								   @TemperatureType final int type);
 }

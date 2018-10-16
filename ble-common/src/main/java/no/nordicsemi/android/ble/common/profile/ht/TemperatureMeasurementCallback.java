@@ -46,9 +46,10 @@ public interface TemperatureMeasurementCallback extends HealthThermometerTypes {
 	 * @param type        an optional type where the temperature was measured, see TYPE_* constants.
 	 */
 	void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
-										  final float temperature, final int unit,
+										  final float temperature,
+										  @TemperatureUnit final int unit,
 										  @Nullable final Calendar calendar,
-										  @Nullable final Integer type);
+										  @Nullable @TemperatureType final Integer type);
 
 	/**
 	 * Converts the value provided in given unit to Celsius degrees.
@@ -58,7 +59,7 @@ public interface TemperatureMeasurementCallback extends HealthThermometerTypes {
 	 * @param unit        the unit of the value ({@link #UNIT_C} or {@link #UNIT_F}).
 	 * @return Value in C.
 	 */
-	static float toCelsius(final float temperature, final int unit) {
+	static float toCelsius(final float temperature, @TemperatureUnit final int unit) {
 		if (unit == UNIT_C) {
 			return temperature;
 		} else {
@@ -74,7 +75,7 @@ public interface TemperatureMeasurementCallback extends HealthThermometerTypes {
 	 * @param unit        the unit of the value ({@link #UNIT_C} or {@link #UNIT_F}).
 	 * @return Value in F.
 	 */
-	static float toFahrenheit(final float temperature, final int unit) {
+	static float toFahrenheit(final float temperature, @TemperatureUnit final int unit) {
 		if (unit == UNIT_F) {
 			return temperature;
 		} else {

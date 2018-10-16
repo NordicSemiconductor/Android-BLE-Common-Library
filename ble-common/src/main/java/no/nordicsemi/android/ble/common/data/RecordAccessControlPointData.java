@@ -22,6 +22,7 @@
 
 package no.nordicsemi.android.ble.common.data;
 
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
@@ -73,28 +74,42 @@ public final class RecordAccessControlPointData {
 		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LAST_RECORD);
 	}
 
-	public static Data reportStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
-		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, filter, formatType, parameter);
+	public static Data reportStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter,
+															@Data.IntFormat final int formatType,
+															final int parameter) {
+		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL,
+				filter, formatType, parameter);
 	}
 
-	public static Data reportStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
-		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, filter, formatType, parameter);
+	public static Data reportStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter,
+															   @Data.IntFormat final int formatType,
+															   final int parameter) {
+		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL,
+				filter, formatType, parameter);
 	}
 
-	public static Data reportStoredRecordsFromRange(@NonNull final FilterType filter, final int formatType, final int start, final int end) {
-		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_WITHING_RANGE, filter, formatType, start, end);
+	public static Data reportStoredRecordsFromRange(@NonNull final FilterType filter,
+													@Data.IntFormat final int formatType,
+													final int start, final int end) {
+		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_WITHING_RANGE,
+				filter, formatType, start, end);
 	}
 
-	public static Data reportStoredRecordsLessThenOrEqualTo(final int sequenceNumber) {
-		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
+	public static Data reportStoredRecordsLessThenOrEqualTo(@IntRange(from = 0) final int sequenceNumber) {
+		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
 	}
 
-	public static Data reportStoredRecordsGreaterThenOrEqualTo(final int sequenceNumber) {
-		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
+	public static Data reportStoredRecordsGreaterThenOrEqualTo(@IntRange(from = 0) final int sequenceNumber) {
+		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
 	}
 
-	public static Data reportStoredRecordsFromRange(final int startSequenceNumber, final int endSequenceNumber) {
-		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_WITHING_RANGE, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, startSequenceNumber, endSequenceNumber);
+	public static Data reportStoredRecordsFromRange(@IntRange(from = 0) final int startSequenceNumber,
+													@IntRange(from = 0) final int endSequenceNumber) {
+		return create(OP_CODE_REPORT_STORED_RECORDS, OPERATOR_WITHING_RANGE,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16,
+				startSequenceNumber, endSequenceNumber);
 	}
 
 	public static Data deleteAllStoredRecords() {
@@ -109,56 +124,84 @@ public final class RecordAccessControlPointData {
 		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LAST_RECORD);
 	}
 
-	public static Data deleteStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, filter, formatType, parameter);
+	public static Data deleteStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter,
+															@Data.IntFormat final int formatType,
+															final int parameter) {
+		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL,
+				filter, formatType, parameter);
 	}
 
-	public static Data deleteStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, filter, formatType, parameter);
+	public static Data deleteStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter,
+															   @Data.IntFormat  int formatType,
+															   final int parameter) {
+		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL,
+				filter, formatType, parameter);
 	}
 
-	public static Data deleteStoredRecordsFromRange(@NonNull final FilterType filter, final int formatType, final int start, final int end) {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_WITHING_RANGE, filter, formatType, start, end);
+	public static Data deleteStoredRecordsFromRange(@NonNull final FilterType filter,
+													@Data.IntFormat final int formatType,
+													final int start, final int end) {
+		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_WITHING_RANGE,
+				filter, formatType, start, end);
 	}
 
-	public static Data deleteStoredRecordsLessThenOrEqualTo(final int sequenceNumber) {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
+	public static Data deleteStoredRecordsLessThenOrEqualTo(@IntRange(from = 0) final int sequenceNumber) {
+		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
 	}
 
-	public static Data deleteStoredRecordsGreaterThenOrEqualTo(final int sequenceNumber) {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
+	public static Data deleteStoredRecordsGreaterThenOrEqualTo(@IntRange(from = 0) final int sequenceNumber) {
+		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
 	}
 
-	public static Data deleteStoredRecordsFromRange(final int startSequenceNumber, final int endSequenceNumber) {
-		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_WITHING_RANGE, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, startSequenceNumber, endSequenceNumber);
+	public static Data deleteStoredRecordsFromRange(@IntRange(from = 0) final int startSequenceNumber,
+													@IntRange(from = 0) final int endSequenceNumber) {
+		return create(OP_CODE_DELETE_STORED_RECORDS, OPERATOR_WITHING_RANGE,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16,
+				startSequenceNumber, endSequenceNumber);
 	}
 
 	public static Data reportNumberOfAllStoredRecords() {
 		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_ALL_RECORDS);
 	}
 
-	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
-		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, filter, formatType, parameter);
+	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(@NonNull final FilterType filter,
+																	@Data.IntFormat final int formatType,
+																	final int parameter) {
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL,
+				filter, formatType, parameter);
 	}
 
-	public static Data reportNumberOfStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter, final int formatType, final int parameter) {
-		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, filter, formatType, parameter);
+	public static Data reportNumberOfStoredRecordsGreaterThenOrEqualTo(@NonNull final FilterType filter,
+																	   @Data.IntFormat final int formatType,
+																	   final int parameter) {
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL,
+				filter, formatType, parameter);
 	}
 
-	public static Data reportNumberOfStoredRecordsFromRange(@NonNull final FilterType filter, final int formatType, final int start, final int end) {
-		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_WITHING_RANGE, filter, formatType, start, end);
+	public static Data reportNumberOfStoredRecordsFromRange(@NonNull final FilterType filter,
+															@Data.IntFormat final int formatType,
+															final int start, final int end) {
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_WITHING_RANGE,
+				filter, formatType, start, end);
 	}
 
-	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(final int sequenceNumber) {
-		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
+	public static Data reportNumberOfStoredRecordsLessThenOrEqualTo(@IntRange(from = 0) final int sequenceNumber) {
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_LESS_THEN_OR_EQUAL,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
 	}
 
-	public static Data reportNumberOfStoredRecordsGreaterThenOrEqualTo(final int sequenceNumber) {
-		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
+	public static Data reportNumberOfStoredRecordsGreaterThenOrEqualTo(@IntRange(from = 0) final int sequenceNumber) {
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_GREATER_THEN_OR_EQUAL,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, sequenceNumber);
 	}
 
-	public static Data reportNumberOfStoredRecordsFromRange(final int startSequenceNumber, final int endSequenceNumber) {
-		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_WITHING_RANGE, FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16, startSequenceNumber, endSequenceNumber);
+	public static Data reportNumberOfStoredRecordsFromRange(@IntRange(from = 0) final int startSequenceNumber,
+															@IntRange(from = 0) final int endSequenceNumber) {
+		return create(OP_CODE_REPORT_NUMBER_OF_RECORDS, OPERATOR_WITHING_RANGE,
+				FilterType.SEQUENCE_NUMBER, Data.FORMAT_UINT16,
+				startSequenceNumber, endSequenceNumber);
 	}
 
 	public static Data abortOperation() {
@@ -169,7 +212,10 @@ public final class RecordAccessControlPointData {
 		return Data.opCode(opCode, operator);
 	}
 
-	private static Data create(final byte opCode, final byte operator, @NonNull final FilterType filter, final int formatType, final int... parameters) {
+	private static Data create(final byte opCode, final byte operator,
+							   @NonNull final FilterType filter,
+							   @Data.IntFormat final int formatType,
+							   final int... parameters) {
 		final int parameterLen = formatType & 0x0F;
 
 		final MutableData data = new MutableData(new byte[2 + 1 + parameters.length * parameterLen]);

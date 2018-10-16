@@ -58,7 +58,7 @@ public interface BloodPressureTypes {
 	 * @param unit the unit of the value ({@link #UNIT_mmHg} or {@link #UNIT_kPa}).
 	 * @return Value in mmHg.
 	 */
-	static float toMmHg(final float value, final int unit) {
+	static float toMmHg(final float value, @BloodPressureUnit final int unit) {
 		if (unit == UNIT_mmHg) {
 			return value;
 		} else {
@@ -74,7 +74,7 @@ public interface BloodPressureTypes {
 	 * @param unit the unit of the value ({@link #UNIT_mmHg} or {@link #UNIT_kPa}).
 	 * @return Value in kPa.
 	 */
-	static float toKPa(final float value, final int unit) {
+	static float toKPa(final float value, @BloodPressureUnit final int unit) {
 		if (unit == UNIT_kPa) {
 			return value;
 		} else {

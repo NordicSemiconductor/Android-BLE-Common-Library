@@ -23,12 +23,46 @@
 package no.nordicsemi.android.ble.common.profile.cgm;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntDef;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleLocation;
+import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleType;
 import no.nordicsemi.android.ble.data.Data;
 
 @SuppressWarnings("unused")
 public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef(value = {
+			CGM_OP_CODE_SET_COMMUNICATION_INTERVAL,
+			CGM_OP_CODE_SET_CALIBRATION_VALUE,
+			CGM_OP_CODE_SET_PATIENT_HIGH_ALERT_LEVEL,
+			CGM_OP_CODE_SET_PATIENT_LOW_ALERT_LEVEL,
+			CGM_OP_CODE_SET_HYPO_ALERT_LEVEL,
+			CGM_OP_CODE_SET_HYPER_ALERT_LEVEL,
+			CGM_OP_CODE_SET_RATE_OF_DECREASE_ALERT_LEVEL,
+			CGM_OP_CODE_SET_RATE_OF_INCREASE_ALERT_LEVEL,
+			CGM_OP_CODE_RESET_DEVICE_SPECIFIC_ERROR,
+			CGM_OP_CODE_START_SESSION,
+			CGM_OP_CODE_STOP_SESSION
+	})
+	@interface CGMOpCode {}
+
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef(value = {
+			CGM_ERROR_OP_CODE_NOT_SUPPORTED,
+			CGM_ERROR_INVALID_OPERAND,
+			CGM_ERROR_PROCEDURE_NOT_COMPLETED,
+			CGM_ERROR_PARAMETER_OUT_OF_RANGE
+	})
+	@interface CGMErrorCode {}
+
 	int CGM_OP_CODE_SET_COMMUNICATION_INTERVAL = 1;
 	int CGM_OP_CODE_SET_CALIBRATION_VALUE = 4;
 	int CGM_OP_CODE_SET_PATIENT_HIGH_ALERT_LEVEL = 7;
@@ -56,7 +90,7 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                    CRC matched the packet. False, if the CRC field was not present.
 	 */
 	void onCGMSpecificOpsOperationCompleted(@NonNull final BluetoothDevice device,
-											final int requestCode,
+											@CGMOpCode final int requestCode,
 											final boolean secured);
 
 	/**
@@ -69,8 +103,9 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 * @param secured     true, if the value received was secured with E2E-CRC value and the
 	 *                    CRC matched the packet. False, if the CRC field was not present.
 	 */
-	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device, final int requestCode,
-										final int errorCode, final boolean secured);
+	void onCGMSpecificOpsOperationError(@NonNull final BluetoothDevice device,
+										@CGMOpCode final int requestCode,
+										@CGMErrorCode final int errorCode, final boolean secured);
 
 	/**
 	 * Callback called when a CGM Specific Ops response was received with and incorrect E2E CRC.
@@ -92,9 +127,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 * @param secured  true, if the value received was secured with E2E-CRC value and
 	 *                 the CRC matched the packet. False, if the CRC field was not present.
 	 */
-	default void onContinuousGlucoseCommunicationIntervalReceived(@NonNull final BluetoothDevice device,
-																  final int interval,
-																  final boolean secured) {
+	default void onContinuousGlucoseCommunicationIntervalReceived(
+			@NonNull final BluetoothDevice device,
+			@IntRange(from = 0) final int interval,
+			final boolean secured) {
 		// empty
 	}
 
@@ -120,10 +156,12 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 */
 	default void onContinuousGlucoseCalibrationValueReceived(
 			@NonNull final BluetoothDevice device,
-			final float glucoseConcentrationOfCalibration,
-			final int calibrationTime, final int nextCalibrationTime,
-			final int type, final int sampleLocation,
-			final int calibrationDataRecordNumber,
+			@FloatRange(from = 0) final float glucoseConcentrationOfCalibration,
+			@IntRange(from = 0, to = 65535) final int calibrationTime,
+			@IntRange(from = 0, to = 65535) final int nextCalibrationTime,
+			@GlucoseSampleType final int type,
+			@GlucoseSampleLocation final int sampleLocation,
+			@IntRange(from = 0, to = 65535) final int calibrationDataRecordNumber,
 			@NonNull final CGMCalibrationStatus status,
 			final boolean secured) {
 		// empty
@@ -139,9 +177,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                   value and the CRC matched the packet. False, if the
 	 *                   CRC field was not present.
 	 */
-	default void onContinuousGlucosePatientHighAlertReceived(@NonNull final BluetoothDevice device,
-															 final float alertLevel,
-															 final boolean secured) {
+	default void onContinuousGlucosePatientHighAlertReceived(
+			@NonNull final BluetoothDevice device,
+			@FloatRange(from = 0) final float alertLevel,
+			final boolean secured) {
 		// empty
 	}
 
@@ -155,9 +194,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                   value and the CRC matched the packet. False, if the
 	 *                   CRC field was not present.
 	 */
-	default void onContinuousGlucosePatientLowAlertReceived(@NonNull final BluetoothDevice device,
-															final float alertLevel,
-															final boolean secured) {
+	default void onContinuousGlucosePatientLowAlertReceived(
+			@NonNull final BluetoothDevice device,
+			@FloatRange(from = 0) final float alertLevel,
+			final boolean secured) {
 		// empty
 	}
 
@@ -171,9 +211,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                   value and the CRC matched the packet. False, if the
 	 *                   CRC field was not present.
 	 */
-	default void onContinuousGlucoseHypoAlertReceived(@NonNull final BluetoothDevice device,
-													  final float alertLevel,
-													  final boolean secured) {
+	default void onContinuousGlucoseHypoAlertReceived(
+			@NonNull final BluetoothDevice device,
+			@FloatRange(from = 0) final float alertLevel,
+			final boolean secured) {
 		// empty
 	}
 
@@ -187,9 +228,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                   value and the CRC matched the packet. False, if the
 	 *                   CRC field was not present.
 	 */
-	default void onContinuousGlucoseHyperAlertReceived(@NonNull final BluetoothDevice device,
-													   final float alertLevel,
-													   final boolean secured) {
+	default void onContinuousGlucoseHyperAlertReceived(
+			@NonNull final BluetoothDevice device,
+			@FloatRange(from = 0) final float alertLevel,
+			final boolean secured) {
 		// empty
 	}
 
@@ -203,9 +245,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                   value and the CRC matched the packet. False, if the
 	 *                   CRC field was not present.
 	 */
-	default void onContinuousGlucoseRateOfDecreaseAlertReceived(@NonNull final BluetoothDevice device,
-																final float alertLevel,
-																final boolean secured) {
+	default void onContinuousGlucoseRateOfDecreaseAlertReceived(
+			@NonNull final BluetoothDevice device,
+			@FloatRange(from = 0) final float alertLevel,
+			final boolean secured) {
 		// empty
 	}
 
@@ -219,9 +262,10 @@ public interface CGMSpecificOpsControlPointCallback extends CGMTypes {
 	 *                   value and the CRC matched the packet. False, if the
 	 *                   CRC field was not present.
 	 */
-	default void onContinuousGlucoseRateOfIncreaseAlertReceived(@NonNull final BluetoothDevice device,
-																final float alertLevel,
-																final boolean secured) {
+	default void onContinuousGlucoseRateOfIncreaseAlertReceived(
+			@NonNull final BluetoothDevice device,
+			@FloatRange(from = 0) final float alertLevel,
+			final boolean secured) {
 		// empty
 	}
 }

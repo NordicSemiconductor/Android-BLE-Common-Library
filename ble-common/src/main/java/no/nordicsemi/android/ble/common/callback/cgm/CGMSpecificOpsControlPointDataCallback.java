@@ -22,6 +22,7 @@
 
 package no.nordicsemi.android.ble.common.callback.cgm;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
@@ -128,6 +129,7 @@ public abstract class CGMSpecificOpsControlPointDataCallback extends ProfileRead
 				final float glucoseConcentrationOfCalibration = data.getFloatValue(Data.FORMAT_SFLOAT, 1);
 				final int calibrationTime = data.getIntValue(Data.FORMAT_UINT16, 3);
 				final int calibrationTypeAndSampleLocation = data.getIntValue(Data.FORMAT_UINT8, 5);
+				@SuppressLint("WrongConstant")
 				final int calibrationType = calibrationTypeAndSampleLocation & 0x0F;
 				final int calibrationSampleLocation = calibrationTypeAndSampleLocation >> 4;
 				final int nextCalibrationTime = data.getIntValue(Data.FORMAT_UINT16, 6);

@@ -22,6 +22,7 @@
 
 package no.nordicsemi.android.ble.common.callback.cgm;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public interface CRCSecuredResponse {
 
 	/**

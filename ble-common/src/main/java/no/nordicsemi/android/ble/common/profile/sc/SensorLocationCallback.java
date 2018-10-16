@@ -34,5 +34,6 @@ public interface SensorLocationCallback extends SensorLocationTypes {
 	 * @param device   the target device.
 	 * @param location the sensor location, one of SENSOR_LOCATION_* constants.
 	 */
-	void onSensorLocationReceived(@NonNull final BluetoothDevice device, final int location);
+	void onSensorLocationReceived(@NonNull final BluetoothDevice device,
+								  @SensorLocation final int location);
 }

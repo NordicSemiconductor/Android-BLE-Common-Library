@@ -22,6 +22,7 @@
 
 package no.nordicsemi.android.ble.common.callback.cgm;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
@@ -79,6 +80,7 @@ public abstract class CGMFeatureDataCallback extends ProfileReadResponse impleme
 			}
 		}
 
+		@SuppressLint("WrongConstant")
 		final int type = typeAndSampleLocation & 0x0F; // least significant nibble
 		final int sampleLocation = typeAndSampleLocation >> 4; // most significant nibble
 

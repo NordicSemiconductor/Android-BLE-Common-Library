@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.cgm;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import no.nordicsemi.android.ble.data.Data;
@@ -46,7 +47,8 @@ public interface CGMStatusCallback extends CGMTypes {
 	 *                   {@link #onContinuousGlucoseMonitorStatusReceivedWithCrcError(BluetoothDevice,Data)}.
 	 */
 	void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device,
-												 @NonNull final CGMStatus status, final int timeOffset,
+												 @NonNull final CGMStatus status,
+												 @IntRange(from = 0, to = 65535) final int timeOffset,
 												 final boolean secured);
 
 	/**
@@ -55,8 +57,9 @@ public interface CGMStatusCallback extends CGMTypes {
 	 * @param device the target device.
 	 * @param data   the CGM packet data that was received, including the CRC field.
 	 */
-	default void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device,
-																	  @NonNull final Data data) {
+	default void onContinuousGlucoseMonitorStatusReceivedWithCrcError(
+			@NonNull final BluetoothDevice device,
+			@NonNull final Data data) {
 		// ignore
 	}
 }

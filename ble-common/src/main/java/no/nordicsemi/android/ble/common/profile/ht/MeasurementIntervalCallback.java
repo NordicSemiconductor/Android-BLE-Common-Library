@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.ht;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 @SuppressWarnings("unused")
@@ -36,5 +37,5 @@ public interface MeasurementIntervalCallback {
 	 *                 18 hours, 12 minutes and 15 seconds.
 	 */
 	void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device,
-									   final int interval);
+									   @IntRange(from = 0, to = 65535) final int interval);
 }

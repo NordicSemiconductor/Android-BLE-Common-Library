@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.profile.hr;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -42,8 +43,8 @@ public interface HeartRateMeasurementCallback {
 	 *                        Null if this feature is not supported.
 	 */
 	void onHeartRateMeasurementReceived(@NonNull final BluetoothDevice device,
-										final int heartRate,
+										@IntRange(from = 0) final int heartRate,
 										@Nullable final Boolean contactDetected,
-										@Nullable final Integer energyExpanded,
+										@Nullable @IntRange(from = 0) final Integer energyExpanded,
 										@Nullable final List<Integer> rrIntervals);
 }
