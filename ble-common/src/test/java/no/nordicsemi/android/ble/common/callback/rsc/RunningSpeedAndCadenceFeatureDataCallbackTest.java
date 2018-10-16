@@ -28,8 +28,6 @@ import android.support.annotation.NonNull;
 import org.junit.Test;
 
 import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
-import no.nordicsemi.android.ble.common.callback.csc.CyclingSpeedAndCadenceFeatureDataCallback;
-import no.nordicsemi.android.ble.common.profile.rsc.RunningSpeedAndCadenceFeatureCallback;
 import no.nordicsemi.android.ble.data.Data;
 
 import static org.junit.Assert.assertEquals;

@@ -39,7 +39,7 @@ public class GlucoseFeatureDataCallbackTest {
 	private boolean invalidData;
 	private GlucoseFeatureCallback.GlucoseFeatures result;
 
-	private DataReceivedCallback callback = new GlucoseFeatureDataCallback() {
+	private final DataReceivedCallback callback = new GlucoseFeatureDataCallback() {
 		@Override
 		public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			success = false;

@@ -31,7 +31,6 @@ import no.nordicsemi.android.ble.callback.DataReceivedCallback;
 import no.nordicsemi.android.ble.common.profile.DSTOffsetCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 

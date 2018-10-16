@@ -41,7 +41,7 @@ public class GlucoseMeasurementContextDataCallbackTest {
 	private boolean invalidData;
 	private int number;
 
-	private DataReceivedCallback callback = new GlucoseMeasurementContextDataCallback() {
+	private final DataReceivedCallback callback = new GlucoseMeasurementContextDataCallback() {
 		@Override
 		public void onDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
 			success = false;

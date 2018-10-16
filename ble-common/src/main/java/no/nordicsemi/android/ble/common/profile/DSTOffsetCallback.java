@@ -37,7 +37,7 @@ public interface DSTOffsetCallback {
 		/**
 		 * Offset of the Daylight Saving Time in minutes.
 		 */
-		public int offset;
+		public final int offset;
 
 		DSTOffset(final int code) {
 			if (code != 255)
