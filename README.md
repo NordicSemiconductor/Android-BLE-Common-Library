@@ -15,7 +15,7 @@ version number 2.0. The current stable version of BLE Library is 1.2 (master bra
 The library is available on jcenter and Maven-Central repositories. Add the following dependency to your *build.gradle* file:
 
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.0-beta5'
+implementation 'no.nordicsemi.android:ble-common:2.0-beta6'
 ```
 The BLE Common library depends on BLE Library with the same version number.
 
@@ -80,7 +80,7 @@ protected void initialize() {
     .with(new HeartRateMeasurementDataCallback() {
       @Override
       public void onHeartRateMeasurementReceived(@NonNull final BluetoothDevice device,
-                                                 final int heartRate,
+                                                 @IntRange(from = 0) final int heartRate,
                                                  @Nullable final Boolean contactDetected,
                                                  @Nullable final Integer energyExpanded,
                                                  @Nullable final List<Integer> rrIntervals) {
@@ -101,7 +101,7 @@ Such code looks simpler, is easier to read, relies on a tested library and marks
 ## Testing
 
 All data parsers have unit tests and should work properly. The classes are used by nRF Toolbox and were tested against sample 
-apps from Nordic SDK 15 on nRF 51 and nRF52 DKs.
+apps from Nordic SDK 15 on nRF51 and nRF52 DKs.
 
 ## Note
 
