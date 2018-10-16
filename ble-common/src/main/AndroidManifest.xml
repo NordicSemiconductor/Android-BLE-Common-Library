@@ -1,2 +1,1 @@
-<manifest package="no.nordicsemi.android.ble.common"
-	xmlns:android="http://schemas.android.com/apk/res/android"/>
+<manifest package="no.nordicsemi.android.ble.common"/>
