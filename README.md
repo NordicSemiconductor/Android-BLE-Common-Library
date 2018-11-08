@@ -2,20 +2,17 @@
 
 [ ![Download](https://api.bintray.com/packages/nordic/android/ble-common-library/images/download.svg) ](https://bintray.com/nordic/android/ble-common-library/_latestVersion)
 
-This library is an addon to the [Android BLE Library](https://github.com/NordicSemiconductor/Android-BLE-Library) 
+This library is an addon to the 
+[Android BLE Library](https://github.com/NordicSemiconductor/Android-BLE-Library) 
 which provides data parsers and other useful features for some Bluetooth SIG Adopted profiles.
 
-The library is under development. It's compatible with the Android BLE Library version from the 
-[develop](https://github.com/NordicSemiconductor/Android-BLE-Library/tree/develop) branch, and Android nRF Toolbox, also on 
-[develop](https://github.com/NordicSemiconductor/Android-nRF-Toolbox/tree/develop) branch.
+It's compatible with the Android BLE Library starting from version 2.0 and 
+used as an example by [Android nRF Toolbox](https://github.com/NordicSemiconductor/Android-nRF-Toolbox).
 
-Both the BLE Library and BLE Common Library may change until they go out of beta version, after that they will have 
-version number 2.0. The current stable version of BLE Library is 1.2 (master branch).
-
-The library is available on jcenter and Maven-Central repositories. Add the following dependency to your *build.gradle* file:
-
+The library is available on jcenter and Maven-Central repositories. Add the following dependency 
+to your *build.gradle* file:
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.0-beta6'
+implementation 'no.nordicsemi.android:ble-common:2.0.0'
 ```
 The BLE Common library depends on BLE Library with the same version number.
 
@@ -42,7 +39,9 @@ We are happy to accept PRs with other parsers.
 The BLE Library v2 allows to set a callback for BLE operations using `.with(DataReceivedCallback)` method.
 It is common, that you application needs to parse the received data. 
 
-Let's have a look at HRM profile. The [Heart Rate Measurement](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml) characteristic specifies the structure of data sent by a remote sensor.
+Let's have a look at HRM profile. 
+The [Heart Rate Measurement](https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.characteristic.heart_rate_measurement.xml) 
+characteristic specifies the structure of data sent by a remote sensor.
 
 Using just the BLE Library, one would have to write code that looks something like this:
 ```java
@@ -70,7 +69,7 @@ protected void initialize() {
 
 Parsing the data would have to be implemented and tested in the app.
 
-To make working with standard profiles easier, this lib allows to replace the code above with:
+To make working with standard profiles easier, this library allows to replace the code above with:
 
 ```java
 @Override
@@ -96,21 +95,24 @@ protected void initialize() {
 }
 ```
 
-Such code looks simpler, is easier to read, relies on a tested library and marks fields that may not be present in the packet with *@Nullable* annotation.
+Such code looks simpler, is easier to read, relies on a tested library and marks fields that 
+may not be present in the packet with *@Nullable* annotation.
 
 ## Testing
 
-All data parsers have unit tests and should work properly. The classes are used by nRF Toolbox and were tested against sample 
-apps from Nordic SDK 15 on nRF51 and nRF52 DKs.
+All data parsers have unit tests and should work properly. The classes are used by nRF Toolbox 
+and were tested against sample apps from Nordic SDK 15.2 on nRF51 and nRF52 DKs.
 
 ## Note
 
-In CGMS profile the E2E CRC bytes may be inverted. Unfortunately, I couldn't find any working device or test data in order 
-to verify the implementation. The sample from the SDK does not support E2E CRC.
+In CGMS profile the E2E CRC bytes may be inverted. Unfortunately, I couldn't find any working 
+device or test data in order to verify the implementation. The sample from the SDK does not 
+support E2E CRC.
 
 ## Contribution
 
-Feel free to add more services after the API of BLE Library becomes stable. Please, follow our coding style.
-The library is and will be based on BSD-3 License. Any feedback is welcome.
+Feel free to add more services after the API of BLE Library becomes stable. Please, follow our 
+coding style. The library is and will be based on BSD-3 License. Any feedback is welcome.
 
-Please, use Issues to report bugs or submit suggestions.
+Use [Issues](https://github.com/NordicSemiconductor/Android-BLE-Common-Library/issues) to report 
+bugs or submit suggestions.
