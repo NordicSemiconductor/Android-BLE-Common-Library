@@ -6,7 +6,7 @@ apply plugin: 'com.jfrog.bintray'
 ext {
     PUBLISH_GROUP_ID = 'no.nordicsemi.android'
     PUBLISH_ARTIFACT_ID = 'ble-common'
-    PUBLISH_VERSION = '2.0.0'
+    PUBLISH_VERSION = '2.0.5'
 
     bintrayRepo = 'android'
     bintrayName = 'ble-common-library'
@@ -36,8 +36,8 @@ android {
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 20
-        versionName "2.0.0"
+        versionCode 25
+        versionName "2.0.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -57,7 +57,7 @@ android {
 
 dependencies {
     // Import the BLE Library
-    api 'no.nordicsemi.android:ble:2.0.0'
+    api 'no.nordicsemi.android:ble:2.0.5'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
