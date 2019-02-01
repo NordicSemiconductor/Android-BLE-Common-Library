@@ -23,9 +23,9 @@
 package no.nordicsemi.android.ble.common.profile.hr;
 
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 

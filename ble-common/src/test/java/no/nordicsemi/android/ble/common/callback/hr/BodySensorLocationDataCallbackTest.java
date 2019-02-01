@@ -23,7 +23,7 @@
 package no.nordicsemi.android.ble.common.callback.hr;
 
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.junit.Test;
 

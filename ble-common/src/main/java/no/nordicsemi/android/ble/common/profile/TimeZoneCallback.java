@@ -23,8 +23,8 @@
 package no.nordicsemi.android.ble.common.profile;
 
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 public interface TimeZoneCallback {
 

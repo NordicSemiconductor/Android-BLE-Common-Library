@@ -22,8 +22,8 @@
 
 package no.nordicsemi.android.ble.common.data.cgm;
 
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
 
 import no.nordicsemi.android.ble.common.profile.cgm.CGMTypes;
 import no.nordicsemi.android.ble.common.profile.glucose.GlucoseSampleLocation;

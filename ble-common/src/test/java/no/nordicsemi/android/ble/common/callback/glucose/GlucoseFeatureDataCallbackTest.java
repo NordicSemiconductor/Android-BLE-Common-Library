@@ -23,7 +23,7 @@
 package no.nordicsemi.android.ble.common.callback.glucose;
 
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.junit.Test;
 

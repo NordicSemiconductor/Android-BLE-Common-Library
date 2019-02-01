@@ -23,8 +23,8 @@
 package no.nordicsemi.android.ble.common.profile.csc;
 
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
 
 public interface CyclingSpeedAndCadenceCallback {
 	float WHEEL_CIRCUMFERENCE_DEFAULT = 2340; // [mm]

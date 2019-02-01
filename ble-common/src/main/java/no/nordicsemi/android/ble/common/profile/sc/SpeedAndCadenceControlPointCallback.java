@@ -23,8 +23,8 @@
 package no.nordicsemi.android.ble.common.profile.sc;
 
 import android.bluetooth.BluetoothDevice;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

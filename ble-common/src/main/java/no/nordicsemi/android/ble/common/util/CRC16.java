@@ -22,7 +22,7 @@
 
 package no.nordicsemi.android.ble.common.util;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * CRC-16 class is a helper that calculates different types of CRC.

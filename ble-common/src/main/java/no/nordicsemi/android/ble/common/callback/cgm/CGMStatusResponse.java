@@ -25,8 +25,8 @@ package no.nordicsemi.android.ble.common.callback.cgm;
 import android.bluetooth.BluetoothDevice;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import no.nordicsemi.android.ble.data.Data;
 import no.nordicsemi.android.ble.exception.InvalidDataException;
