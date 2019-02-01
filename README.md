@@ -12,9 +12,11 @@ used as an example by [Android nRF Toolbox](https://github.com/NordicSemiconduct
 The library is available on jcenter and Maven-Central repositories. Add the following dependency 
 to your *build.gradle* file:
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.0.5'
+implementation 'no.nordicsemi.android:ble-common:2.1.0'
 ```
 The BLE Common library depends on BLE Library with the same version number.
+
+The last version not migrated to AndroidX is 2.0.5.
 
 ## Services
 
