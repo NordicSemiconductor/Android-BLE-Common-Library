@@ -88,7 +88,7 @@ public abstract class GlucoseMeasurementDataCallback extends ProfileReadResponse
 
 		// Optional fields
 		if (timeOffsetPresent) {
-			final int timeOffset = data.getIntValue(Data.FORMAT_UINT16, offset);
+			final int timeOffset = data.getIntValue(Data.FORMAT_SINT16, offset);
 			offset += 2;
 
 			baseTime.add(Calendar.MINUTE, timeOffset);

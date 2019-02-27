@@ -49,14 +49,16 @@ public class GlucoseMeasurementDataCallbackTest {
 												 @Nullable final Integer sampleLocation, @Nullable final GlucoseStatus status,
 												 final boolean contextInformationFollows) {
 			success = true;
+			assertEquals(1, sequenceNumber);
 			assertNotNull(time);
-			assertEquals(58, time.get(Calendar.MINUTE));
+			assertEquals(5, time.get(Calendar.MINUTE));
 			assertNotNull(unit);
 			assertEquals(GlucoseMeasurementCallback.UNIT_kg_L, unit.intValue());
 			assertNotNull(status);
 			assertEquals(261, status.value);
 			assertTrue(status.deviceBatteryLow);
 			assertFalse(status.generalDeviceFault);
+			assertTrue(contextInformationFollows);
 		}
 
 		@Override
@@ -67,7 +69,18 @@ public class GlucoseMeasurementDataCallbackTest {
 
 	@Test
 	public void onGlucoseMeasurementReceived() {
-		final Data data = new Data(new byte[] { (byte) 0b011011, 0, 0, (byte) 0xE2, 0x07, 4, 26, 11, 9, 30, 49, 0, 30, 0, 0x12, 0b101, 0b1 });
+		final Data data = new Data(new byte[] {
+				(byte) 0b011011,           // Time Offset, Type and Location Present, unit: kg/L, Status Annunciation Present, Context follows
+				1, 0,                      // Seq = 1
+				(byte) 0xE3, 0x07,         // 2019
+				2,                         // February
+				27,                        // 27th
+				11, 10, 30,                // at 11:10:30
+				(byte) 0xFB, (byte) 0xFF,  // Time offset = -5 minutes
+				30, 0,                     // Glucose concentration = 30.0 kg/L
+				0x12,                      // Type = 2 (TYPE_CAPILLARY_PLASMA), Location = 1 (SAMPLE_LOCATION_FINGER)
+				0b101, 0b1                 // Status: Low battery, Device Fault, Sensor Temp too low
+		});
 		callback.onDataReceived(null, data);
 		assertTrue(success);
 	}
