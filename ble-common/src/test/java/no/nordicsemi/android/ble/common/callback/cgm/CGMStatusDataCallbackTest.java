@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.callback.cgm;
 
 import android.bluetooth.BluetoothDevice;
+
 import androidx.annotation.NonNull;
 
 import org.junit.Test;
@@ -38,156 +39,156 @@ import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 public class CGMStatusDataCallbackTest {
-	private boolean called = false;
+    private boolean called = false;
 
-	@Test
-	public void onContinuousGlucoseMonitorStatusChanged_withCrc() {
-		final DataReceivedCallback callback = new CGMStatusDataCallback() {
-			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
-																final int timeOffset, final boolean secured) {
-				assertNotNull("Status present", status);
-				assertTrue(status.sessionStopped);
-				assertTrue(status.deviceBatteryLow);
-				assertTrue(status.sensorTypeIncorrectForDevice);
-				assertTrue(status.sensorMalfunction);
-				assertTrue(status.deviceSpecificAlert);
-				assertTrue(status.generalDeviceFault);
-				assertTrue(status.timeSyncRequired);
-				assertTrue(status.calibrationNotAllowed);
-				assertTrue(status.calibrationRecommended);
-				assertTrue(status.calibrationRequired);
-				assertTrue(status.sensorTemperatureTooHigh);
-				assertTrue(status.sensorTemperatureTooLow);
-				assertTrue(status.sensorResultLowerThenPatientLowLevel);
-				assertTrue(status.sensorResultHigherThenPatientHighLevel);
-				assertTrue(status.sensorResultLowerThenHypoLevel);
-				assertTrue(status.sensorResultHigherThenHyperLevel);
-				assertTrue(status.sensorRateOfDecreaseExceeded);
-				assertTrue(status.sensorRateOfIncreaseExceeded);
-				assertTrue(status.sensorResultLowerThenDeviceCanProcess);
-				assertTrue(status.sensorResultHigherThenDeviceCanProcess);
-				assertEquals("Time offset", 5, timeOffset);
-				assertTrue(secured);
-			}
+    @Test
+    public void onContinuousGlucoseMonitorStatusChanged_withCrc() {
+        final DataReceivedCallback callback = new CGMStatusDataCallback() {
+            @Override
+            public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
+                                                                final int timeOffset, final boolean secured) {
+                assertNotNull("Status present", status);
+                assertTrue(status.getSessionStopped());
+                assertTrue(status.getDeviceBatteryLow());
+                assertTrue(status.getSensorTypeIncorrectForDevice());
+                assertTrue(status.getSensorMalfunction());
+                assertTrue(status.getDeviceSpecificAlert());
+                assertTrue(status.getGeneralDeviceFault());
+                assertTrue(status.getTimeSyncRequired());
+                assertTrue(status.getCalibrationNotAllowed());
+                assertTrue(status.getCalibrationRecommended());
+                assertTrue(status.getCalibrationRequired());
+                assertTrue(status.getSensorTemperatureTooHigh());
+                assertTrue(status.getSensorTemperatureTooLow());
+                assertTrue(status.getSensorResultLowerThenPatientLowLevel());
+                assertTrue(status.getSensorResultHigherThenPatientHighLevel());
+                assertTrue(status.getSensorResultLowerThenHypoLevel());
+                assertTrue(status.getSensorResultHigherThenHyperLevel());
+                assertTrue(status.getSensorRateOfDecreaseExceeded());
+                assertTrue(status.getSensorRateOfIncreaseExceeded());
+                assertTrue(status.getSensorResultLowerThenDeviceCanProcess());
+                assertTrue(status.getSensorResultHigherThenDeviceCanProcess());
+                assertEquals("Time offset", 5, timeOffset);
+                assertTrue(secured);
+            }
 
-			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				assertEquals("Correct data reported as CRC error", 1, 2);
-			}
+            @Override
+            public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                assertEquals("Correct data reported as CRC error", 1, 2);
+            }
 
-			@Override
-			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				assertEquals("Correct data reported as invalid", 1, 2);
-			}
-		};
-		final MutableData data = new MutableData(new byte[7]);
-		data.setValue(5, Data.FORMAT_UINT16, 0);
-		data.setValue(0xff3f3f, Data.FORMAT_UINT24, 2); // all flags set
-		data.setValue(0xE0A7, Data.FORMAT_UINT16, 5);
-		callback.onDataReceived(null, data);
-	}
+            @Override
+            public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                assertEquals("Correct data reported as invalid", 1, 2);
+            }
+        };
+        final MutableData data = new MutableData(new byte[7]);
+        data.setValue(5, Data.FORMAT_UINT16, 0);
+        data.setValue(0xff3f3f, Data.FORMAT_UINT24, 2); // all flags set
+        data.setValue(0xE0A7, Data.FORMAT_UINT16, 5);
+        callback.onDataReceived(null, data);
+    }
 
-	@Test
-	public void onContinuousGlucoseMonitorStatusChanged_noCrc() {
-		final DataReceivedCallback callback = new CGMStatusDataCallback() {
-			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
-																final int timeOffset, final boolean secured) {
-				assertNotNull("Status present", status);
-				assertTrue(status.sessionStopped);
-				assertFalse(status.deviceBatteryLow);
-				assertFalse(status.sensorTypeIncorrectForDevice);
-				assertFalse(status.sensorMalfunction);
-				assertFalse(status.deviceSpecificAlert);
-				assertFalse(status.generalDeviceFault);
-				assertTrue(status.timeSyncRequired);
-				assertFalse(status.calibrationNotAllowed);
-				assertFalse(status.calibrationRecommended);
-				assertFalse(status.calibrationRequired);
-				assertFalse(status.sensorTemperatureTooHigh);
-				assertFalse(status.sensorTemperatureTooLow);
-				assertTrue(status.sensorResultLowerThenPatientLowLevel);
-				assertFalse(status.sensorResultHigherThenPatientHighLevel);
-				assertFalse(status.sensorResultLowerThenHypoLevel);
-				assertFalse(status.sensorResultHigherThenHyperLevel);
-				assertFalse(status.sensorRateOfDecreaseExceeded);
-				assertFalse(status.sensorRateOfIncreaseExceeded);
-				assertFalse(status.sensorResultLowerThenDeviceCanProcess);
-				assertFalse(status.sensorResultHigherThenDeviceCanProcess);
-				assertEquals("Time offset", 6, timeOffset);
-				assertFalse(secured);
-			}
+    @Test
+    public void onContinuousGlucoseMonitorStatusChanged_noCrc() {
+        final DataReceivedCallback callback = new CGMStatusDataCallback() {
+            @Override
+            public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
+                                                                final int timeOffset, final boolean secured) {
+                assertNotNull("Status present", status);
+                assertTrue(status.getSessionStopped());
+                assertFalse(status.getDeviceBatteryLow());
+                assertFalse(status.getSensorTypeIncorrectForDevice());
+                assertFalse(status.getSensorMalfunction());
+                assertFalse(status.getDeviceSpecificAlert());
+                assertFalse(status.getGeneralDeviceFault());
+                assertTrue(status.getTimeSyncRequired());
+                assertFalse(status.getCalibrationNotAllowed());
+                assertFalse(status.getCalibrationRecommended());
+                assertFalse(status.getCalibrationRequired());
+                assertFalse(status.getSensorTemperatureTooHigh());
+                assertFalse(status.getSensorTemperatureTooLow());
+                assertTrue(status.getSensorResultLowerThenPatientLowLevel());
+                assertFalse(status.getSensorResultHigherThenPatientHighLevel());
+                assertFalse(status.getSensorResultLowerThenHypoLevel());
+                assertFalse(status.getSensorResultHigherThenHyperLevel());
+                assertFalse(status.getSensorRateOfDecreaseExceeded());
+                assertFalse(status.getSensorRateOfIncreaseExceeded());
+                assertFalse(status.getSensorResultLowerThenDeviceCanProcess());
+                assertFalse(status.getSensorResultHigherThenDeviceCanProcess());
+                assertEquals("Time offset", 6, timeOffset);
+                assertFalse(secured);
+            }
 
-			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				assertEquals("Correct data reported as CRC error", 1, 2);
-			}
+            @Override
+            public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                assertEquals("Correct data reported as CRC error", 1, 2);
+            }
 
-			@Override
-			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				assertEquals("Correct data reported as invalid", 1, 2);
-			}
-		};
-		final MutableData data = new MutableData(new byte[5]);
-		data.setValue(6, Data.FORMAT_UINT16, 0);
-		data.setValue(0x010101, Data.FORMAT_UINT24, 2);
-		callback.onDataReceived(null, data);
-	}
+            @Override
+            public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                assertEquals("Correct data reported as invalid", 1, 2);
+            }
+        };
+        final MutableData data = new MutableData(new byte[5]);
+        data.setValue(6, Data.FORMAT_UINT16, 0);
+        data.setValue(0x010101, Data.FORMAT_UINT24, 2);
+        callback.onDataReceived(null, data);
+    }
 
-	@Test
-	public void onContinuousGlucoseMonitorStatusReceivedWithCrcError() {
-		final DataReceivedCallback callback = new CGMStatusDataCallback() {
-			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
-																final int timeOffset, final boolean secured) {
-				assertEquals("Invalid CRC reported as valid packet", 1, 2);
-			}
+    @Test
+    public void onContinuousGlucoseMonitorStatusReceivedWithCrcError() {
+        final DataReceivedCallback callback = new CGMStatusDataCallback() {
+            @Override
+            public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
+                                                                final int timeOffset, final boolean secured) {
+                assertEquals("Invalid CRC reported as valid packet", 1, 2);
+            }
 
-			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				called = true;
-			}
+            @Override
+            public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                called = true;
+            }
 
-			@Override
-			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				assertEquals("Correct data reported as invalid", 1, 2);
-			}
-		};
-		final MutableData data = new MutableData(new byte[7]);
-		data.setValue(6, Data.FORMAT_UINT16, 0);
-		data.setValue(0x010101, Data.FORMAT_UINT24, 2);
-		data.setValue(0xE0A7, Data.FORMAT_UINT16, 5);
-		called = false;
-		callback.onDataReceived(null, data);
-		assertTrue(called);
-	}
+            @Override
+            public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                assertEquals("Correct data reported as invalid", 1, 2);
+            }
+        };
+        final MutableData data = new MutableData(new byte[7]);
+        data.setValue(6, Data.FORMAT_UINT16, 0);
+        data.setValue(0x010101, Data.FORMAT_UINT24, 2);
+        data.setValue(0xE0A7, Data.FORMAT_UINT16, 5);
+        called = false;
+        callback.onDataReceived(null, data);
+        assertTrue(called);
+    }
 
-	@Test
-	public void onInvalidDataReceived() {
-		final DataReceivedCallback callback = new CGMStatusDataCallback() {
-			@Override
-			public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
-																final int timeOffset, final boolean secured) {
-				assertEquals("Invalid data reported as valid packet", 1, 2);
-			}
+    @Test
+    public void onInvalidDataReceived() {
+        final DataReceivedCallback callback = new CGMStatusDataCallback() {
+            @Override
+            public void onContinuousGlucoseMonitorStatusChanged(@NonNull final BluetoothDevice device, @NonNull final CGMStatus status,
+                                                                final int timeOffset, final boolean secured) {
+                assertEquals("Invalid data reported as valid packet", 1, 2);
+            }
 
-			@Override
-			public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				assertEquals("Invalid data reported as wrong CRC", 1, 2);
-			}
+            @Override
+            public void onContinuousGlucoseMonitorStatusReceivedWithCrcError(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                assertEquals("Invalid data reported as wrong CRC", 1, 2);
+            }
 
-			@Override
-			public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
-				called = true;
-			}
-		};
-		final MutableData data = new MutableData(new byte[6]);
-		data.setValue(6, Data.FORMAT_UINT16, 0);
-		data.setValue(0x010101, Data.FORMAT_UINT24, 2);
-		data.setValue(1, Data.FORMAT_UINT8, 5);
-		called = false;
-		callback.onDataReceived(null, data);
-		assertTrue(called);
-	}
+            @Override
+            public void onInvalidDataReceived(@NonNull final BluetoothDevice device, @NonNull final Data data) {
+                called = true;
+            }
+        };
+        final MutableData data = new MutableData(new byte[6]);
+        data.setValue(6, Data.FORMAT_UINT16, 0);
+        data.setValue(0x010101, Data.FORMAT_UINT24, 2);
+        data.setValue(1, Data.FORMAT_UINT8, 5);
+        called = false;
+        callback.onDataReceived(null, data);
+        assertTrue(called);
+    }
 }

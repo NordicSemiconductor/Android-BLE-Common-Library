@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common;
 
 import android.content.Context;
+
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -38,11 +39,11 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-	@Test
-	public void useAppContext() {
-		// Context of the app under test.
-		Context appContext = InstrumentationRegistry.getTargetContext();
+    @Test
+    public void useAppContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getTargetContext();
 
-		assertEquals("no.nordicsemi.android.ble.common.test", appContext.getPackageName());
-	}
+        assertEquals("no.nordicsemi.android.ble.common.test", appContext.getPackageName());
+    }
 }
