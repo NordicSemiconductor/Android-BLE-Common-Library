@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
 import android.bluetooth.BluetoothDevice;
+
 import androidx.annotation.NonNull;
 
 import org.junit.Test;
@@ -34,38 +35,38 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("ConstantConditions")
 public class MeasurementIntervalDataCallbackTest {
-	private boolean called;
+    private boolean called;
 
-	@Test
-	public void onMeasurementIntervalReceived() {
-		final ProfileReadResponse response = new MeasurementIntervalDataCallback() {
-			@Override
-			public void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device, final int interval) {
-				called = true;
-				assertEquals("Interval", 60, interval);
-			}
-		};
+    @Test
+    public void onMeasurementIntervalReceived() {
+        final ProfileReadResponse response = new MeasurementIntervalDataCallback() {
+            @Override
+            public void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device, final int interval) {
+                called = true;
+                assertEquals("Interval", 60, interval);
+            }
+        };
 
-		called = false;
-		final Data data = new Data(new byte[] { 60, 0 });
-		response.onDataReceived(null, data);
-		assertTrue(response.isValid());
-		assertTrue(called);
-	}
+        called = false;
+        final Data data = new Data(new byte[]{60, 0});
+        response.onDataReceived(null, data);
+        assertTrue(response.isValid());
+        assertTrue(called);
+    }
 
-	@Test
-	public void onInvalidDataReceived() {
-		final ProfileReadResponse response = new MeasurementIntervalDataCallback() {
-			@Override
-			public void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device, final int interval) {
-				called = true;
-			}
-		};
+    @Test
+    public void onInvalidDataReceived() {
+        final ProfileReadResponse response = new MeasurementIntervalDataCallback() {
+            @Override
+            public void onMeasurementIntervalReceived(@NonNull final BluetoothDevice device, final int interval) {
+                called = true;
+            }
+        };
 
-		called = false;
-		final Data data = new Data(new byte[] { 60 });
-		response.onDataReceived(null, data);
-		assertFalse(called);
-		assertFalse(response.isValid());
-	}
+        called = false;
+        final Data data = new Data(new byte[]{60});
+        response.onDataReceived(null, data);
+        assertFalse(called);
+        assertFalse(response.isValid());
+    }
 }

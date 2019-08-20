@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.callback.csc;
 
 import android.bluetooth.BluetoothDevice;
+
 import androidx.annotation.NonNull;
 
 import org.junit.Test;
@@ -37,44 +38,44 @@ import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 public class CyclingSpeedAndCadenceFeatureDataCallbackTest {
-	private boolean called;
+    private boolean called;
 
-	@Test
-	public void onCyclingSpeedAndCadenceFeaturesReceived() {
-		final ProfileReadResponse callback = new CyclingSpeedAndCadenceFeatureDataCallback() {
-			@Override
-			public void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
-																 @NonNull final CSCFeatures features) {
-				called = true;
-				assertNotNull(features);
-				assertTrue("Wheel revolutions supported", features.wheelRevolutionDataSupported);
-				assertTrue("Crank revolutions supported", features.crankRevolutionDataSupported);
-				assertFalse("Multiple sensors not supported", features.multipleSensorDataSupported);
-				assertEquals("Feature value", 0x03, features.value);
-			}
-		};
+    @Test
+    public void onCyclingSpeedAndCadenceFeaturesReceived() {
+        final ProfileReadResponse callback = new CyclingSpeedAndCadenceFeatureDataCallback() {
+            @Override
+            public void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+                                                                 @NonNull final CSCFeatures features) {
+                called = true;
+                assertNotNull(features);
+                assertTrue("Wheel revolutions supported", features.getWheelRevolutionDataSupported());
+                assertTrue("Crank revolutions supported", features.getCrankRevolutionDataSupported());
+                assertFalse("Multiple sensors not supported", features.getMultipleSensorDataSupported());
+                assertEquals("Feature value", 0x03, features.getValue());
+            }
+        };
 
-		called = false;
-		final Data data = new Data(new byte[] { 0x03, 0x00 });
-		callback.onDataReceived(null, data);
-		assertTrue(called);
-		assertTrue(callback.isValid());
-	}
+        called = false;
+        final Data data = new Data(new byte[]{0x03, 0x00});
+        callback.onDataReceived(null, data);
+        assertTrue(called);
+        assertTrue(callback.isValid());
+    }
 
-	@Test
-	public void onInvalidDataReceived() {
-		final ProfileReadResponse callback = new CyclingSpeedAndCadenceFeatureDataCallback() {
-			@Override
-			public void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
-																 @NonNull final CSCFeatures features) {
-				called = true;
-			}
-		};
+    @Test
+    public void onInvalidDataReceived() {
+        final ProfileReadResponse callback = new CyclingSpeedAndCadenceFeatureDataCallback() {
+            @Override
+            public void onCyclingSpeedAndCadenceFeaturesReceived(@NonNull final BluetoothDevice device,
+                                                                 @NonNull final CSCFeatures features) {
+                called = true;
+            }
+        };
 
-		called = false;
-		final Data data = new Data(new byte[] { 0x03 });
-		callback.onDataReceived(null, data);
-		assertFalse(called);
-		assertFalse(callback.isValid());
-	}
+        called = false;
+        final Data data = new Data(new byte[]{0x03});
+        callback.onDataReceived(null, data);
+        assertFalse(called);
+        assertFalse(callback.isValid());
+    }
 }

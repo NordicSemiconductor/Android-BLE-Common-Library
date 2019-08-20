@@ -23,6 +23,7 @@
 package no.nordicsemi.android.ble.common.callback.ht;
 
 import android.bluetooth.BluetoothDevice;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -34,62 +35,65 @@ import no.nordicsemi.android.ble.callback.profile.ProfileReadResponse;
 import no.nordicsemi.android.ble.common.profile.ht.TemperatureMeasurementCallback;
 import no.nordicsemi.android.ble.data.Data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 public class TemperatureMeasurementDataCallbackTest {
-	private boolean called;
+    private boolean called;
 
-	@Test
-	public void onTemperatureMeasurementReceived() {
-		final ProfileReadResponse response = new TemperatureMeasurementDataCallback() {
-			@Override
-			public void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
-														 final float temperature, final int unit,
-														 @Nullable final Calendar calendar,
-														 @Nullable final Integer type) {
-				called = true;
-				assertEquals("Temperature", 37.60f, temperature, 0.001f);
-				assertEquals("Unit", TemperatureMeasurementCallback.UNIT_C, unit);
-				assertNotNull("Calendar present", calendar);
-				assertTrue("Year set", calendar.isSet(Calendar.YEAR));
-				assertEquals("Year", calendar.get(Calendar.YEAR), 2012);
-				assertTrue("Month set", calendar.isSet(Calendar.MONTH));
-				assertEquals("Month", calendar.get(Calendar.MONTH), Calendar.DECEMBER);
-				assertTrue("Day set", calendar.isSet(Calendar.DATE));
-				assertEquals("Day", 5, calendar.get(Calendar.DATE));
-				assertEquals("Hour", 11, calendar.get(Calendar.HOUR_OF_DAY));
-				assertEquals("Minute", 50, calendar.get(Calendar.MINUTE));
-				assertEquals("Seconds", 27, calendar.get(Calendar.SECOND));
-				assertEquals("Milliseconds", 0, calendar.get(Calendar.MILLISECOND));
-				assertNotNull("Type present", type);
-				assertEquals(TemperatureMeasurementCallback.TYPE_FINGER, type.intValue());
-			}
-		};
+    @Test
+    public void onTemperatureMeasurementReceived() {
+        final ProfileReadResponse response = new TemperatureMeasurementDataCallback() {
+            @Override
+            public void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
+                                                         final float temperature, final int unit,
+                                                         @Nullable final Calendar calendar,
+                                                         @Nullable final Integer type) {
+                called = true;
+                assertEquals("Temperature", 37.60f, temperature, 0.001f);
+                assertEquals("Unit", TemperatureMeasurementCallback.Companion.getUNIT_C(), unit);
+                assertNotNull("Calendar present", calendar);
+                assertTrue("Year set", calendar.isSet(Calendar.YEAR));
+                assertEquals("Year", calendar.get(Calendar.YEAR), 2012);
+                assertTrue("Month set", calendar.isSet(Calendar.MONTH));
+                assertEquals("Month", calendar.get(Calendar.MONTH), Calendar.DECEMBER);
+                assertTrue("Day set", calendar.isSet(Calendar.DATE));
+                assertEquals("Day", 5, calendar.get(Calendar.DATE));
+                assertEquals("Hour", 11, calendar.get(Calendar.HOUR_OF_DAY));
+                assertEquals("Minute", 50, calendar.get(Calendar.MINUTE));
+                assertEquals("Seconds", 27, calendar.get(Calendar.SECOND));
+                assertEquals("Milliseconds", 0, calendar.get(Calendar.MILLISECOND));
+                assertNotNull("Type present", type);
+                assertEquals(TemperatureMeasurementCallback.Companion.getTYPE_FINGER(), type.intValue());
+            }
+        };
 
-		final Data data = new Data(new byte[] { 0x06, (byte) 0xB0, 0x0E, 0x00, (byte) 0xFE, (byte) 0xDC, 0x07, 0x0C, 0x05, 0x0B, 0x32, 0x1B, 0x04 });
-		called = false;
-		response.onDataReceived(null, data);
-		assertTrue(called);
-		assertTrue(response.isValid());
-	}
+        final Data data = new Data(new byte[]{0x06, (byte) 0xB0, 0x0E, 0x00, (byte) 0xFE, (byte) 0xDC, 0x07, 0x0C, 0x05, 0x0B, 0x32, 0x1B, 0x04});
+        called = false;
+        response.onDataReceived(null, data);
+        assertTrue(called);
+        assertTrue(response.isValid());
+    }
 
-	@Test
-	public void onInvalidDataReceived() {
-		final ProfileReadResponse response = new TemperatureMeasurementDataCallback() {
-			@Override
-			public void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
-														 final float temperature, final int unit,
-														 @Nullable final Calendar calendar,
-														 @Nullable final Integer type) {
-				called = true;
-			}
-		};
+    @Test
+    public void onInvalidDataReceived() {
+        final ProfileReadResponse response = new TemperatureMeasurementDataCallback() {
+            @Override
+            public void onTemperatureMeasurementReceived(@NonNull final BluetoothDevice device,
+                                                         final float temperature, final int unit,
+                                                         @Nullable final Calendar calendar,
+                                                         @Nullable final Integer type) {
+                called = true;
+            }
+        };
 
-		final Data data = new Data(new byte[] { 0x06, (byte) 0xB0, 0x0E, 0x00, (byte) 0xFE, (byte) 0xDC, 0x07, 0x0C, 0x05, 0x0B, 0x32, 0x1B });
-		called = false;
-		response.onDataReceived(null, data);
-		assertFalse(called);
-		assertFalse(response.isValid());
-	}
+        final Data data = new Data(new byte[]{0x06, (byte) 0xB0, 0x0E, 0x00, (byte) 0xFE, (byte) 0xDC, 0x07, 0x0C, 0x05, 0x0B, 0x32, 0x1B});
+        called = false;
+        response.onDataReceived(null, data);
+        assertFalse(called);
+        assertFalse(response.isValid());
+    }
 }
