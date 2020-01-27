@@ -1,6 +1,6 @@
 # Android BLE Common Library
 
-[ ![Download](https://api.bintray.com/packages/nordic/android/ble-common-library/images/download.svg) ](https://bintray.com/nordic/android/ble-common-library/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/nordic/android/no.nordicsemi.android%3Able-common/images/download.svg) ](https://bintray.com/nordic/android/no.nordicsemi.android%3Able-common/_latestVersion)
 
 This library is an addon to the 
 [Android BLE Library](https://github.com/NordicSemiconductor/Android-BLE-Library) 
@@ -15,6 +15,11 @@ to your *build.gradle* file:
 implementation 'no.nordicsemi.android:ble-common:2.1.1'
 ```
 The BLE Common library depends on BLE Library with the same version number.
+
+To test the latest features, use the alpha build:
+```grovy
+implementation 'no.nordicsemi.android:ble-common:2.2.0-alpha03'
+```
 
 The last version not migrated to AndroidX is 2.0.5.
 
