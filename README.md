@@ -18,7 +18,7 @@ The BLE Common library depends on BLE Library with the same version number.
 
 To test the latest features, use the alpha build:
 ```grovy
-implementation 'no.nordicsemi.android:ble-common:2.2.0-alpha03'
+implementation 'no.nordicsemi.android:ble-common:2.2.0-alpha04'
 ```
 
 The last version not migrated to AndroidX is 2.0.5.
